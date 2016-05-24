@@ -1,0 +1,5 @@
+name: ${project.parent.name}${project.name}
+version: ${project.version}
+author: Ninjoh
+
+main: tk.martijn_heil.KindgomEssentials.item.KingdomEssItemdomEssItem

@@ -1,0 +1,6 @@
+name: ${project.parent.name}${project.name}
+version: ${project.version}
+author: Ninjoh
+
+depend: [KingdomEssItem,KingdomEssCore]
+main: tk.martijn_heil.KindgomEssentials.command.KingdomEssCommand

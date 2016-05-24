@@ -1,0 +1,86 @@
+# This is a list of categories of items which can only be used for certain things if they have a certain property.
+#
+# Set use-allowed of a category to true to disable USING those items unless the item is use-allowed.
+# Set combat-allowed of a category to true to disable HITTING ENTITIES with those items unless the item is combat-allowed.
+# Set equip-allowed of a category to true to disable EQUIPPING those items unless the item is equip-allowed.
+# Set mine-allowed of a category to true to disable MINING using those items unless the item is mine-allowed.
+# Set consume-allowed of a category to true to disable EATING those items unless the item is eat-allowed.
+#
+# You may add more categories to this list.
+# The items list in each category should contain a list of items which this category includes.
+allowed:
+
+  swords:
+    items:
+      - 'WOOD_SWORD'
+      - 'STONE_SWORD'
+      - 'GOLD_SWORD'
+      - 'IRON_SWORD'
+      - 'DIAMOND_SWORD'
+
+    require:
+      use-allowed: false
+      combat-allowed: false
+      equip-allowed: false
+      mine-allowed: false
+      consume-allowed: false
+
+  axes:
+    items:
+      - 'WOOD_AXE'
+      - 'STONE_AXE'
+      - 'GOLD_AXE'
+      - 'IRON_AXE'
+      - 'DIAMOND_AXE'
+
+    require:
+      use-allowed: false
+      combat-allowed: false
+      equip-allowed: false
+      mine-allowed: false
+      consume-allowed: false
+
+  hoes:
+    items:
+      - 'WOOD_HOE'
+      - 'STONE_HOE'
+      - 'GOLD_HOE'
+      - 'IRON_HOE'
+      - 'DIAMOND_HOE'
+
+    require:
+      use-unique: false
+      combat-allowed: false
+      equip-allowed: false
+      mine-allowed: false
+      consume-allowed: false
+
+  shovels:
+    items:
+      - 'WOOD_SPADE'
+      - 'STONE_SPADE'
+      - 'GOLD_SPADE'
+      - 'IRON_SPADE'
+      - 'DIAMOND_SPADE'
+
+    require:
+      use-allowed: false
+      combat-allowed: false
+      equip-allowed: false
+      mine-allowed: false
+      consume-allowed: false
+
+  pickaxes:
+    items:
+      - 'WOOD_PICKAXE'
+      - 'STONE_PICKAXE'
+      - 'GOLD_PICKAXE'
+      - 'IRON_PICKAXE'
+      - 'DIAMOND_PICKAXE'
+
+    require:
+      use-allowed: false
+      combat-allowed: false
+      equip-allowed: false
+      mine-allowed: false
+      consume-allowed: false
