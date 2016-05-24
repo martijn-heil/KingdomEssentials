@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>tk.martijn_heil.KindgomEssentials</groupId>
+    <groupId>tk.martijn_heil.kingdomessentials</groupId>
     <artifactId>KingdomEssentials</artifactId>
     <version>1.0-SNAPSHOT</version>
 
@@ -51,21 +51,6 @@
 
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>tk.martijn_heil.KindgomEssentials.boot</groupId>
-                <artifactId>Boot</artifactId>
-                <version>1.0-SNAPSHOT</version>
-            </dependency>
-
-            <dependency>
-                <groupId>tk.martijn_heil.KindgomEssentials.command</groupId>
-                <artifactId>Command</artifactId>
-                <version>1.0-SNAPSHOT</version>
-            </dependency>
-
-
-
-
             <!-- NinCore API -->
             <dependency>
                 <groupId>tk.martijn-heil</groupId>
@@ -96,14 +81,6 @@
                 <artifactId>lombok</artifactId>
                 <version>1.16.8</version>
                 <scope>provided</scope>
-            </dependency>
-
-            <!-- Joda Time-->
-            <dependency>
-                <groupId>joda-time</groupId>
-                <artifactId>joda-time</artifactId>
-                <version>2.9.1</version>
-                <scope>compile</scope>
             </dependency>
 
         </dependencies>

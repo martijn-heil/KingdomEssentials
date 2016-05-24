@@ -1,4 +1,4 @@
-package tk.martijn_heil.kingdomessentials.core.exceptions;
+package tk.martijn_heil.kingdomessentials.playerclass.exceptions;
 
 import org.bukkit.command.CommandSender;
 import tk.martijn_heil.nincore.api.entity.NinCommandSender;

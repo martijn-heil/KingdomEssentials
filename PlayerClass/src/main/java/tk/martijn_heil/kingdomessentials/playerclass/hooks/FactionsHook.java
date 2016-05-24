@@ -3,7 +3,7 @@ package tk.martijn_heil.kingdomessentials.playerclass.hooks;
 
 import com.massivecraft.factions.entity.MPlayer;
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
+import org.bukkit.OfflinePlayer;
 import org.jetbrains.annotations.NotNull;
 import tk.martijn_heil.kingdomessentials.playerclass.KingdomEssPlayerClass;
 import tk.martijn_heil.kingdomessentials.playerclass.model.COnlinePlayer;
@@ -18,20 +18,18 @@ public class FactionsHook
     /**
      * Check if a player can become a player class.
      *
-     * @param className The class name to check for.
+     * @param playerClass the {@link PlayerClass} to check for.
      * @return True if the player can become this class.
      */
-    public boolean canBecomeClass(@NotNull Player p, @NotNull String className)
+    public boolean canBecomeClass(@NotNull OfflinePlayer p, @NotNull PlayerClass playerClass)
     {
         if(!Bukkit.getPluginManager().isPluginEnabled("Factions")) return true;
 
         // Noone with any sense would check for a className with null, if null is passed this cleary indicates some
         // mistake, and we should not fail silently.
-        checkNotNull(className, "classname can not be null.");
+        checkNotNull(playerClass, "playerClass can not be null.");
         checkNotNull(p, "p can not be null.");
 
-
-        PlayerClass playerClass = new PlayerClass(className);
 
         // If this player class does not use MaxPercentagePerFaction.
         if(!playerClass.usesMaxPercentagePerFaction())
@@ -86,6 +84,7 @@ public class FactionsHook
         //int roundedCurrentPercentage = Math.round(currentPercentage);
 
         // Percentage of players with the class already reached the max percentage.
-        return !(newPercentage > KingdomEssPlayerClass.getInstance().getConfig().getDouble("soulbound.classes." + className + ".maxPercentagePerFaction"));
+        return !(newPercentage > KingdomEssPlayerClass.getInstance().getConfig().getDouble("soulbound.classes." +
+                playerClass.getName() + ".maxPercentagePerFaction"));
     }
 }

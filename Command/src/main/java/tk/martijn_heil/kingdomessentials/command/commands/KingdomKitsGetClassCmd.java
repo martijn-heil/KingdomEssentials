@@ -7,9 +7,8 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
-import tk.martijn_heil.kingdomkits.KingdomKits;
-import tk.martijn_heil.kingdomkits.model.COfflinePlayer;
-import tk.martijn_heil.kingdomkits.model.COnlinePlayer;
+import tk.martijn_heil.kingdomessentials.playerclass.model.COfflinePlayer;
+import tk.martijn_heil.kingdomessentials.playerclass.model.COnlinePlayer;
 import tk.martijn_heil.nincore.api.command.executors.NinSubCommandExecutor;
 import tk.martijn_heil.nincore.api.exceptions.TechnicalException;
 import tk.martijn_heil.nincore.api.exceptions.ValidationException;
@@ -57,16 +56,7 @@ public class KingdomKitsGetClassCmd extends NinSubCommandExecutor
             OfflinePlayer op = Bukkit.getOfflinePlayer(targetPlayer);
 
 
-            if (op == null || !KingdomKits.getInstance().getDataManager().getData().getKeys(false).contains(op.getUniqueId().toString()))
-            {
-                throw new PlayerNotFoundException(sender);
-            }
-
-
-            if (!KingdomKits.getInstance().getDataManager().getData().getKeys(false).contains(op.getUniqueId().toString()))
-            {
-                throw new PlayerNotFoundException(sender);
-            }
+            if (op == null) throw new PlayerNotFoundException(sender);
 
             COfflinePlayer cOfflinePlayer = new COfflinePlayer(op);
 

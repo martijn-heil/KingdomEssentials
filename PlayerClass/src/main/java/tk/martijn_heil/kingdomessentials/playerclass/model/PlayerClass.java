@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import tk.martijn_heil.kingdomessentials.playerclass.KingdomEssPlayerClass;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -27,6 +28,14 @@ public class PlayerClass
         name = className;
         this.classSection = KingdomEssPlayerClass.getInstance().getConfig().getConfigurationSection("classes.classes." + name);
     }
+
+
+    @Override
+    public String toString()
+    {
+        return this.getName();
+    }
+
 
     /**
      * Get the player class' name.
@@ -100,5 +109,18 @@ public class PlayerClass
     public static PlayerClass getDefault()
     {
         return new PlayerClass(KingdomEssPlayerClass.getInstance().getConfig().getString("classes.defaultClass"));
+    }
+
+
+    public static List<PlayerClass> getAll()
+    {
+        List<PlayerClass> list = new ArrayList<>();
+
+        for (String key : KingdomEssPlayerClass.getInstance().getConfig().getConfigurationSection("classes.classes").getKeys(false))
+        {
+            list.add(new PlayerClass(key));
+        }
+
+        return list;
     }
 }

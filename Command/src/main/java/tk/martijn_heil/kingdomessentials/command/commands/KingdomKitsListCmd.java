@@ -3,8 +3,7 @@ package tk.martijn_heil.kingdomessentials.command.commands;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.configuration.ConfigurationSection;
-import tk.martijn_heil.kingdomkits.KingdomKits;
+import tk.martijn_heil.kingdomessentials.playerclass.model.PlayerClass;
 import tk.martijn_heil.nincore.api.command.executors.NinSubCommandExecutor;
 import tk.martijn_heil.nincore.api.entity.NinCommandSender;
 import tk.martijn_heil.nincore.api.exceptions.TechnicalException;
@@ -19,10 +18,6 @@ public class KingdomKitsListCmd extends NinSubCommandExecutor
     public void execute(CommandSender sender, String[] strings) throws ValidationException, TechnicalException
     {
         Locale locale = NinCommandSender.fromCommandSender(sender).getLocale();
-
-
-        ConfigurationSection playerClasses = KingdomKits.getInstance().getConfig().getConfigurationSection("classes.classes");
-
         final ResourceBundle mainMsgs = ResourceBundle.getBundle("lang.mainMsgs", locale);
 
         sender.sendMessage("");
@@ -32,9 +27,9 @@ public class KingdomKitsListCmd extends NinSubCommandExecutor
         int count = 1;
 
         // List all player classes
-        for (String key : playerClasses.getKeys(false))
+        for (PlayerClass playerClass : PlayerClass.getAll())
         {
-            sender.sendMessage(ChatColor.GRAY + "" + count + ". " + ChatColor.YELLOW + key);
+            sender.sendMessage(ChatColor.GRAY + "" + count + ". " + ChatColor.YELLOW + playerClass.getName());
             count++;
         }
     }

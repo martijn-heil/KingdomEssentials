@@ -27,5 +27,7 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.projectlombok:lombok:1.16.8" level="project" />
     <orderEntry type="module" module-name="Item" />
     <orderEntry type="module" module-name="Core" />
+    <orderEntry type="module" module-name="PlayerClass" />
+    <orderEntry type="library" name="Maven: joda-time:joda-time:2.9.1" level="project" />
   </component>
 </module>

@@ -4,7 +4,6 @@ import com.google.common.base.Preconditions;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
-import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.joda.time.DateTime;
 import tk.martijn_heil.kingdomessentials.playerclass.KingdomEssPlayerClass;
@@ -14,6 +13,8 @@ import tk.martijn_heil.nincore.api.util.TranslationUtils;
 
 import java.util.ResourceBundle;
 import java.util.UUID;
+
+import static com.google.common.base.Preconditions.checkArgument;
 
 
 public class COfflinePlayer
@@ -180,8 +181,15 @@ public class COfflinePlayer
     }
 
 
-    public boolean canBecomeClass(@NotNull Player p, @NotNull String className)
+    public boolean canBecomeClass(String className)
     {
-        return KingdomEssPlayerClass.getInstance().getFactionsHook().canBecomeClass(p, className);
+        checkArgument(PlayerClass.PlayerClassExists(className), String.format("Player class with name '%s' does not exist.", className));
+        return this.canBecomeClass(new PlayerClass(className));
+    }
+
+
+    public boolean canBecomeClass(PlayerClass playerClass)
+    {
+        return KingdomEssPlayerClass.getInstance().getFactionsHook().canBecomeClass(this.toOfflinePlayer(), playerClass);
     }
 }

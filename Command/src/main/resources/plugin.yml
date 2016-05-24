@@ -2,7 +2,7 @@ name: ${project.parent.name}${project.name}
 version: ${project.version}
 author: Ninjoh
 
-depend: [KingdomEssItem,KingdomEssCore]
+depend: [KingdomEssItem,KingdomEssCore,KIngdomEssPlayerClass]
 main: tk.martijn_heil.KindgomEssentials.command.KingdomEssCommand
 
 commands:

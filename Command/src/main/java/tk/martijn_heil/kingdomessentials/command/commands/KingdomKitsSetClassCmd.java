@@ -6,15 +6,13 @@ import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
-import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
-import tk.martijn_heil.kingdomkits.KingdomKits;
-import tk.martijn_heil.kingdomkits.exceptions.CoolDownHasNotExpiredException;
-import tk.martijn_heil.kingdomkits.exceptions.PlayerCannotBecomeClassException;
-import tk.martijn_heil.kingdomkits.exceptions.PlayerClassNotFoundException;
-import tk.martijn_heil.kingdomkits.model.COfflinePlayer;
-import tk.martijn_heil.kingdomkits.model.COnlinePlayer;
-import tk.martijn_heil.kingdomkits.model.PlayerClass;
+import tk.martijn_heil.kingdomessentials.core.exceptions.CoolDownHasNotExpiredException;
+import tk.martijn_heil.kingdomessentials.playerclass.exceptions.PlayerCannotBecomeClassException;
+import tk.martijn_heil.kingdomessentials.playerclass.exceptions.PlayerClassNotFoundException;
+import tk.martijn_heil.kingdomessentials.playerclass.model.COfflinePlayer;
+import tk.martijn_heil.kingdomessentials.playerclass.model.COnlinePlayer;
+import tk.martijn_heil.kingdomessentials.playerclass.model.PlayerClass;
 import tk.martijn_heil.nincore.api.command.executors.NinSubCommandExecutor;
 import tk.martijn_heil.nincore.api.exceptions.TechnicalException;
 import tk.martijn_heil.nincore.api.exceptions.ValidationException;
@@ -24,9 +22,6 @@ import tk.martijn_heil.nincore.api.exceptions.validationexceptions.PlayerNotFoun
 
 public class KingdomKitsSetClassCmd extends NinSubCommandExecutor
 {
-    FileConfiguration data = KingdomKits.getInstance().getDataManager().getData();
-
-
     @Override
     public void execute(CommandSender sender, String[] args) throws ValidationException, TechnicalException
     {
@@ -40,17 +35,11 @@ public class KingdomKitsSetClassCmd extends NinSubCommandExecutor
             String className = args[0];
 
             // If sender doesn't have the kingdomkits.setclass.[class] permission
-            if (!sender.hasPermission("kingdomkits.setclass." + className))
-            {
-                throw new AccessDeniedException(sender);
-            }
+            if (!sender.hasPermission("kingdomkits.setclass." + className)) throw new AccessDeniedException(sender);
 
 
             // Class validation
-            if (!PlayerClass.PlayerClassExists(className))
-            {
-                throw new PlayerClassNotFoundException(sender);
-            }
+            if (!PlayerClass.PlayerClassExists(className)) throw new PlayerClassNotFoundException(sender);
 
 
             // Integration with factions validation.
@@ -101,42 +90,13 @@ public class KingdomKitsSetClassCmd extends NinSubCommandExecutor
 
             // If sender doesn't have the kingdomkits.setclass.[class] permission
             if (!sender.hasPermission("kingdomkits.setclass.class." + className) && !sender.hasPermission("kingdomkits.setclass.class.*"))
-            {
-                if (sender instanceof Player)
-                {
-                    throw new AccessDeniedException(sender);
-                }
-                else if (sender instanceof ConsoleCommandSender)
-                {
-                    ConsoleCommandSender consoleCommandSender = (ConsoleCommandSender) sender;
-
-                    throw new AccessDeniedException((CommandSender) consoleCommandSender);
-                }
-                return;
-            }
-
-
-            if (!sender.hasPermission("kingdomkits.setclass.others"))
-            {
                 throw new AccessDeniedException(sender);
-            }
+
+
+            if (!sender.hasPermission("kingdomkits.setclass.others")) throw new AccessDeniedException(sender);
 
             // Class validation
-            if (!PlayerClass.PlayerClassExists(className))
-            {
-                if (sender instanceof Player)
-                {
-                    throw new PlayerClassNotFoundException(sender);
-                }
-                else if (sender instanceof ConsoleCommandSender)
-                {
-                    ConsoleCommandSender consoleCommandSender = (ConsoleCommandSender) sender;
-
-                    throw new PlayerClassNotFoundException((CommandSender) consoleCommandSender);
-                }
-
-                return;
-            }
+            if (!PlayerClass.PlayerClassExists(className)) throw new PlayerClassNotFoundException(sender);
 
 
             // Class validation has passed..
@@ -145,10 +105,7 @@ public class KingdomKitsSetClassCmd extends NinSubCommandExecutor
             OfflinePlayer op = Bukkit.getOfflinePlayer(args[1]);
 
             // Player validation..
-            if (op == null || !data.getKeys(false).contains(op.getUniqueId().toString()))
-            {
-                throw new PlayerNotFoundException(sender);
-            }
+            if (op == null) throw new PlayerNotFoundException(sender);
 
             // Player validation & class validation has passed..
 
@@ -156,10 +113,7 @@ public class KingdomKitsSetClassCmd extends NinSubCommandExecutor
 
 
             // Player can become class validation..
-            if (!ninOfflinePlayer.canBecomeClass(className))
-            {
-                throw new PlayerCannotBecomeClassException(sender);
-            }
+            if (!ninOfflinePlayer.canBecomeClass(className)) throw new PlayerCannotBecomeClassException(sender);
 
 
             // Cooldown validation..
