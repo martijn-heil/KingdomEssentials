@@ -4,3 +4,9 @@ author: Ninjoh
 
 depend: [KingdomEssItem,KingdomEssCore]
 main: tk.martijn_heil.KindgomEssentials.command.KingdomEssCommand
+
+commands:
+   kingdomess:
+      aliases: [kingdomkits,kk,ke,]
+      description: The main command for this plugin.
+      usage: /<command>
