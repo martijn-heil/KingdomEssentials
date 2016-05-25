@@ -7,7 +7,8 @@ import tk.martijn_heil.nincore.api.Core;
 
 public class KingdomEssStorage extends Core
 {
-    @Getter private static KingdomEssStorage instance;
+    @Getter
+    private static KingdomEssStorage instance;
 
 
     public KingdomEssStorage()
@@ -21,7 +22,7 @@ public class KingdomEssStorage extends Core
     {
         this.saveDefaultConfig();
 
-        if(!this.getDataManager().dataFileExists())
+        if (!this.getDataManager().dataFileExists())
         {
             this.getDataManager().createDataFile();
         }

@@ -14,7 +14,7 @@ public class ItemCategories
     {
         for (ItemCategory category : KingdomEssItem.getInstance().getItemCategories())
         {
-            if(category.getItems().contains(material)) return category;
+            if (category.getItems().contains(material)) return category;
         }
 
         return null;

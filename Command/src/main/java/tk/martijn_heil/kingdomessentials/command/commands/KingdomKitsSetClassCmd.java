@@ -7,7 +7,7 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
-import tk.martijn_heil.kingdomessentials.core.exceptions.CoolDownHasNotExpiredException;
+import tk.martijn_heil.kingdomessentials.playerclass.exceptions.CoolDownHasNotExpiredException;
 import tk.martijn_heil.kingdomessentials.playerclass.exceptions.PlayerCannotBecomeClassException;
 import tk.martijn_heil.kingdomessentials.playerclass.exceptions.PlayerClassNotFoundException;
 import tk.martijn_heil.kingdomessentials.playerclass.model.COfflinePlayer;

@@ -27,7 +27,7 @@ public class ItemCategory
                         boolean mineAllowedRequired,
                         boolean requireConsumeAllowed,
                         boolean requireFireAllowed
-                        )
+    )
     {
         Preconditions.checkNotNull(items, "items can not be null.");
 

@@ -14,6 +14,6 @@ public class PlayerElytraFlightDeniedException extends ValidationException
     {
         super(target, TranslationUtils.getStaticMsg(ResourceBundle.getBundle("lang.errorMsgs",
                 NinCommandSender.fromCommandSender(target).getMinecraftLocale().
-                        toLocale()), "eventError.cancelledElytra"), null);
+                        toLocale()), "error.event.cancelled.movement.glide"), null);
     }
 }

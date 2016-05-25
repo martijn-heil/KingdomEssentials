@@ -5,9 +5,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
-import tk.martijn_heil.kingdomessentials.playerclass.model.COnlinePlayer;
 import tk.martijn_heil.kingdomessentials.playerclass.KingdomEssPlayerClass;
 import tk.martijn_heil.kingdomessentials.playerclass.Players;
+import tk.martijn_heil.kingdomessentials.playerclass.model.COnlinePlayer;
 import tk.martijn_heil.nincore.api.util.ServerUtils;
 
 public class PlayerListener
@@ -20,7 +20,7 @@ public class PlayerListener
         Players.populateData(e.getPlayer());
 
         // Player is new.
-        if(KingdomEssPlayerClass.getInstance().getRawData().isSet(e.getPlayer().getUniqueId().toString()))
+        if (KingdomEssPlayerClass.getInstance().getRawData().isSet(e.getPlayer().getUniqueId().toString()))
         {
             for (String cmd : cp.getPlayerClass().getCmdsExecutedOnPlayerRespawn())
             {
@@ -29,7 +29,7 @@ public class PlayerListener
             }
 
             // Give player default class kit
-            if(KingdomEssPlayerClass.getInstance().getConfig().getBoolean("classes.enabled") &&
+            if (KingdomEssPlayerClass.getInstance().getConfig().getBoolean("classes.enabled") &&
                     KingdomEssPlayerClass.getInstance().getConfig().getBoolean("classes.giveKitOnRespawn"))
             {
                 cp.givePlayerClassKit();
@@ -44,7 +44,7 @@ public class PlayerListener
         COnlinePlayer cOnlinePlayer = new COnlinePlayer(e.getPlayer().getUniqueId());
 
 
-        if(KingdomEssPlayerClass.getInstance().getConfig().getBoolean("classes.enabled") &&
+        if (KingdomEssPlayerClass.getInstance().getConfig().getBoolean("classes.enabled") &&
                 KingdomEssPlayerClass.getInstance().getConfig().getBoolean("classes.giveKitOnRespawn"))
         {
             cOnlinePlayer.givePlayerClassKit();

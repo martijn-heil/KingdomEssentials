@@ -16,6 +16,7 @@ public class PlayerClass
     private String name;
     private ConfigurationSection classSection;
 
+
     /**
      * Constructor
      *
@@ -88,7 +89,7 @@ public class PlayerClass
 
 
     /**
-     *  Check if a player class exists.
+     * Check if a player class exists.
      *
      * @param className The player class name to check for.
      * @return true if this player class exists.

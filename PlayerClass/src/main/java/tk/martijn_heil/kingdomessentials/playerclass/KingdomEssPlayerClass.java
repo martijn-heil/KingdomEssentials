@@ -4,9 +4,14 @@ package tk.martijn_heil.kingdomessentials.playerclass;
 import lombok.Getter;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import tk.martijn_heil.kingdomessentials.playerclass.hooks.FactionsHook;
 import tk.martijn_heil.kingdomessentials.playerclass.hooks.PlaceHolderApiHook;
 import tk.martijn_heil.nincore.api.Core;
+
+import java.util.Locale;
+import java.util.ResourceBundle;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -16,8 +21,10 @@ public class KingdomEssPlayerClass extends Core
     private static KingdomEssPlayerClass instance;
 
 
-    @Getter private PlaceHolderApiHook placeHolderApiHook;
-    @Getter private FactionsHook factionsHook;
+    @Getter
+    private PlaceHolderApiHook placeHolderApiHook;
+    @Getter
+    private FactionsHook factionsHook;
 
 
     public KingdomEssPlayerClass()
@@ -34,7 +41,7 @@ public class KingdomEssPlayerClass extends Core
 
         this.saveDefaultConfig();
 
-        if(!this.getDataManager().dataFileExists())
+        if (!this.getDataManager().dataFileExists())
         {
             this.getDataManager().createDataFile();
         }
@@ -54,16 +61,27 @@ public class KingdomEssPlayerClass extends Core
      * Check if an item is part of a given kit. The item is known to be part of a certain kit if the lore contains
      * {@literal '§b§oKitNameHere'}
      *
-     * @param item The {@link ItemStack} to check.
+     * @param item    The {@link ItemStack} to check.
      * @param kitName The name of the kit to check if this item is part of it.
      * @return true if the item is part of this kit.
-     * @throws NullPointerException if kitName is null.
      */
-    public static boolean isPartOfKit(ItemStack item, String kitName)
+    public static boolean isPartOfKit(@Nullable ItemStack item, @Nullable String kitName)
     {
-        checkNotNull(kitName, "kitName can not be null.");
         return (item != null) && (item.getItemMeta().getLore() != null) && (item.getItemMeta().getLore() != null) &&
                 item.getItemMeta().getLore().contains("§b§o" + kitName);
-                                                // NOTE: §b instead of §6
+        // NOTE: §b instead of §6
+    }
+
+
+    public static ResourceBundle getMessages(@NotNull Locale inLocale)
+    {
+        checkNotNull(inLocale, "inLocale can not be null.");
+        return ResourceBundle.getBundle("tk.martijn_heil.kingomessentials.playerclass.res.messages", inLocale);
+    }
+
+
+    public static ResourceBundle getMessages()
+    {
+        return ResourceBundle.getBundle("tk.martijn_heil.kingomessentials.playerclass.res.messages");
     }
 }

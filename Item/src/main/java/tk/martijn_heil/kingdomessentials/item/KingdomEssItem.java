@@ -2,17 +2,23 @@ package tk.martijn_heil.kingdomessentials.item;
 
 
 import lombok.Getter;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
+import tk.martijn_heil.kingdomessentials.item.listeners.ItemRequireListener;
+import tk.martijn_heil.kingdomessentials.item.listeners.SoulboundItemListener;
 import tk.martijn_heil.nincore.api.Core;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 public class KingdomEssItem extends Core
 {
-    @Getter private static KingdomEssItem instance;
+    @Getter
+    private static KingdomEssItem instance;
 
 
     public KingdomEssItem()
@@ -20,30 +26,22 @@ public class KingdomEssItem extends Core
         instance = this;
     }
 
-    @Override
-    public void onLoadInner()
-    {
-
-    }
-
 
     @Override
     public void onEnableInner()
     {
+        this.saveDefaultConfig();
 
+        this.getNinLogger().info("Registering event listeners..");
+        Bukkit.getPluginManager().registerEvents(new SoulboundItemListener(), this);
+        Bukkit.getPluginManager().registerEvents(new ItemRequireListener(), this);
     }
 
-
-    @Override
-    public void onDisableInner()
-    {
-
-    }
 
     public List<ItemCategory> getItemCategories()
     {
         List<ItemCategory> categories = new ArrayList<>();
-        ConfigurationSection section = this.getConfig().getConfigurationSection("allowed");
+        ConfigurationSection section = this.getConfig().getConfigurationSection("rules");
 
         for (String key : section.getKeys(false))
         {
@@ -68,5 +66,11 @@ public class KingdomEssItem extends Core
         }
 
         return categories;
+    }
+
+
+    public static ResourceBundle getMessages(Locale inLocale)
+    {
+        return ResourceBundle.getBundle("tk.martijn_heil.kingdomessentials.item.res.messages", inLocale);
     }
 }

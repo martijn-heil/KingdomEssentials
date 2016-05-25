@@ -8,7 +8,7 @@
 #
 # You may add more categories to this list.
 # The items list in each category should contain a list of items which this category includes.
-allowed:
+rules:
 
   swords:
     items:

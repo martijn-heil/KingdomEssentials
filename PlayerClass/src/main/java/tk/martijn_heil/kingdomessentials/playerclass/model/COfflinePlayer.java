@@ -23,7 +23,6 @@ public class COfflinePlayer
     private OfflinePlayer offlinePlayer;
 
 
-
     public COfflinePlayer(@NotNull UUID uuid)
     {
         Preconditions.checkNotNull(uuid);
@@ -82,7 +81,7 @@ public class COfflinePlayer
     /**
      * Set the player's class.
      *
-     * @param className The class name.
+     * @param className    The class name.
      * @param withCoolDown Add cooldown value to player section in data file?
      */
     public void setPlayerClass(String className, boolean withCoolDown)
@@ -106,14 +105,14 @@ public class COfflinePlayer
 
     public void setPlayerClass(PlayerClass playerClass, boolean withCoolDown, boolean silent)
     {
-        if(this.toOfflinePlayer().isOnline())
+        if (this.toOfflinePlayer().isOnline())
         {
             new COnlinePlayer(this.toOfflinePlayer().getPlayer()).removePlayerClassKit();
         }
 
         KingdomEssPlayerClass.getInstance().getRawData().set(uuid + ".class", playerClass.getName());
 
-        if(withCoolDown)
+        if (withCoolDown)
         {
             DateTime currentDateTime = new DateTime();
             DateTime nextPossibleClassSwitchTime = currentDateTime.plusMinutes(
@@ -122,16 +121,16 @@ public class COfflinePlayer
                     nextPossibleClassSwitchTime.toString());
         }
 
-        if(this.toOfflinePlayer().isOnline())
+        if (this.toOfflinePlayer().isOnline())
         {
             new COnlinePlayer(this.uuid).givePlayerClassKit();
             NinOnlinePlayer np = NinOnlinePlayer.fromPlayer(this.toOfflinePlayer().getPlayer());
 
-            if(!silent)
+            if (!silent)
             {
                 this.toOfflinePlayer().getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&',
                         TranslationUtils.transWithArgs(ResourceBundle.getBundle("lang.mainMsgs", np.getLocale()),
-                                new Object[] {playerClass.getName()}, "switchedPlayerClass")));
+                                new Object[]{playerClass.getName()}, "switchedPlayerClass")));
             }
         }
     }
@@ -139,7 +138,6 @@ public class COfflinePlayer
 
     /**
      * Move the player to the default player class.
-     *
      */
     public void moveToDefaultPlayerClass()
     {
@@ -149,7 +147,6 @@ public class COfflinePlayer
 
     /**
      * Move the player to the default player class.
-     *
      */
     public void moveToDefaultPlayerClass(boolean withCoolDown)
     {

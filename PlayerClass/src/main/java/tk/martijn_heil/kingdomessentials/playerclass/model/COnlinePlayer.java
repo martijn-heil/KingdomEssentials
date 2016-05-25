@@ -16,6 +16,7 @@ public class COnlinePlayer extends COfflinePlayer
 {
     private Player player;
 
+
     /**
      * Constructor
      *
@@ -55,18 +56,18 @@ public class COnlinePlayer extends COfflinePlayer
 
     public void removePlayerClassKit()
     {
-        for(ItemStack i : this.player.getInventory().getContents())
+        for (ItemStack i : this.player.getInventory().getContents())
         {
-            if(KingdomEssPlayerClass.isPartOfKit(i, this.getPlayerClass().getName()))
+            if (KingdomEssPlayerClass.isPartOfKit(i, this.getPlayerClass().getName()))
             {
                 this.player.getInventory().remove(i);
             }
         }
 
         List<ItemStack> armorContentsStaging = new ArrayList<>();
-        for(ItemStack i : this.player.getInventory().getArmorContents())
+        for (ItemStack i : this.player.getInventory().getArmorContents())
         {
-            if(!KingdomEssPlayerClass.isPartOfKit(i, this.getPlayerClass().getKitName()))
+            if (!KingdomEssPlayerClass.isPartOfKit(i, this.getPlayerClass().getKitName()))
             {
                 armorContentsStaging.add(i);
             }
@@ -74,9 +75,9 @@ public class COnlinePlayer extends COfflinePlayer
         this.player.getInventory().setArmorContents(armorContentsStaging.toArray(new ItemStack[armorContentsStaging.size()]));
 
         List<ItemStack> storageContentsStaging = new ArrayList<>();
-        for(ItemStack i : this.player.getInventory().getStorageContents())
+        for (ItemStack i : this.player.getInventory().getStorageContents())
         {
-            if(!KingdomEssPlayerClass.isPartOfKit(i, this.getPlayerClass().getKitName()))
+            if (!KingdomEssPlayerClass.isPartOfKit(i, this.getPlayerClass().getKitName()))
             {
                 storageContentsStaging.add(i);
             }
@@ -84,9 +85,9 @@ public class COnlinePlayer extends COfflinePlayer
         this.player.getInventory().setStorageContents(storageContentsStaging.toArray(new ItemStack[storageContentsStaging.size()]));
 
         List<ItemStack> extraContentsStaging = new ArrayList<>();
-        for(ItemStack i : this.player.getInventory().getExtraContents())
+        for (ItemStack i : this.player.getInventory().getExtraContents())
         {
-            if(!KingdomEssPlayerClass.isPartOfKit(i, this.getPlayerClass().getKitName()))
+            if (!KingdomEssPlayerClass.isPartOfKit(i, this.getPlayerClass().getKitName()))
             {
                 extraContentsStaging.add(i);
             }

@@ -25,6 +25,7 @@
         <processorPath useClasspath="true" />
         <module name="Command" />
         <module name="Core" />
+        <module name="IllegalActions" />
         <module name="Item" />
         <module name="PlayerClass" />
         <module name="Storage" />
@@ -34,6 +35,7 @@
       <module name="Boot" target="1.8" />
       <module name="Command" target="1.8" />
       <module name="Core" target="1.8" />
+      <module name="IllegalActions" target="1.8" />
       <module name="Item" target="1.8" />
       <module name="KingdomEssentials" target="1.8" />
       <module name="PlayerClass" target="1.8" />

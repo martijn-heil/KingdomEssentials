@@ -36,7 +36,7 @@ public class SoulboundItemListener implements Listener
             NinOnlinePlayer np = NinOnlinePlayer.fromPlayer(e.getPlayer());
 
             np.sendError(TranslationUtils.getStaticMsg(ResourceBundle.getBundle("lang.errorMsgs",
-                    np.getMinecraftLocale().toLocale()), "eventError.cancelledPutItemInItemFrame"));
+                    np.getMinecraftLocale().toLocale()), "error.event.cancelled.entity.itemFrame.putItemIn"));
         }
     }
 
@@ -55,7 +55,7 @@ public class SoulboundItemListener implements Listener
 
 
             np.sendError(TranslationUtils.getStaticMsg(ResourceBundle.getBundle("lang.errorMsgs",
-                    np.getMinecraftLocale().toLocale()), "eventError.cancelledItemDrop"));
+                    np.getMinecraftLocale().toLocale()), "error.event.cancelled.item.drop"));
         }
     }
 
@@ -84,7 +84,7 @@ public class SoulboundItemListener implements Listener
 //            }
 //        }
 
-        if(e.getCurrentItem() != null && e.getAction() == InventoryAction.MOVE_TO_OTHER_INVENTORY &&
+        if (e.getCurrentItem() != null && e.getAction() == InventoryAction.MOVE_TO_OTHER_INVENTORY &&
                 ItemStacks.isSoulBound(e.getCurrentItem()) &&
                 e.getInventory().getType() != InventoryType.PLAYER &&
                 e.getInventory().getType() != InventoryType.CRAFTING &&
@@ -93,7 +93,7 @@ public class SoulboundItemListener implements Listener
             e.setCancelled(true);
 
             np.sendError(TranslationUtils.getStaticMsg(ResourceBundle.getBundle("lang.errorMsgs",
-                    np.getMinecraftLocale().toLocale()), "eventError.cancelledPutItemInInventory"));
+                    np.getMinecraftLocale().toLocale()), "error.event.cancelled.inventory.putItemIn"));
         }
 
 
@@ -117,19 +117,17 @@ public class SoulboundItemListener implements Listener
                 // If player tries to drop item by clicking outside of his inventory while dragging the item..
                 // the PlayerDropItemEvent would cancel this aswell, but this keeps the item being dragged,
                 // The PlayerDropItemEvent just puts the item back into the inventory, so this is a bit nicer..
-                if(clicked == null)
+                if (clicked == null)
                 {
-                    np.sendError(errorMsgs.getString("eventError.cancelledItemDrop"));
+                    np.sendError(errorMsgs.getString("error.event.cancelled.item.drop"));
                 }
                 else
                 {
-                    np.sendError(errorMsgs.getString("eventError.cancelledPutItemInInventory"));
+                    np.sendError(errorMsgs.getString("error.event.cancelled.inventory.putItemIn"));
                 }
 
             }
         }
-
-
 
 
         if (e.getCurrentItem() != null && e.getInventory() != null)
@@ -137,7 +135,7 @@ public class SoulboundItemListener implements Listener
             boolean cancel = false;
             for (ItemStack i : e.getInventory().getContents())
             {
-                if(i != null && ItemStacks.isSoulBound(i))
+                if (i != null && ItemStacks.isSoulBound(i))
                 {
                     cancel = true;
                     break;
@@ -149,30 +147,26 @@ public class SoulboundItemListener implements Listener
             if (e.getInventory().getType().equals(InventoryType.WORKBENCH) ||
                     e.getInventory().getType().equals(InventoryType.CRAFTING))
             {
-                if(e.getSlotType().equals(InventoryType.SlotType.RESULT) && cancel)
+                if (e.getSlotType().equals(InventoryType.SlotType.RESULT) && cancel)
                 {
                     e.setCancelled(true);
                     NinOnlinePlayer np2 = NinOnlinePlayer.fromPlayer((Player) e.getWhoClicked());
 
                     np2.sendError(TranslationUtils.getStaticMsg(ResourceBundle.getBundle("lang.errorMsgs",
-                            np2.getMinecraftLocale().toLocale()), "eventError.cancelledSoulboundCraft"));
+                            np2.getMinecraftLocale().toLocale()), "event.error.cancelled.item.craft.soulbound"));
                 }
             }
         }
 
 
-
-
-
-
-        if(e.getCurrentItem() != null && ItemStacks.isSoulBound(e.getCurrentItem()) &&
+        if (e.getCurrentItem() != null && ItemStacks.isSoulBound(e.getCurrentItem()) &&
                 ((e.getClick() == ClickType.DROP || e.getClick() == ClickType.CONTROL_DROP)))
         {
             e.setCancelled(true);
             np.toPlayer().updateInventory();
 
             np.sendError(TranslationUtils.getStaticMsg(ResourceBundle.getBundle("lang.errorMsgs",
-                    np.getMinecraftLocale().toLocale()), "eventError.cancelledItemDrop"));
+                    np.getMinecraftLocale().toLocale()), "error.event.cancelled.item.drop"));
         }
 //        else if(ItemStacks.isSoulBound(e.getCursor()) && e.getSlotType() == InventoryType.SlotType.OUTSIDE &&
 //                e.getClickedInventory() == null)
@@ -233,7 +227,7 @@ public class SoulboundItemListener implements Listener
 //        }
         InventoryType type = e.getInventory().getType();
 
-        if(ItemStacks.isSoulBound(dragged) &&
+        if (ItemStacks.isSoulBound(dragged) &&
                 type != InventoryType.CREATIVE &&
                 type != InventoryType.PLAYER &&
                 type != InventoryType.CRAFTING)
@@ -241,7 +235,7 @@ public class SoulboundItemListener implements Listener
             e.setCancelled(true);
 
             np.sendError(TranslationUtils.getStaticMsg(ResourceBundle.getBundle("lang.errorMsgs"
-                    , np.getMinecraftLocale().toLocale()), "eventError.cancelledPutItemInInventory"));
+                    , np.getMinecraftLocale().toLocale()), "error.event.cancelled.inventory.putItemIn"));
         }
     }
 
@@ -258,18 +252,18 @@ public class SoulboundItemListener implements Listener
     {
         InventoryHolder holder = e.getInitiator().getHolder();
 
-        if(holder instanceof Player)
+        if (holder instanceof Player)
         {
             Player pHolder = (Player) holder;
             NinOnlinePlayer npHolder = NinOnlinePlayer.fromPlayer(pHolder);
 
-            if(e.getDestination() != pHolder.getInventory())
+            if (e.getDestination() != pHolder.getInventory())
             {
                 e.setCancelled(true);
                 npHolder.toPlayer().updateInventory();
 
                 npHolder.sendError(TranslationUtils.getStaticMsg(ResourceBundle.getBundle("lang.errorMsgs"
-                        , npHolder.getMinecraftLocale().toLocale()), "eventError.cancelledPutItemInInventory"));
+                        , npHolder.getMinecraftLocale().toLocale()), "error.event.cancelled.inventory.putItemIn"));
             }
         }
     }
@@ -281,14 +275,14 @@ public class SoulboundItemListener implements Listener
         boolean containsSoulboundItem = false;
         for (ItemStack i : e.getInventory().getContents())
         {
-            if(i != null && ItemStacks.isSoulBound(i))
+            if (i != null && ItemStacks.isSoulBound(i))
             {
                 containsSoulboundItem = true;
                 break; // don't waste time continuing to iterate till the end.
             }
         }
 
-        if(containsSoulboundItem)
+        if (containsSoulboundItem)
         {
             e.setCancelled(true);
 
@@ -296,7 +290,7 @@ public class SoulboundItemListener implements Listener
             np.toPlayer().updateInventory();
 
             np.sendError(TranslationUtils.getStaticMsg(ResourceBundle.getBundle("lang.errorMsgs",
-                    np.getMinecraftLocale().toLocale()), "eventError.cancelledSoulboundCraft"));
+                    np.getMinecraftLocale().toLocale()), "event.error.cancelled.item.craft.soulbound"));
         }
     }
 
@@ -329,7 +323,7 @@ public class SoulboundItemListener implements Listener
             NinOnlinePlayer np = NinOnlinePlayer.fromPlayer(e.getPlayer());
 
             np.sendError(TranslationUtils.getStaticMsg(ResourceBundle.getBundle("lang.errorMsgs",
-                    np.getMinecraftLocale().toLocale()), "eventError.cancelledPutItemOnArmorStand"));
+                    np.getMinecraftLocale().toLocale()), "error.event.cancelled.entity.armorStand.putItemOn"));
         }
     }
 }

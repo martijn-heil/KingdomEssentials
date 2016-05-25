@@ -16,7 +16,7 @@ public class PlaceHolderApiHook
 
     public PlaceHolderApiHook()
     {
-        if(Bukkit.getPluginManager().isPluginEnabled("PlaceHolderAPI"))
+        if (Bukkit.getPluginManager().isPluginEnabled("PlaceHolderAPI"))
         {
             KingdomEssPlayerClass.getInstance().getNinLogger().info("PlaceHolderAPI detected! Hooking in.");
             this.usePlaceHolderApi = true;
@@ -44,7 +44,7 @@ public class PlaceHolderApiHook
         {
             switch (s)
             {
-                case("class"):
+                case ("class"):
                     return new COnlinePlayer(player).getPlayerClass().getName();
             }
 

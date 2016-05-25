@@ -6,7 +6,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
-import tk.martijn_heil.kingdomessentials.core.exceptions.ItemAlreadySoulboundException;
+import tk.martijn_heil.kingdomessentials.item.exceptions.ItemAlreadySoulboundException;
 import tk.martijn_heil.kingdomessentials.item.util.ItemStacks;
 import tk.martijn_heil.nincore.api.command.executors.NinSubCommandExecutor;
 import tk.martijn_heil.nincore.api.exceptions.TechnicalException;
@@ -30,7 +30,8 @@ public class KingdomKitsBindCmd extends NinSubCommandExecutor
         if (p.getInventory().getItemInMainHand() == null) return;
 
         // Check if item isn't already soulbound
-        if (ItemStacks.isSoulBound(p.getInventory().getItemInMainHand())) throw new ItemAlreadySoulboundException(sender);
+        if (ItemStacks.isSoulBound(p.getInventory().getItemInMainHand()))
+            throw new ItemAlreadySoulboundException(sender);
 
 
         List<String> lore = Collections.singletonList("§6§oSoulbound");

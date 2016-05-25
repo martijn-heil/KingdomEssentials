@@ -7,8 +7,6 @@ import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import tk.martijn_heil.kingdomessentials.playerclass.model.COnlinePlayer;
 import tk.martijn_heil.kingdomessentials.playerclass.model.PlayerClass;
-import tk.martijn_heil.kingdomkits.KingdomKits;
-import tk.martijn_heil.kingdomkits.model.COnlinePlayer;
 
 public class Players
 {
@@ -22,29 +20,29 @@ public class Players
     {
         Preconditions.checkNotNull(p, "p can not be null.");
 
-        FileConfiguration data = KingdomKits.getInstance().getDataManager().getData();
-        FileConfiguration config = KingdomKits.getInstance().getConfig();
+        FileConfiguration data = KingdomEssPlayerClass.getInstance().getRawData();
+        FileConfiguration config = KingdomEssPlayerClass.getInstance().getConfig();
 
         String playerUUID = p.getUniqueId().toString();
         String defaultClassName = config.getString("classes.defaultClass");
 
 
-        if(!data.isSet(playerUUID)) // he's new.
+        if (!data.isSet(playerUUID)) // he's new.
         {
-            KingdomKits.getInstance().getNinLogger().info("Creating new data entry for player: " + p.getName() + " (" + playerUUID + ")");
+            KingdomEssPlayerClass.getInstance().getNinLogger().info("Creating new data entry for player: " + p.getName() + " (" + playerUUID + ")");
 
             data.set(playerUUID + ".class", defaultClassName);
             data.set(playerUUID + ".lastSeenName", p.getName());
         }
 
 
-        if(!data.isSet(playerUUID + ".class"))
+        if (!data.isSet(playerUUID + ".class"))
         {
             data.set(playerUUID + ".class", defaultClassName);
         }
 
 
-        if(!data.isSet(playerUUID + ".lastSeenName"))
+        if (!data.isSet(playerUUID + ".lastSeenName"))
         {
             data.set(playerUUID + ".lastSeenName", p.getName());
         }

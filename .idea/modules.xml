@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/Command/Command.iml" filepath="$PROJECT_DIR$/Command/Command.iml" />
       <module fileurl="file://$PROJECT_DIR$/Core/Core.iml" filepath="$PROJECT_DIR$/Core/Core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/IllegalActions/IllegalActions.iml" filepath="$PROJECT_DIR$/IllegalActions/IllegalActions.iml" />
       <module fileurl="file://$PROJECT_DIR$/Item/Item.iml" filepath="$PROJECT_DIR$/Item/Item.iml" />
       <module fileurl="file://$PROJECT_DIR$/KingdomEssentials.iml" filepath="$PROJECT_DIR$/KingdomEssentials.iml" />
       <module fileurl="file://$PROJECT_DIR$/PlayerClass/PlayerClass.iml" filepath="$PROJECT_DIR$/PlayerClass/PlayerClass.iml" />

@@ -23,7 +23,7 @@ public class FactionsHook
      */
     public boolean canBecomeClass(@NotNull OfflinePlayer p, @NotNull PlayerClass playerClass)
     {
-        if(!Bukkit.getPluginManager().isPluginEnabled("Factions")) return true;
+        if (!Bukkit.getPluginManager().isPluginEnabled("Factions")) return true;
 
         // Noone with any sense would check for a className with null, if null is passed this cleary indicates some
         // mistake, and we should not fail silently.
@@ -32,7 +32,7 @@ public class FactionsHook
 
 
         // If this player class does not use MaxPercentagePerFaction.
-        if(!playerClass.usesMaxPercentagePerFaction())
+        if (!playerClass.usesMaxPercentagePerFaction())
         {
             return true;
         }
@@ -41,7 +41,7 @@ public class FactionsHook
         MPlayer mPlayer = MPlayer.get(p.getUniqueId());
 
         // If the player is in no faction, he can always can become the class.
-        if(!mPlayer.hasFaction())
+        if (!mPlayer.hasFaction())
         {
             return true;
         }
@@ -51,17 +51,17 @@ public class FactionsHook
         float total = 0;
 
         // Players in a class which doesn't use MaxPercentagePerFaction should not be counted to the total.
-        for (MPlayer mP: list)
+        for (MPlayer mP : list)
         {
             COnlinePlayer cPlayer = new COnlinePlayer(mP.getUuid());
 
-            if(cPlayer.getPlayerClass().usesMaxPercentagePerFaction())
+            if (cPlayer.getPlayerClass().usesMaxPercentagePerFaction())
             {
                 total++;
             }
         }
 
-        float effect = (100/total);
+        float effect = (100 / total);
         float count = 0;
 
         // Count all players in this specific player class.
@@ -69,7 +69,7 @@ public class FactionsHook
         {
             COnlinePlayer cPlayer = new COnlinePlayer(mP.getUuid());
 
-            if(cPlayer.getPlayerClass().equals(playerClass))
+            if (cPlayer.getPlayerClass().equals(playerClass))
             {
                 count++;
             }
@@ -77,7 +77,7 @@ public class FactionsHook
 
 
         // Calculate percentage
-        float currentPercentage = count*100/total;
+        float currentPercentage = count * 100 / total;
         float newPercentage = currentPercentage + effect;
 
 

@@ -103,7 +103,7 @@ public class ItemStacks
      * Check if an item is part of a given kit. The item is known to be part of a certain kit if the lore contains
      * {@literal '§b§oKitNameHere'}
      *
-     * @param item The {@link ItemStack} to check.
+     * @param item    The {@link ItemStack} to check.
      * @param kitName The name of the kit to check if this item is part of it.
      * @return true if the item is part of this kit.
      * @throws NullPointerException if kitName is null.
@@ -113,6 +113,6 @@ public class ItemStacks
         checkNotNull(kitName, "kitName can not be null.");
         return (item != null) && (item.getItemMeta().getLore() != null) && (item.getItemMeta().getLore() != null) &&
                 item.getItemMeta().getLore().contains("§b§o" + kitName);
-                                            // NOTE: §b instead of §6
+        // NOTE: §b instead of §6
     }
 }
