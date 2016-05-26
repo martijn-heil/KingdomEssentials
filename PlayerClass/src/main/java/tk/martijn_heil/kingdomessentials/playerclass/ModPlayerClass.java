@@ -17,14 +17,9 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 public class ModPlayerClass extends Core
 {
-    @Getter
-    private static ModPlayerClass instance;
-
-
-    @Getter
-    private PlaceHolderApiHook placeHolderApiHook;
-    @Getter
-    private FactionsHook factionsHook;
+    @Getter private static ModPlayerClass instance;
+    @Getter private PlaceHolderApiHook placeHolderApiHook;
+    @Getter private FactionsHook factionsHook;
 
 
     public ModPlayerClass()

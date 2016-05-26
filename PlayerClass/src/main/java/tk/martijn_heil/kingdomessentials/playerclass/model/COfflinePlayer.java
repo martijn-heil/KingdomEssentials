@@ -1,12 +1,12 @@
 package tk.martijn_heil.kingdomessentials.playerclass.model;
 
-import com.google.common.base.Preconditions;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.jetbrains.annotations.NotNull;
 import org.joda.time.DateTime;
 import tk.martijn_heil.kingdomessentials.playerclass.ModPlayerClass;
+import tk.martijn_heil.kingdomessentials.playerclass.Players;
 import tk.martijn_heil.nincore.api.entity.NinOfflinePlayer;
 import tk.martijn_heil.nincore.api.entity.NinOnlinePlayer;
 import tk.martijn_heil.nincore.api.util.TranslationUtils;
@@ -15,29 +15,47 @@ import java.util.ResourceBundle;
 import java.util.UUID;
 
 import static com.google.common.base.Preconditions.checkArgument;
+import static com.google.common.base.Preconditions.checkNotNull;
 
 
 public class COfflinePlayer
 {
-    private UUID uuid;
     private OfflinePlayer offlinePlayer;
 
 
+    /**
+     * @param uuid The UUID for the related {@link OfflinePlayer}
+     * @throws NullPointerException if uuid is null.
+     * @throws IllegalArgumentException if no {@link OfflinePlayer} with the given uuid can be found.
+     */
     public COfflinePlayer(@NotNull UUID uuid)
     {
-        Preconditions.checkNotNull(uuid);
+        checkNotNull(uuid, "uuid can not be null.");
 
         this.offlinePlayer = Bukkit.getOfflinePlayer(uuid);
-        this.uuid = uuid;
+        if(offlinePlayer == null) throw new IllegalArgumentException(String.format("No OfflinePlayer found with UUID %s", uuid));
+
+        if(!ModPlayerClass.getInstance().getRawData().getKeys(false).contains(uuid.toString()))
+        {
+            Players.populateData(this.offlinePlayer);
+        }
     }
 
 
+    /**
+     * @param p The related {@link OfflinePlayer}
+     * @throws NullPointerException if p is null.
+     */
     public COfflinePlayer(@NotNull OfflinePlayer p)
     {
-        Preconditions.checkNotNull(p);
+        checkNotNull(p, "p can not be null.");
 
         this.offlinePlayer = p;
-        this.uuid = p.getUniqueId();
+
+        if(!ModPlayerClass.getInstance().getRawData().getKeys(false).contains(offlinePlayer.getUniqueId().toString()))
+        {
+            Players.populateData(this.offlinePlayer);
+        }
     }
 
 
@@ -60,7 +78,7 @@ public class COfflinePlayer
      */
     public PlayerClass getPlayerClass()
     {
-        String playerClassname = ModPlayerClass.getInstance().getRawData().getString(uuid + ".class");
+        String playerClassname = ModPlayerClass.getInstance().getRawData().getString(offlinePlayer.getUniqueId() + ".class");
 
         return new PlayerClass(playerClassname);
     }
@@ -70,10 +88,11 @@ public class COfflinePlayer
      * Set the player's class.
      *
      * @param className The class name.
+     * @throws NullPointerException if className is null.
      */
     public void setPlayerClass(@NotNull String className)
     {
-        Preconditions.checkNotNull(className);
+        checkNotNull(className);
         this.setPlayerClass(new PlayerClass(className), true);
     }
 
@@ -110,20 +129,20 @@ public class COfflinePlayer
             new COnlinePlayer(this.toOfflinePlayer().getPlayer()).removePlayerClassKit();
         }
 
-        ModPlayerClass.getInstance().getRawData().set(uuid + ".class", playerClass.getName());
+        ModPlayerClass.getInstance().getRawData().set(offlinePlayer.getUniqueId() + ".class", playerClass.getName());
 
         if (withCoolDown)
         {
             DateTime currentDateTime = new DateTime();
             DateTime nextPossibleClassSwitchTime = currentDateTime.plusMinutes(
                     ModPlayerClass.getInstance().getConfig().getInt("classes.coolDownInMinutes"));
-            ModPlayerClass.getInstance().getRawData().set(uuid + ".nextPossibleClassSwitchTime",
+            ModPlayerClass.getInstance().getRawData().set(offlinePlayer.getUniqueId() + ".nextPossibleClassSwitchTime",
                     nextPossibleClassSwitchTime.toString());
         }
 
         if (this.toOfflinePlayer().isOnline())
         {
-            new COnlinePlayer(this.uuid).givePlayerClassKit();
+            new COnlinePlayer(this.offlinePlayer.getUniqueId()).givePlayerClassKit();
             NinOnlinePlayer np = NinOnlinePlayer.fromPlayer(this.toOfflinePlayer().getPlayer());
 
             if (!silent)
@@ -162,7 +181,7 @@ public class COfflinePlayer
     public boolean hasPlayerClassSwitchCoolDownExpired()
     {
         DateTime nextPossibleClassSwitchTime = new DateTime(ModPlayerClass.getInstance().getRawData()
-                .getString(uuid + ".nextPossibleClassSwitchTime"));
+                .getString(offlinePlayer.getUniqueId() + ".nextPossibleClassSwitchTime"));
         return nextPossibleClassSwitchTime.isBeforeNow();
     }
 
@@ -174,7 +193,7 @@ public class COfflinePlayer
      */
     public DateTime getNextPossibleClassSwitchTime()
     {
-        return DateTime.parse(ModPlayerClass.getInstance().getRawData().getString(uuid + ".nextPossibleClassSwitchTime"));
+        return DateTime.parse(ModPlayerClass.getInstance().getRawData().getString(offlinePlayer.getUniqueId() + ".nextPossibleClassSwitchTime"));
     }
 
 

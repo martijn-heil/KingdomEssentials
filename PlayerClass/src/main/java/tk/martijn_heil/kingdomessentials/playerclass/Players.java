@@ -2,8 +2,8 @@ package tk.martijn_heil.kingdomessentials.playerclass;
 
 
 import com.google.common.base.Preconditions;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import tk.martijn_heil.kingdomessentials.playerclass.model.COnlinePlayer;
 import tk.martijn_heil.kingdomessentials.playerclass.model.PlayerClass;
@@ -16,7 +16,7 @@ public class Players
      * @param p The player to populate data for.
      * @throws NullPointerException if p is null.
      */
-    public static void populateData(@NotNull Player p)
+    public static void populateData(@NotNull OfflinePlayer p)
     {
         Preconditions.checkNotNull(p, "p can not be null.");
 

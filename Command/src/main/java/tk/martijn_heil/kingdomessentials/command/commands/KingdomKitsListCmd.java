@@ -3,6 +3,7 @@ package tk.martijn_heil.kingdomessentials.command.commands;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
+import tk.martijn_heil.kingdomessentials.playerclass.ModPlayerClass;
 import tk.martijn_heil.kingdomessentials.playerclass.model.PlayerClass;
 import tk.martijn_heil.nincore.api.command.executors.NinSubCommandExecutor;
 import tk.martijn_heil.nincore.api.entity.NinCommandSender;
@@ -10,7 +11,6 @@ import tk.martijn_heil.nincore.api.exceptions.TechnicalException;
 import tk.martijn_heil.nincore.api.exceptions.ValidationException;
 
 import java.util.Locale;
-import java.util.ResourceBundle;
 
 public class KingdomKitsListCmd extends NinSubCommandExecutor
 {
@@ -18,10 +18,9 @@ public class KingdomKitsListCmd extends NinSubCommandExecutor
     public void execute(CommandSender sender, String[] strings) throws ValidationException, TechnicalException
     {
         Locale locale = NinCommandSender.fromCommandSender(sender).getLocale();
-        final ResourceBundle mainMsgs = ResourceBundle.getBundle("lang.mainMsgs", locale);
 
         sender.sendMessage("");
-        sender.sendMessage("§8-=[ §b§l+ §8]=- §8[ §6" + mainMsgs.getString("listOfPlayerClasses") + " §8] -= [ §b§l+ §8]=-");
+        sender.sendMessage("§8-=[ §b§l+ §8]=- §8[ §6" + ModPlayerClass.getMessages(locale).getString("listOfPlayerClasses") + " §8] -= [ §b§l+ §8]=-");
         sender.sendMessage("");
 
         int count = 1;

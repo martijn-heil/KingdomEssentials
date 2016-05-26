@@ -21,6 +21,7 @@ public class PlayerClass
      * Constructor
      *
      * @param className The player class name.
+     * @throws NullPointerException if className is null.
      */
     public PlayerClass(@NotNull String className)
     {
@@ -28,6 +29,8 @@ public class PlayerClass
 
         name = className;
         this.classSection = ModPlayerClass.getInstance().getConfig().getConfigurationSection("classes.classes." + name);
+
+        if(classSection == null) throw new IllegalArgumentException("No class could be found for name: " + className);
     }
 
 
