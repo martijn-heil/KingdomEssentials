@@ -14,10 +14,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.massivecraft:massivecore:SNAPSHOT" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: com.massivecraft:factions:SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: joda-time:joda-time:2.9.1" level="project" />
-    <orderEntry type="library" scope="PROVIDED" name="Maven: me.clip:placeholderapi:SNAPSHOT" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: me.clip:placeholderapi:2.5.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: tk.martijn-heil:NinCore-API:-189d32d322-1" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.spigotmc:spigot-api:1.9-R0.1-SNAPSHOT" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: commons-lang:commons-lang:2.6" level="project" />

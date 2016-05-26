@@ -46,19 +46,19 @@
 
     <dependencies>
 
-        <dependency>
-            <groupId>com.massivecraft</groupId>
-            <artifactId>massivecore</artifactId>
-            <version>SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.massivecraft</groupId>-->
+            <!--<artifactId>massivecore</artifactId>-->
+            <!--<version>SNAPSHOT</version>-->
+            <!--<scope>provided</scope>-->
+        <!--</dependency>-->
 
-        <dependency>
-            <groupId>com.massivecraft</groupId>
-            <artifactId>factions</artifactId>
-            <version>SNAPSHOT</version>
-            <scope>provided</scope>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>com.massivecraft</groupId>-->
+            <!--<artifactId>factions</artifactId>-->
+            <!--<version>SNAPSHOT</version>-->
+            <!--<scope>provided</scope>-->
+        <!--</dependency>-->
 
         <!-- Joda Time-->
         <dependency>
