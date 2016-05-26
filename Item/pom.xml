@@ -75,7 +75,7 @@
 
         <sourceDirectory>target/generated-sources/delombok</sourceDirectory>
         <testSourceDirectory>target/generated-test-sources/delombok</testSourceDirectory>
-        <finalName>KE-${project.name}-${project.version}</finalName>
+        <finalName>KE-${project.name}-${env.DRONE_COMMIT}@${env.DRONE_BRANCH}$-${env.DRONE_BUILD_NUMBER}</finalName>
 
         <plugins>
 
