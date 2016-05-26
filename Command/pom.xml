@@ -93,7 +93,7 @@
 
         <sourceDirectory>target/generated-sources/delombok</sourceDirectory>
         <testSourceDirectory>target/generated-test-sources/delombok</testSourceDirectory>
-        <finalName>KE-${project.name}-${project.version}</finalName>
+        <finalName>KE-${project.name}</finalName>
 
         <plugins>
 
