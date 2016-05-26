@@ -1,6 +1,6 @@
-name: ${project.parent.name}${project.name}${project.name}
+name: ${project.name}
 version: ${project.version}
 author: Ninjoh
 
 main: tk.martijn_heil.kingdomessentials.illegalactions.KingdomEssIllegalActions
-depend: [KingdomEssItem]
+depend: [KE-ModItem]

@@ -1,12 +1,12 @@
-name: ${project.parent.name}${project.name}
+name: KE-${project.name}
 version: ${project.version}
 author: Ninjoh
 
-depend: [KingdomEssItem,KingdomEssCore,KIngdomEssPlayerClass]
-main: tk.martijn_heil.KindgomEssentials.command.KingdomEssCommand
+depend: [KE-ModItem,KE-ModCore,KE-ModPlayerClass]
+main: tk.martijn_heil.kingdomessentials.command.KingdomEssCommand
 
 commands:
-   kingdomess:
-      aliases: [kingdomkits,kk,ke,]
+   kingdomessentials:
+      aliases: [kingdomkits,kk,ke]
       description: The main command for this plugin.
       usage: /<command>

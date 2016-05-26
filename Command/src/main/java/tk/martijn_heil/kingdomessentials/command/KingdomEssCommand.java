@@ -26,7 +26,7 @@ public class KingdomEssCommand extends Core
     {
         this.getLogger().info("Creating kingdomkits command..");
         CommandBuilder kkBuider = new CommandBuilder(this);
-        kkBuider.setName("kingdomkits");
+        kkBuider.setName("kingdomessentials");
         kkBuider.setUseStaticDescription(true);
         NinCommand kk = kkBuider.construct();
         kk.addDefaultInfoSubCmd();
