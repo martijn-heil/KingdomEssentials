@@ -1,4 +1,0 @@
-# Interval in ticks for saving the data file.
-# NOTE: 1 second = 20 ticks
-# Default value is set to 6000 ticks, wich is 5 minutes exact.
-dataSaveInterval: 6000

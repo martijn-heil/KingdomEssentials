@@ -28,7 +28,6 @@
         <module name="IllegalActions" />
         <module name="Item" />
         <module name="PlayerClass" />
-        <module name="Storage" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>

@@ -19,7 +19,6 @@
         <module>Command</module>
         <module>Core</module>
         <module>Item</module>
-        <module>Storage</module>
         <module>PlayerClass</module>
         <module>IllegalActions</module>
     </modules>
