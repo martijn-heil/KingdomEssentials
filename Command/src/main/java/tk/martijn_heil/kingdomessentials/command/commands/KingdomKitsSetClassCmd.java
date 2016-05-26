@@ -60,7 +60,7 @@ public class KingdomKitsSetClassCmd extends NinSubCommandExecutor
                 COnlinePlayer ninOnlinePlayer = new COnlinePlayer(((Player) sender).getUniqueId());
 
                 if (!ninOnlinePlayer.hasPlayerClassSwitchCoolDownExpired() &&
-                        !sender.hasPermission("kingdomkits.bypass.changeclasscooldown"))
+                        !sender.hasPermission("kingdomess.bypass.changeclasscooldown"))
                 {
                     throw new CoolDownHasNotExpiredException(sender, ninOnlinePlayer.getNextPossibleClassSwitchTime());
                 }

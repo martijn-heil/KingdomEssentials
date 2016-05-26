@@ -71,12 +71,12 @@ public class ModPlayerClass extends Core
     public static ResourceBundle getMessages(@NotNull Locale inLocale)
     {
         checkNotNull(inLocale, "inLocale can not be null.");
-        return ResourceBundle.getBundle("tk.martijn_heil.kingomessentials.playerclass.res.messages", inLocale);
+        return ResourceBundle.getBundle("tk.martijn_heil.kingdomessentials.playerclass.res.messages", inLocale);
     }
 
 
     public static ResourceBundle getMessages()
     {
-        return ResourceBundle.getBundle("tk.martijn_heil.kingomessentials.playerclass.res.messages");
+        return ResourceBundle.getBundle("tk.martijn_heil.kingdomessentials.playerclass.res.messages");
     }
 }
