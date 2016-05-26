@@ -4,6 +4,7 @@ author: Ninjoh
 
 depend: [KE-ModItem,KE-ModCore,KE-ModPlayerClass,NinCore]
 main: tk.martijn_heil.kingdomessentials.command.ModCommand
+commands:
    kingdomessentials:
       aliases: [kingdomkits,kk,ke]
       description: The main command for this plugin.
