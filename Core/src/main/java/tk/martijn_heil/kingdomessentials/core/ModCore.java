@@ -3,7 +3,7 @@ package tk.martijn_heil.kingdomessentials.core;
 
 import tk.martijn_heil.nincore.api.Core;
 
-public class KingdomEssCore extends Core
+public class ModCore extends Core
 {
 
     @Override

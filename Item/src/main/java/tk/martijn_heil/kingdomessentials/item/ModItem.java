@@ -15,13 +15,13 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
-public class KingdomEssItem extends Core
+public class ModItem extends Core
 {
     @Getter
-    private static KingdomEssItem instance;
+    private static ModItem instance;
 
 
-    public KingdomEssItem()
+    public ModItem()
     {
         instance = this;
     }

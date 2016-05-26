@@ -1,6 +1,6 @@
-name: ${project.name}
+name: KE-${project.name}
 version: ${project.version}
 author: Ninjoh
 
-main: tk.martijn_heil.kingdomessentials.illegalactions.KingdomEssIllegalActions
+main: tk.martijn_heil.kingdomessentials.illegalactions.ModIllegalActions
 depend: [KE-ModItem,NinCore]

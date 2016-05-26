@@ -11,7 +11,7 @@ import tk.martijn_heil.nincore.api.command.builders.SubCommandBuilder;
 import tk.martijn_heil.nincore.api.localization.LocalizedString;
 import tk.martijn_heil.nincore.api.logging.LogColor;
 
-public class KingdomEssCommand extends Core
+public class ModCommand extends Core
 {
 
     @Override

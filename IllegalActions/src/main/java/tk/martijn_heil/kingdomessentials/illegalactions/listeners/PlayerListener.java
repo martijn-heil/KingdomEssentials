@@ -20,7 +20,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionType;
-import tk.martijn_heil.kingdomessentials.illegalactions.KingdomEssIllegalActions;
+import tk.martijn_heil.kingdomessentials.illegalactions.ModIllegalActions;
 import tk.martijn_heil.kingdomessentials.item.util.ItemStacks;
 import tk.martijn_heil.nincore.api.entity.NinOnlinePlayer;
 
@@ -32,7 +32,7 @@ public class PlayerListener implements Listener
     @EventHandler(priority = EventPriority.HIGHEST) // If player tries to shoot with a non-soulbound bow.
     public void onEntityShootBow(EntityShootBowEvent e)
     {
-        if (KingdomEssIllegalActions.getInstance().getConfig().getBoolean("soulbound.preventNonSoulboundWeaponUsage") &&
+        if (ModIllegalActions.getInstance().getConfig().getBoolean("soulbound.preventNonSoulboundWeaponUsage") &&
                 e.getEntity() instanceof Player &&
                 !ItemStacks.isSoulBound(e.getBow()))
         {
@@ -44,7 +44,7 @@ public class PlayerListener implements Listener
             player.updateInventory();
 
             NinOnlinePlayer np = NinOnlinePlayer.fromPlayer(player);
-            np.sendError(KingdomEssIllegalActions.getMessages(np.getLocale()).getString("error.event.cancelled.generic.shootBow"));
+            np.sendError(ModIllegalActions.getMessages(np.getLocale()).getString("error.event.cancelled.generic.shootBow"));
         }
     }
 
@@ -52,7 +52,7 @@ public class PlayerListener implements Listener
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onEntityDamageByEntity(EntityDamageByEntityEvent e)
     {
-        if (KingdomEssIllegalActions.getInstance().getConfig().getBoolean("soulbound.preventNonSoulboundWeaponUsage") && e.getDamager() instanceof Player)
+        if (ModIllegalActions.getInstance().getConfig().getBoolean("soulbound.preventNonSoulboundWeaponUsage") && e.getDamager() instanceof Player)
         {
             Player player = (Player) e.getDamager();
 
@@ -72,12 +72,12 @@ public class PlayerListener implements Listener
                 e.setCancelled(true);
 
                 NinOnlinePlayer np = NinOnlinePlayer.fromPlayer(player);
-                np.sendError(KingdomEssIllegalActions.getMessages(np.getLocale()).getString("error.event.cancelled.item.combat"));
+                np.sendError(ModIllegalActions.getMessages(np.getLocale()).getString("error.event.cancelled.item.combat"));
             }
         }
 
 
-        if (KingdomEssIllegalActions.getInstance().getConfig().getBoolean("soulbound.preventNonSoulboundAxeUsage") && e.getDamager() instanceof Player)
+        if (ModIllegalActions.getInstance().getConfig().getBoolean("soulbound.preventNonSoulboundAxeUsage") && e.getDamager() instanceof Player)
         {
             Player player = (Player) e.getDamager();
 
@@ -99,7 +99,7 @@ public class PlayerListener implements Listener
                 e.setCancelled(true);
 
                 NinOnlinePlayer np = NinOnlinePlayer.fromPlayer(player);
-                np.sendError(KingdomEssIllegalActions.getMessages(np.getLocale()).getString("error.event.cancelled.item.combat"));
+                np.sendError(ModIllegalActions.getMessages(np.getLocale()).getString("error.event.cancelled.item.combat"));
             }
         }
 
@@ -109,13 +109,13 @@ public class PlayerListener implements Listener
     @EventHandler
     public void onEntityToggleGlide(EntityToggleGlideEvent e)
     {
-        if (e.isGliding() && e.getEntity() instanceof Player && KingdomEssIllegalActions.getInstance().getConfig().getBoolean("preventElytra") &&
+        if (e.isGliding() && e.getEntity() instanceof Player && ModIllegalActions.getInstance().getConfig().getBoolean("preventElytra") &&
                 !e.getEntity().hasPermission("kingdomkits.bypass.elytra"))
         {
             e.setCancelled(true);
 
             NinOnlinePlayer np = NinOnlinePlayer.fromPlayer((Player) e.getEntity());
-            np.sendError(KingdomEssIllegalActions.getMessages(np.getLocale()).getString("error.event.cancelled.movement.glide"));
+            np.sendError(ModIllegalActions.getMessages(np.getLocale()).getString("error.event.cancelled.movement.glide"));
         }
     }
 
@@ -124,7 +124,7 @@ public class PlayerListener implements Listener
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onInventoryClick(InventoryClickEvent e)
     {
-        List<String> items = KingdomEssIllegalActions.getInstance().getConfig().getStringList("crafting.blacklistedItems");
+        List<String> items = ModIllegalActions.getInstance().getConfig().getStringList("crafting.blacklistedItems");
 
         if (e.getCurrentItem() != null && e.getInventory() != null)
         {
@@ -138,12 +138,12 @@ public class PlayerListener implements Listener
                 {
                     e.setCancelled(true);
                     NinOnlinePlayer np = NinOnlinePlayer.fromPlayer((Player) e.getWhoClicked());
-                    np.sendError(KingdomEssIllegalActions.getMessages(np.getLocale()).getString("error.event.cancelled.item.craft"));
+                    np.sendError(ModIllegalActions.getMessages(np.getLocale()).getString("error.event.cancelled.item.craft"));
                 }
             }
         }
 
-        List<String> items2 = KingdomEssIllegalActions.getInstance().getConfig().getStringList("enchanting.blacklistedItems");
+        List<String> items2 = ModIllegalActions.getInstance().getConfig().getStringList("enchanting.blacklistedItems");
 
         if (e.getCurrentItem() != null && e.getInventory() != null)
         {
@@ -164,7 +164,7 @@ public class PlayerListener implements Listener
                         e.setCancelled(true);
 
                         NinOnlinePlayer np = NinOnlinePlayer.fromPlayer((Player) e.getWhoClicked());
-                        np.sendError(KingdomEssIllegalActions.getMessages(np.getLocale()).getString("error.event.cancelled.block.use.anvil"));
+                        np.sendError(ModIllegalActions.getMessages(np.getLocale()).getString("error.event.cancelled.block.use.anvil"));
                     }
                 }
             }
@@ -178,14 +178,14 @@ public class PlayerListener implements Listener
     {
         if (e.getItem() != null)
         {
-            if (KingdomEssIllegalActions.getInstance().getConfig().getList("usage.blacklistedItems").contains(e.getItem().getType().toString()) &&
+            if (ModIllegalActions.getInstance().getConfig().getList("usage.blacklistedItems").contains(e.getItem().getType().toString()) &&
                     (e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)))
             {
                 e.setCancelled(true);
                 e.getPlayer().updateInventory();
 
                 NinOnlinePlayer np = NinOnlinePlayer.fromPlayer(e.getPlayer());
-                np.sendError(KingdomEssIllegalActions.getMessages(np.getLocale()).getString("error.event.cancelled.item.use"));
+                np.sendError(ModIllegalActions.getMessages(np.getLocale()).getString("error.event.cancelled.item.use"));
             }
         }
     }
@@ -194,16 +194,16 @@ public class PlayerListener implements Listener
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerItemConsume(PlayerItemConsumeEvent e)
     {
-        if (KingdomEssIllegalActions.getInstance().getConfig().getList("consume.blacklistedItems").contains(e.getItem().getType().toString())
+        if (ModIllegalActions.getInstance().getConfig().getList("consume.blacklistedItems").contains(e.getItem().getType().toString())
                 && !ItemStacks.isConsumeAllowed(e.getItem()))
         {
             e.setCancelled(true);
 
             NinOnlinePlayer np = NinOnlinePlayer.fromPlayer(e.getPlayer());
-            np.sendError(KingdomEssIllegalActions.getMessages(np.getLocale()).getString("error.event.cancelled.item.consume"));
+            np.sendError(ModIllegalActions.getMessages(np.getLocale()).getString("error.event.cancelled.item.consume"));
         }
 
-        if (KingdomEssIllegalActions.getInstance().getConfig().getBoolean("potions.disablePotions"))
+        if (ModIllegalActions.getInstance().getConfig().getBoolean("potions.disablePotions"))
         {
             if (e.getItem().getType().equals(Material.POTION))
             {
@@ -214,7 +214,7 @@ public class PlayerListener implements Listener
                     e.setCancelled(true);
 
                     NinOnlinePlayer np = NinOnlinePlayer.fromPlayer(e.getPlayer());
-                    np.sendError(KingdomEssIllegalActions.getMessages(np.getLocale()).getString("error.event.cancelled.potion.drink"));
+                    np.sendError(ModIllegalActions.getMessages(np.getLocale()).getString("error.event.cancelled.potion.drink"));
                 }
             }
         }
@@ -224,7 +224,7 @@ public class PlayerListener implements Listener
     @EventHandler(priority = EventPriority.HIGHEST) // Prevent player enchanting soulbound items.
     public void onEnchantItem(EnchantItemEvent e)
     {
-        List<String> items = KingdomEssIllegalActions.getInstance().getConfig().getStringList("enchanting.blacklistedItems");
+        List<String> items = ModIllegalActions.getInstance().getConfig().getStringList("enchanting.blacklistedItems");
 
         ItemStack enchantedItem = e.getItem();
 
@@ -236,7 +236,7 @@ public class PlayerListener implements Listener
             e.setCancelled(true);
 
             NinOnlinePlayer np = NinOnlinePlayer.fromPlayer(e.getEnchanter());
-            np.sendError(KingdomEssIllegalActions.getMessages(np.getLocale()).getString("error.event.cancelled.item.enchant"));
+            np.sendError(ModIllegalActions.getMessages(np.getLocale()).getString("error.event.cancelled.item.enchant"));
         }
     }
 
@@ -244,7 +244,7 @@ public class PlayerListener implements Listener
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onBlockDispenseEvent(BlockDispenseEvent e)
     {
-        if (KingdomEssIllegalActions.getInstance().getConfig().getBoolean("potions.disablePotions"))
+        if (ModIllegalActions.getInstance().getConfig().getBoolean("potions.disablePotions"))
         {
             if (e.getItem().getType().equals(Material.POTION))
             {
@@ -257,7 +257,7 @@ public class PlayerListener implements Listener
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerInteract(PlayerInteractEvent e)
     {
-        if (KingdomEssIllegalActions.getInstance().getConfig().getBoolean("potions.disablePotions"))
+        if (ModIllegalActions.getInstance().getConfig().getBoolean("potions.disablePotions"))
         {
             if (e.getItem() != null && e.getItem().getType().equals(Material.POTION) &&
                     (e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)))
@@ -269,7 +269,7 @@ public class PlayerListener implements Listener
                     e.setCancelled(true);
 
                     NinOnlinePlayer np = NinOnlinePlayer.fromPlayer(e.getPlayer());
-                    np.sendError(KingdomEssIllegalActions.getMessages(np.getLocale()).getString("error.event.cancelled.potion.throw"));
+                    np.sendError(ModIllegalActions.getMessages(np.getLocale()).getString("error.event.cancelled.potion.throw"));
                 }
             }
         }

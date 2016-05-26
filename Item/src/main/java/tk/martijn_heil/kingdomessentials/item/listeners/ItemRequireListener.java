@@ -10,7 +10,7 @@ import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerItemConsumeEvent;
 import tk.martijn_heil.kingdomessentials.item.ItemCategory;
-import tk.martijn_heil.kingdomessentials.item.KingdomEssItem;
+import tk.martijn_heil.kingdomessentials.item.ModItem;
 import tk.martijn_heil.kingdomessentials.item.util.ItemCategories;
 import tk.martijn_heil.kingdomessentials.item.util.ItemStacks;
 import tk.martijn_heil.nincore.api.entity.NinOnlinePlayer;
@@ -32,7 +32,7 @@ public class ItemRequireListener implements Listener
 
             // send the error.
             NinOnlinePlayer np = NinOnlinePlayer.fromPlayer(e.getPlayer());
-            np.sendError(KingdomEssItem.getMessages(np.getLocale()).getString("error.event.cancelled.item.use"));
+            np.sendError(ModItem.getMessages(np.getLocale()).getString("error.event.cancelled.item.use"));
         }
     }
 
@@ -52,7 +52,7 @@ public class ItemRequireListener implements Listener
 
             // send the error.
             NinOnlinePlayer np = NinOnlinePlayer.fromPlayer((Player) e.getDamager());
-            np.sendError(KingdomEssItem.getMessages(np.getLocale()).getString("error.event.cancelled.item.combat"));
+            np.sendError(ModItem.getMessages(np.getLocale()).getString("error.event.cancelled.item.combat"));
         }
     }
 
@@ -72,7 +72,7 @@ public class ItemRequireListener implements Listener
 
             // send the error.
             NinOnlinePlayer np = NinOnlinePlayer.fromPlayer(e.getPlayer());
-            np.sendError(KingdomEssItem.getMessages(np.getLocale()).getString("error.event.cancelled.item.equip"));
+            np.sendError(ModItem.getMessages(np.getLocale()).getString("error.event.cancelled.item.equip"));
         }
     }
 
@@ -88,7 +88,7 @@ public class ItemRequireListener implements Listener
 
             // send the error.
             NinOnlinePlayer np = NinOnlinePlayer.fromPlayer(e.getPlayer());
-            np.sendError(KingdomEssItem.getMessages(np.getLocale()).getString("error.event.cancelled.block.mine"));
+            np.sendError(ModItem.getMessages(np.getLocale()).getString("error.event.cancelled.block.mine"));
         }
     }
 
@@ -104,7 +104,7 @@ public class ItemRequireListener implements Listener
 
             // send the error.
             NinOnlinePlayer np = NinOnlinePlayer.fromPlayer(e.getPlayer());
-            np.sendError(KingdomEssItem.getMessages(np.getLocale()).getString("error.event.cancelled.item.consume"));
+            np.sendError(ModItem.getMessages(np.getLocale()).getString("error.event.cancelled.item.consume"));
         }
     }
 }

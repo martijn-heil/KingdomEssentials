@@ -11,13 +11,13 @@ import tk.martijn_heil.nincore.api.Core;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-public class KingdomEssIllegalActions extends Core
+public class ModIllegalActions extends Core
 {
     @Getter
-    private static KingdomEssIllegalActions instance;
+    private static ModIllegalActions instance;
 
 
-    public KingdomEssIllegalActions()
+    public ModIllegalActions()
     {
         instance = this;
     }

@@ -3,9 +3,7 @@ version: ${project.version}
 author: Ninjoh
 
 depend: [KE-ModItem,KE-ModCore,KE-ModPlayerClass,NinCore]
-main: tk.martijn_heil.kingdomessentials.command.KingdomEssCommand
-
-commands:
+main: tk.martijn_heil.kingdomessentials.command.ModCommand
    kingdomessentials:
       aliases: [kingdomkits,kk,ke]
       description: The main command for this plugin.

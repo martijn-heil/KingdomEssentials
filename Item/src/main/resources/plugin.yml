@@ -2,5 +2,5 @@ name: KE-${project.name}
 version: ${project.version}
 author: Ninjoh
 
-main: tk.martijn_heil.kingdomessentials.item.KingdomEssItemdomEssItem
+main: tk.martijn_heil.kingdomessentials.item.ModItem
 depend: [NinCore]
