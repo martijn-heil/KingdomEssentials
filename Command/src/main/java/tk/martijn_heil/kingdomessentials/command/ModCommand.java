@@ -15,13 +15,6 @@ public class ModCommand extends Core
 {
 
     @Override
-    public void onLoadInner()
-    {
-
-    }
-
-
-    @Override
     public void onEnableInner()
     {
         this.getLogger().info("Creating kingdomkits command..");
@@ -44,43 +37,36 @@ public class ModCommand extends Core
 //                .setExecutor(new KingdomKitsBindCmd())
 //                .construct();
 
-        this.getLogger().fine("Creating" + LogColor.HIGHLIGHT + "/kingdomkits getclass" + LogColor.RESET + " sub command.");
+        this.getLogger().fine("Creating" + LogColor.HIGHLIGHT + "/kingdomessentials getclass" + LogColor.RESET + " sub command.");
         new SubCommandBuilder()
                 .setName("getclass")
                 .setUsage("<player=you>")
-                .setRequiredPermission("kingdomkits.getclass")
+                .setRequiredPermission("kingdomess.playerclass.getclass")
                 .setUseStaticDescription(false)
-                .setLocalizedDescription(new LocalizedString(this.getClassLoader(), "lang.subCmdMessages", "getclass.desc"))
+                .setLocalizedDescription(new LocalizedString(this.getClassLoader(), "tk.martijn_heil.kingdomessentials.command.res.messages", "command.getclass.description"))
                 .setParentCommand(kk)
                 .setExecutor(new KingdomKitsGetClassCmd())
                 .construct();
 
-        this.getLogger().fine("Creating" + LogColor.HIGHLIGHT + "/kingdomkits list" + LogColor.RESET + " sub command.");
+        this.getLogger().fine("Creating" + LogColor.HIGHLIGHT + "/kingdomessentials list" + LogColor.RESET + " sub command.");
         new SubCommandBuilder()
                 .setName("list")
-                .setRequiredPermission("kingdomkits.list")
+                .setRequiredPermission("kingdomess.playerclass.list")
                 .setUseStaticDescription(false)
-                .setLocalizedDescription(new LocalizedString(this.getClassLoader(), "lang.subCmdMessages", "list.desc"))
+                .setLocalizedDescription(new LocalizedString(this.getClassLoader(), "tk.martijn_heil.kingdomessentials.command.res.messages", "command.list.description"))
                 .setParentCommand(kk)
                 .setExecutor(new KingdomKitsListCmd())
                 .construct();
 
-        this.getLogger().fine("Creating" + LogColor.HIGHLIGHT + "/kingdomkits setclass" + LogColor.RESET + " sub command.");
+        this.getLogger().fine("Creating" + LogColor.HIGHLIGHT + "/kingdomessentials setclass" + LogColor.RESET + " sub command.");
         new SubCommandBuilder()
                 .setName("setclass")
                 .setUsage("<class> <player=you>")
-                .setRequiredPermission("kingdomkits.setclass")
+                .setRequiredPermission("kingdomess.playerclass.setclass")
                 .setUseStaticDescription(false)
-                .setLocalizedDescription(new LocalizedString(this.getClassLoader(), "lang.subCmdMessages", "setclass.desc"))
+                .setLocalizedDescription(new LocalizedString(this.getClassLoader(), "tk.martijn_heil.kingdomessentials.command.res.messages", "command.setclass.description"))
                 .setParentCommand(kk)
                 .setExecutor(new KingdomKitsSetClassCmd())
                 .construct();
-    }
-
-
-    @Override
-    public void onDisableInner()
-    {
-
     }
 }

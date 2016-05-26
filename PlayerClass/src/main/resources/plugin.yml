@@ -5,3 +5,23 @@ author: Ninjoh
 main: tk.martijn_heil.kingdomessentials.playerclass.ModPlayerClass
 softdepend: [PlaceHolderAPI]
 depend: [NinCore]
+
+permissions:
+  kingdomess.playerclass.list:
+    default: true
+
+  kingdomess.playerclass.getclass:
+    default: true
+
+  kingdomess.playerclass.getclass.other:
+    default: true
+
+  kingdomess.playerclass.setclass:
+    default: op
+
+  kingdomess.playerclass.setclass.other:
+    default: op
+
+
+  kingdomess.playerclass.bypass.changeclasscooldown:
+    default: op

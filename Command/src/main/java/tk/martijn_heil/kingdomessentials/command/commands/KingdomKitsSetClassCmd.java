@@ -89,11 +89,11 @@ public class KingdomKitsSetClassCmd extends NinSubCommandExecutor
             String className = args[0];
 
             // If sender doesn't have the kingdomkits.setclass.[class] permission
-            if (!sender.hasPermission("kingdomkits.setclass.class." + className) && !sender.hasPermission("kingdomkits.setclass.class.*"))
+            if (!sender.hasPermission("kingdomess.playerclass.setclass." + className))
                 throw new AccessDeniedException(sender);
 
 
-            if (!sender.hasPermission("kingdomkits.setclass.others")) throw new AccessDeniedException(sender);
+            if (!sender.hasPermission("kingdomess.playerclass.setclass.others." + className)) throw new AccessDeniedException(sender);
 
             // Class validation
             if (!PlayerClass.PlayerClassExists(className)) throw new PlayerClassNotFoundException(sender);
@@ -118,7 +118,7 @@ public class KingdomKitsSetClassCmd extends NinSubCommandExecutor
 
             // Cooldown validation..
             if (!ninOfflinePlayer.hasPlayerClassSwitchCoolDownExpired() &&
-                    !sender.hasPermission("kingdomkits.bypass.changeclasscooldown"))
+                    !sender.hasPermission("kingdomess.playerclass.bypass.changeclasscooldown"))
             {
                 throw new CoolDownHasNotExpiredException(sender, ninOfflinePlayer.getNextPossibleClassSwitchTime(),
                         ninOfflinePlayer.toOfflinePlayer().getName());

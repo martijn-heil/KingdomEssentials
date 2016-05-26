@@ -22,7 +22,7 @@ public class KingdomKitsGetClassCmd extends NinSubCommandExecutor
     @Override
     public void execute(CommandSender sender, String[] args) throws ValidationException, TechnicalException
     {
-        if (!sender.hasPermission("kingdomkits.getclass"))
+        if (!sender.hasPermission("kingdomess.playerclass.getclass"))
         {
             throw new AccessDeniedException(sender);
         }
@@ -46,7 +46,7 @@ public class KingdomKitsGetClassCmd extends NinSubCommandExecutor
         } // Target player has been given
         else if (args.length == 1)
         {
-            if (!sender.hasPermission("kingdomkits.getclass.others"))
+            if (!sender.hasPermission("kingdomess.playerclass.getclass.others"))
             {
                 throw new AccessDeniedException(sender);
             }
