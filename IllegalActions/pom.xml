@@ -4,8 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>tk.martijn_heil.kingdomessentials.illegalactions</groupId>
-    <artifactId>IllegalActions</artifactId>
+    <artifactId>ModIllegalActions</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -18,7 +17,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <name>IllegalActions</name>
+    <name>ModIllegalActions</name>
 
     <repositories>
 
@@ -43,8 +42,8 @@
     <dependencies>
 
         <dependency>
-            <groupId>tk.martijn_heil.kingdomessentials.item</groupId>
-            <artifactId>Item</artifactId>
+            <groupId>tk.martijn_heil.kingdomessentials</groupId>
+            <artifactId>ModItem</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
@@ -87,6 +86,7 @@
 
         <sourceDirectory>target/generated-sources/delombok</sourceDirectory>
         <testSourceDirectory>target/generated-test-sources/delombok</testSourceDirectory>
+        <finalName>KE-${project.name}-${project.version}</finalName>
 
         <plugins>
 

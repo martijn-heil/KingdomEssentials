@@ -4,8 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>tk.martijn_heil.kingdomessentials.item</groupId>
-    <artifactId>Item</artifactId>
+    <artifactId>ModItem</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
@@ -18,7 +17,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <name>Item</name>
+    <name>ModItem</name>
 
     <repositories>
 
@@ -76,6 +75,7 @@
 
         <sourceDirectory>target/generated-sources/delombok</sourceDirectory>
         <testSourceDirectory>target/generated-test-sources/delombok</testSourceDirectory>
+        <finalName>KE-${project.name}-${project.version}</finalName>
 
         <plugins>
 

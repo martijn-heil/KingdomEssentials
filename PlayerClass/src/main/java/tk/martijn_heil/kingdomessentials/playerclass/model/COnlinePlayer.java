@@ -4,7 +4,7 @@ package tk.martijn_heil.kingdomessentials.playerclass.model;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
-import tk.martijn_heil.kingdomessentials.playerclass.KingdomEssPlayerClass;
+import tk.martijn_heil.kingdomessentials.playerclass.ModPlayerClass;
 import tk.martijn_heil.nincore.api.entity.NinOnlinePlayer;
 import tk.martijn_heil.nincore.api.util.ServerUtils;
 
@@ -58,7 +58,7 @@ public class COnlinePlayer extends COfflinePlayer
     {
         for (ItemStack i : this.player.getInventory().getContents())
         {
-            if (KingdomEssPlayerClass.isPartOfKit(i, this.getPlayerClass().getName()))
+            if (ModPlayerClass.isPartOfKit(i, this.getPlayerClass().getName()))
             {
                 this.player.getInventory().remove(i);
             }
@@ -67,7 +67,7 @@ public class COnlinePlayer extends COfflinePlayer
         List<ItemStack> armorContentsStaging = new ArrayList<>();
         for (ItemStack i : this.player.getInventory().getArmorContents())
         {
-            if (!KingdomEssPlayerClass.isPartOfKit(i, this.getPlayerClass().getKitName()))
+            if (!ModPlayerClass.isPartOfKit(i, this.getPlayerClass().getKitName()))
             {
                 armorContentsStaging.add(i);
             }
@@ -77,7 +77,7 @@ public class COnlinePlayer extends COfflinePlayer
         List<ItemStack> storageContentsStaging = new ArrayList<>();
         for (ItemStack i : this.player.getInventory().getStorageContents())
         {
-            if (!KingdomEssPlayerClass.isPartOfKit(i, this.getPlayerClass().getKitName()))
+            if (!ModPlayerClass.isPartOfKit(i, this.getPlayerClass().getKitName()))
             {
                 storageContentsStaging.add(i);
             }
@@ -87,7 +87,7 @@ public class COnlinePlayer extends COfflinePlayer
         List<ItemStack> extraContentsStaging = new ArrayList<>();
         for (ItemStack i : this.player.getInventory().getExtraContents())
         {
-            if (!KingdomEssPlayerClass.isPartOfKit(i, this.getPlayerClass().getKitName()))
+            if (!ModPlayerClass.isPartOfKit(i, this.getPlayerClass().getKitName()))
             {
                 extraContentsStaging.add(i);
             }

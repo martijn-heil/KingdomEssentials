@@ -4,7 +4,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import tk.martijn_heil.kingdomessentials.playerclass.KingdomEssPlayerClass;
+import tk.martijn_heil.kingdomessentials.playerclass.ModPlayerClass;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +27,7 @@ public class PlayerClass
         checkNotNull(className, "className can not be null.");
 
         name = className;
-        this.classSection = KingdomEssPlayerClass.getInstance().getConfig().getConfigurationSection("classes.classes." + name);
+        this.classSection = ModPlayerClass.getInstance().getConfig().getConfigurationSection("classes.classes." + name);
     }
 
 
@@ -78,7 +78,7 @@ public class PlayerClass
      */
     public boolean isDefaultPlayerClass()
     {
-        return name.equals(KingdomEssPlayerClass.getInstance().getConfig().getString("classes.defaultClass"));
+        return name.equals(ModPlayerClass.getInstance().getConfig().getString("classes.defaultClass"));
     }
 
 
@@ -97,7 +97,7 @@ public class PlayerClass
     @Contract("null -> false")
     public static boolean PlayerClassExists(@Nullable String className)
     {
-        return (className != null) && KingdomEssPlayerClass.getInstance().getConfig().getConfigurationSection("classes.classes").getKeys(false).contains(className);
+        return (className != null) && ModPlayerClass.getInstance().getConfig().getConfigurationSection("classes.classes").getKeys(false).contains(className);
     }
 
 
@@ -109,7 +109,7 @@ public class PlayerClass
     @Contract(" -> !null")
     public static PlayerClass getDefault()
     {
-        return new PlayerClass(KingdomEssPlayerClass.getInstance().getConfig().getString("classes.defaultClass"));
+        return new PlayerClass(ModPlayerClass.getInstance().getConfig().getString("classes.defaultClass"));
     }
 
 
@@ -117,7 +117,7 @@ public class PlayerClass
     {
         List<PlayerClass> list = new ArrayList<>();
 
-        for (String key : KingdomEssPlayerClass.getInstance().getConfig().getConfigurationSection("classes.classes").getKeys(false))
+        for (String key : ModPlayerClass.getInstance().getConfig().getConfigurationSection("classes.classes").getKeys(false))
         {
             list.add(new PlayerClass(key));
         }

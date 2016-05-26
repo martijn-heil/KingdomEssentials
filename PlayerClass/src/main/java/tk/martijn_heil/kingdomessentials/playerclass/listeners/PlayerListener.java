@@ -5,7 +5,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
-import tk.martijn_heil.kingdomessentials.playerclass.KingdomEssPlayerClass;
+import tk.martijn_heil.kingdomessentials.playerclass.ModPlayerClass;
 import tk.martijn_heil.kingdomessentials.playerclass.Players;
 import tk.martijn_heil.kingdomessentials.playerclass.model.COnlinePlayer;
 import tk.martijn_heil.nincore.api.util.ServerUtils;
@@ -20,17 +20,17 @@ public class PlayerListener
         Players.populateData(e.getPlayer());
 
         // Player is new.
-        if (KingdomEssPlayerClass.getInstance().getRawData().isSet(e.getPlayer().getUniqueId().toString()))
+        if (ModPlayerClass.getInstance().getRawData().isSet(e.getPlayer().getUniqueId().toString()))
         {
             for (String cmd : cp.getPlayerClass().getCmdsExecutedOnPlayerRespawn())
             {
-                cmd = KingdomEssPlayerClass.getInstance().getPlaceHolderApiHook().parse(e.getPlayer(), cmd);
+                cmd = ModPlayerClass.getInstance().getPlaceHolderApiHook().parse(e.getPlayer(), cmd);
                 ServerUtils.dispatchCommand(cmd);
             }
 
             // Give player default class kit
-            if (KingdomEssPlayerClass.getInstance().getConfig().getBoolean("classes.enabled") &&
-                    KingdomEssPlayerClass.getInstance().getConfig().getBoolean("classes.giveKitOnRespawn"))
+            if (ModPlayerClass.getInstance().getConfig().getBoolean("classes.enabled") &&
+                    ModPlayerClass.getInstance().getConfig().getBoolean("classes.giveKitOnRespawn"))
             {
                 cp.givePlayerClassKit();
             }
@@ -44,15 +44,15 @@ public class PlayerListener
         COnlinePlayer cOnlinePlayer = new COnlinePlayer(e.getPlayer().getUniqueId());
 
 
-        if (KingdomEssPlayerClass.getInstance().getConfig().getBoolean("classes.enabled") &&
-                KingdomEssPlayerClass.getInstance().getConfig().getBoolean("classes.giveKitOnRespawn"))
+        if (ModPlayerClass.getInstance().getConfig().getBoolean("classes.enabled") &&
+                ModPlayerClass.getInstance().getConfig().getBoolean("classes.giveKitOnRespawn"))
         {
             cOnlinePlayer.givePlayerClassKit();
         }
 
         for (String cmd : cOnlinePlayer.getPlayerClass().getCmdsExecutedOnPlayerRespawn())
         {
-            cmd = KingdomEssPlayerClass.getInstance().getPlaceHolderApiHook().parse(e.getPlayer(), cmd);
+            cmd = ModPlayerClass.getInstance().getPlaceHolderApiHook().parse(e.getPlayer(), cmd);
 
 
             ServerUtils.dispatchCommand(cmd);

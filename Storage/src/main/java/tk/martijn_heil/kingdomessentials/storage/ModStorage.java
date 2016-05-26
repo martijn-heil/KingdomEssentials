@@ -5,13 +5,13 @@ import lombok.Getter;
 import org.bukkit.configuration.file.FileConfiguration;
 import tk.martijn_heil.nincore.api.Core;
 
-public class KingdomEssStorage extends Core
+public class ModStorage extends Core
 {
     @Getter
-    private static KingdomEssStorage instance;
+    private static ModStorage instance;
 
 
-    public KingdomEssStorage()
+    public ModStorage()
     {
         instance = this;
     }

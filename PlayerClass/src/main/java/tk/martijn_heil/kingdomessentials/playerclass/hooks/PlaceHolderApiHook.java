@@ -6,7 +6,7 @@ import me.clip.placeholderapi.external.EZPlaceholderHook;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
-import tk.martijn_heil.kingdomessentials.playerclass.KingdomEssPlayerClass;
+import tk.martijn_heil.kingdomessentials.playerclass.ModPlayerClass;
 import tk.martijn_heil.kingdomessentials.playerclass.model.COnlinePlayer;
 
 public class PlaceHolderApiHook
@@ -18,9 +18,9 @@ public class PlaceHolderApiHook
     {
         if (Bukkit.getPluginManager().isPluginEnabled("PlaceHolderAPI"))
         {
-            KingdomEssPlayerClass.getInstance().getNinLogger().info("PlaceHolderAPI detected! Hooking in.");
+            ModPlayerClass.getInstance().getNinLogger().info("PlaceHolderAPI detected! Hooking in.");
             this.usePlaceHolderApi = true;
-            new Hook(KingdomEssPlayerClass.getInstance());
+            new Hook(ModPlayerClass.getInstance());
         }
     }
 

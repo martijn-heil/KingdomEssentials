@@ -15,10 +15,10 @@ import java.util.ResourceBundle;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-public class KingdomEssPlayerClass extends Core
+public class ModPlayerClass extends Core
 {
     @Getter
-    private static KingdomEssPlayerClass instance;
+    private static ModPlayerClass instance;
 
 
     @Getter
@@ -27,7 +27,7 @@ public class KingdomEssPlayerClass extends Core
     private FactionsHook factionsHook;
 
 
-    public KingdomEssPlayerClass()
+    public ModPlayerClass()
     {
         instance = this;
     }

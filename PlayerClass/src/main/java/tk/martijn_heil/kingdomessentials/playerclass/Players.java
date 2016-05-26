@@ -20,8 +20,8 @@ public class Players
     {
         Preconditions.checkNotNull(p, "p can not be null.");
 
-        FileConfiguration data = KingdomEssPlayerClass.getInstance().getRawData();
-        FileConfiguration config = KingdomEssPlayerClass.getInstance().getConfig();
+        FileConfiguration data = ModPlayerClass.getInstance().getRawData();
+        FileConfiguration config = ModPlayerClass.getInstance().getConfig();
 
         String playerUUID = p.getUniqueId().toString();
         String defaultClassName = config.getString("classes.defaultClass");
@@ -29,7 +29,7 @@ public class Players
 
         if (!data.isSet(playerUUID)) // he's new.
         {
-            KingdomEssPlayerClass.getInstance().getNinLogger().info("Creating new data entry for player: " + p.getName() + " (" + playerUUID + ")");
+            ModPlayerClass.getInstance().getNinLogger().info("Creating new data entry for player: " + p.getName() + " (" + playerUUID + ")");
 
             data.set(playerUUID + ".class", defaultClassName);
             data.set(playerUUID + ".lastSeenName", p.getName());

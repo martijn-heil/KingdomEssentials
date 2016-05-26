@@ -4,8 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>tk.martijn_heil.kingdomessentials.command</groupId>
-    <artifactId>Command</artifactId>
+    <artifactId>ModCommand</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <parent>
@@ -18,7 +17,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-    <name>Command</name>
+    <name>ModCommand</name>
 
     <repositories>
 
@@ -71,20 +70,20 @@
         </dependency>
 
         <dependency>
-            <groupId>tk.martijn_heil.kingdomessentials.item</groupId>
-            <artifactId>Item</artifactId>
+            <groupId>tk.martijn_heil.kingdomessentials</groupId>
+            <artifactId>ModItem</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
-            <groupId>tk.martijn_heil.kingdomessentials.core</groupId>
-            <artifactId>Core</artifactId>
+            <groupId>tk.martijn_heil.kingdomessentials</groupId>
+            <artifactId>ModCore</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
         <dependency>
-            <groupId>tk.martijn_heil.kingdomessentials.playerclass</groupId>
-            <artifactId>PlayerClass</artifactId>
+            <groupId>tk.martijn_heil.kingdomessentials</groupId>
+            <artifactId>ModPlayerClass</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
@@ -94,6 +93,7 @@
 
         <sourceDirectory>target/generated-sources/delombok</sourceDirectory>
         <testSourceDirectory>target/generated-test-sources/delombok</testSourceDirectory>
+        <finalName>KE-${project.name}-${project.version}</finalName>
 
         <plugins>
 

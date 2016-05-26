@@ -5,7 +5,7 @@ import com.massivecraft.factions.entity.MPlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.jetbrains.annotations.NotNull;
-import tk.martijn_heil.kingdomessentials.playerclass.KingdomEssPlayerClass;
+import tk.martijn_heil.kingdomessentials.playerclass.ModPlayerClass;
 import tk.martijn_heil.kingdomessentials.playerclass.model.COnlinePlayer;
 import tk.martijn_heil.kingdomessentials.playerclass.model.PlayerClass;
 
@@ -84,7 +84,7 @@ public class FactionsHook
         //int roundedCurrentPercentage = Math.round(currentPercentage);
 
         // Percentage of players with the class already reached the max percentage.
-        return !(newPercentage > KingdomEssPlayerClass.getInstance().getConfig().getDouble("soulbound.classes." +
+        return !(newPercentage > ModPlayerClass.getInstance().getConfig().getDouble("soulbound.classes." +
                 playerClass.getName() + ".maxPercentagePerFaction"));
     }
 }

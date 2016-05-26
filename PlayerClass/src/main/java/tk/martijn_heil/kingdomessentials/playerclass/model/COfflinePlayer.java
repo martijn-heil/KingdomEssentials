@@ -6,7 +6,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.jetbrains.annotations.NotNull;
 import org.joda.time.DateTime;
-import tk.martijn_heil.kingdomessentials.playerclass.KingdomEssPlayerClass;
+import tk.martijn_heil.kingdomessentials.playerclass.ModPlayerClass;
 import tk.martijn_heil.nincore.api.entity.NinOfflinePlayer;
 import tk.martijn_heil.nincore.api.entity.NinOnlinePlayer;
 import tk.martijn_heil.nincore.api.util.TranslationUtils;
@@ -60,7 +60,7 @@ public class COfflinePlayer
      */
     public PlayerClass getPlayerClass()
     {
-        String playerClassname = KingdomEssPlayerClass.getInstance().getRawData().getString(uuid + ".class");
+        String playerClassname = ModPlayerClass.getInstance().getRawData().getString(uuid + ".class");
 
         return new PlayerClass(playerClassname);
     }
@@ -110,14 +110,14 @@ public class COfflinePlayer
             new COnlinePlayer(this.toOfflinePlayer().getPlayer()).removePlayerClassKit();
         }
 
-        KingdomEssPlayerClass.getInstance().getRawData().set(uuid + ".class", playerClass.getName());
+        ModPlayerClass.getInstance().getRawData().set(uuid + ".class", playerClass.getName());
 
         if (withCoolDown)
         {
             DateTime currentDateTime = new DateTime();
             DateTime nextPossibleClassSwitchTime = currentDateTime.plusMinutes(
-                    KingdomEssPlayerClass.getInstance().getConfig().getInt("classes.coolDownInMinutes"));
-            KingdomEssPlayerClass.getInstance().getRawData().set(uuid + ".nextPossibleClassSwitchTime",
+                    ModPlayerClass.getInstance().getConfig().getInt("classes.coolDownInMinutes"));
+            ModPlayerClass.getInstance().getRawData().set(uuid + ".nextPossibleClassSwitchTime",
                     nextPossibleClassSwitchTime.toString());
         }
 
@@ -161,7 +161,7 @@ public class COfflinePlayer
      */
     public boolean hasPlayerClassSwitchCoolDownExpired()
     {
-        DateTime nextPossibleClassSwitchTime = new DateTime(KingdomEssPlayerClass.getInstance().getRawData()
+        DateTime nextPossibleClassSwitchTime = new DateTime(ModPlayerClass.getInstance().getRawData()
                 .getString(uuid + ".nextPossibleClassSwitchTime"));
         return nextPossibleClassSwitchTime.isBeforeNow();
     }
@@ -174,7 +174,7 @@ public class COfflinePlayer
      */
     public DateTime getNextPossibleClassSwitchTime()
     {
-        return DateTime.parse(KingdomEssPlayerClass.getInstance().getRawData().getString(uuid + ".nextPossibleClassSwitchTime"));
+        return DateTime.parse(ModPlayerClass.getInstance().getRawData().getString(uuid + ".nextPossibleClassSwitchTime"));
     }
 
 
@@ -187,6 +187,6 @@ public class COfflinePlayer
 
     public boolean canBecomeClass(PlayerClass playerClass)
     {
-        return KingdomEssPlayerClass.getInstance().getFactionsHook().canBecomeClass(this.toOfflinePlayer(), playerClass);
+        return ModPlayerClass.getInstance().getFactionsHook().canBecomeClass(this.toOfflinePlayer(), playerClass);
     }
 }
