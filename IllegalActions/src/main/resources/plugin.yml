@@ -3,4 +3,4 @@ version: ${project.version}
 author: Ninjoh
 
 main: tk.martijn_heil.kingdomessentials.illegalactions.KingdomEssIllegalActions
-depend: [KE-ModItem]
+depend: [KE-ModItem,NinCore]

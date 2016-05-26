@@ -4,3 +4,4 @@ author: Ninjoh
 
 main: tk.martijn_heil.kingdomessentials.playerclass.ModPlayerClass
 softdepend: [PlaceHolderAPI]
+depend: [NinCore]
