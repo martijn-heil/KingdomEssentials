@@ -11,7 +11,6 @@ import tk.martijn_heil.nincore.api.entity.NinOfflinePlayer;
 import tk.martijn_heil.nincore.api.entity.NinOnlinePlayer;
 import tk.martijn_heil.nincore.api.util.TranslationUtils;
 
-import java.util.ResourceBundle;
 import java.util.UUID;
 
 import static com.google.common.base.Preconditions.checkArgument;
@@ -21,6 +20,9 @@ import static com.google.common.base.Preconditions.checkNotNull;
 public class COfflinePlayer
 {
     private OfflinePlayer offlinePlayer;
+
+    private PlayerClass playerClass;
+    private DateTime nextPossibleClassSwitchTime;
 
 
     /**
@@ -35,10 +37,13 @@ public class COfflinePlayer
         this.offlinePlayer = Bukkit.getOfflinePlayer(uuid);
         if(offlinePlayer == null) throw new IllegalArgumentException(String.format("No OfflinePlayer found with UUID %s", uuid));
 
+
         if(!ModPlayerClass.getInstance().getRawData().getKeys(false).contains(uuid.toString()))
-        {
             Players.populateData(this.offlinePlayer);
-        }
+
+        this.playerClass = new PlayerClass(ModPlayerClass.getInstance().getRawData().getString(offlinePlayer.getUniqueId() + ".class"));
+        this.nextPossibleClassSwitchTime = DateTime.parse(ModPlayerClass.getInstance().getRawData()
+                .getString(offlinePlayer.getUniqueId() + ".nextPossibleClassSwitchTime"));
     }
 
 
@@ -53,9 +58,12 @@ public class COfflinePlayer
         this.offlinePlayer = p;
 
         if(!ModPlayerClass.getInstance().getRawData().getKeys(false).contains(offlinePlayer.getUniqueId().toString()))
-        {
             Players.populateData(this.offlinePlayer);
-        }
+
+
+        this.playerClass = new PlayerClass(ModPlayerClass.getInstance().getRawData().getString(offlinePlayer.getUniqueId() + ".class"));
+        this.nextPossibleClassSwitchTime = new DateTime(ModPlayerClass.getInstance().getRawData()
+                .getString(offlinePlayer.getUniqueId() + ".nextPossibleClassSwitchTime"));
     }
 
 
@@ -78,9 +86,7 @@ public class COfflinePlayer
      */
     public PlayerClass getPlayerClass()
     {
-        String playerClassname = ModPlayerClass.getInstance().getRawData().getString(offlinePlayer.getUniqueId() + ".class");
-
-        return new PlayerClass(playerClassname);
+        return this.playerClass;
     }
 
 
@@ -92,7 +98,7 @@ public class COfflinePlayer
      */
     public void setPlayerClass(@NotNull String className)
     {
-        checkNotNull(className);
+        checkNotNull(className, "className can not be null.");
         this.setPlayerClass(new PlayerClass(className), true);
     }
 
@@ -102,42 +108,55 @@ public class COfflinePlayer
      *
      * @param className    The class name.
      * @param withCoolDown Add cooldown value to player section in data file?
+     * @throws NullPointerException if className is null.
      */
-    public void setPlayerClass(String className, boolean withCoolDown)
+    public void setPlayerClass(@NotNull String className, boolean withCoolDown)
     {
+        checkNotNull(className, "className can not be null.");
         this.setPlayerClass(new PlayerClass(className), withCoolDown);
     }
 
 
-    @Deprecated
+    /**
+     * @throws NullPointerException if playerClass is null.
+     */
     public void setPlayerClass(PlayerClass playerClass)
     {
-        this.setPlayerClass(playerClass, true);
+        checkNotNull(playerClass, "playerClass can not be null.");
+        this.setPlayerClass(playerClass, true, false, true);
     }
 
 
-    public void setPlayerClass(PlayerClass playerClass, boolean withCoolDown)
+    public void setPlayerClass(@NotNull PlayerClass playerClass, boolean withCoolDown)
     {
-        this.setPlayerClass(playerClass, withCoolDown, false);
+        checkNotNull(playerClass, "playerClass can not be null.");
+        this.setPlayerClass(playerClass, withCoolDown, false, true);
     }
 
 
-    public void setPlayerClass(PlayerClass playerClass, boolean withCoolDown, boolean silent)
+    public void setPlayerClass(@NotNull PlayerClass playerClass, boolean withCoolDown, boolean silent)
     {
-        if (this.toOfflinePlayer().isOnline())
+        this.setPlayerClass(playerClass, withCoolDown, silent, true);
+    }
+
+
+    public void setPlayerClass(@NotNull PlayerClass playerClass, boolean withCoolDown, boolean silent, boolean removeOldKit)
+    {
+        checkNotNull(playerClass, "playerClass can not be null.");
+
+        if (this.toOfflinePlayer().isOnline() && removeOldKit)
         {
             new COnlinePlayer(this.toOfflinePlayer().getPlayer()).removePlayerClassKit();
         }
 
-        ModPlayerClass.getInstance().getRawData().set(offlinePlayer.getUniqueId() + ".class", playerClass.getName());
+        this.playerClass = playerClass;
+
 
         if (withCoolDown)
         {
             DateTime currentDateTime = new DateTime();
-            DateTime nextPossibleClassSwitchTime = currentDateTime.plusMinutes(
+            this.nextPossibleClassSwitchTime = currentDateTime.plusMinutes(
                     ModPlayerClass.getInstance().getConfig().getInt("classes.coolDownInMinutes"));
-            ModPlayerClass.getInstance().getRawData().set(offlinePlayer.getUniqueId() + ".nextPossibleClassSwitchTime",
-                    nextPossibleClassSwitchTime.toString());
         }
 
         if (this.toOfflinePlayer().isOnline())
@@ -148,10 +167,12 @@ public class COfflinePlayer
             if (!silent)
             {
                 this.toOfflinePlayer().getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&',
-                        TranslationUtils.transWithArgs(ResourceBundle.getBundle("lang.mainMsgs", np.getLocale()),
+                        TranslationUtils.transWithArgs(ModPlayerClass.getMessages(np.getLocale()),
                                 new Object[]{playerClass.getName()}, "switchedPlayerClass")));
             }
         }
+
+        this.save();
     }
 
 
@@ -160,16 +181,16 @@ public class COfflinePlayer
      */
     public void moveToDefaultPlayerClass()
     {
-        this.setPlayerClass(PlayerClass.getDefault(), false);
+        this.setPlayerClass(PlayerClass.getDefault(), false, false);
     }
 
 
     /**
      * Move the player to the default player class.
      */
-    public void moveToDefaultPlayerClass(boolean withCoolDown)
+    public void moveToDefaultPlayerClass(boolean withCoolDown, boolean silent)
     {
-        this.setPlayerClass(PlayerClass.getDefault(), withCoolDown);
+        this.setPlayerClass(PlayerClass.getDefault(), withCoolDown, silent);
     }
 
 
@@ -180,9 +201,7 @@ public class COfflinePlayer
      */
     public boolean hasPlayerClassSwitchCoolDownExpired()
     {
-        DateTime nextPossibleClassSwitchTime = new DateTime(ModPlayerClass.getInstance().getRawData()
-                .getString(offlinePlayer.getUniqueId() + ".nextPossibleClassSwitchTime"));
-        return nextPossibleClassSwitchTime.isBeforeNow();
+        return this.nextPossibleClassSwitchTime.isBeforeNow();
     }
 
 
@@ -193,12 +212,13 @@ public class COfflinePlayer
      */
     public DateTime getNextPossibleClassSwitchTime()
     {
-        return DateTime.parse(ModPlayerClass.getInstance().getRawData().getString(offlinePlayer.getUniqueId() + ".nextPossibleClassSwitchTime"));
+        return this.nextPossibleClassSwitchTime;
     }
 
 
-    public boolean canBecomeClass(String className)
+    public boolean canBecomeClass(@NotNull String className)
     {
+        checkNotNull(className, "className can not be null.");
         checkArgument(PlayerClass.PlayerClassExists(className), String.format("Player class with name '%s' does not exist.", className));
         return this.canBecomeClass(new PlayerClass(className));
     }
@@ -207,5 +227,12 @@ public class COfflinePlayer
     public boolean canBecomeClass(PlayerClass playerClass)
     {
         return ModPlayerClass.getInstance().getFactionsHook().canBecomeClass(this.toOfflinePlayer(), playerClass);
+    }
+
+
+    public void save()
+    {
+        ModPlayerClass.getInstance().getRawData().set(this.offlinePlayer.getUniqueId() + ".class", this.playerClass.getName());
+        ModPlayerClass.getInstance().getRawData().set(this.offlinePlayer.getUniqueId() + ".nextPossibleClassSwitchTime", this.nextPossibleClassSwitchTime.toString());
     }
 }

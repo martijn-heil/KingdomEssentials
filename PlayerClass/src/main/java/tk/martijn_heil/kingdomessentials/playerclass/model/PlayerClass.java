@@ -22,6 +22,7 @@ public class PlayerClass
      *
      * @param className The player class name.
      * @throws NullPointerException if className is null.
+     * @throws IllegalArgumentException if no player class could be found for the given name.
      */
     public PlayerClass(@NotNull String className)
     {
