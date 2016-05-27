@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.joda.time.DateTime;
 import tk.martijn_heil.kingdomessentials.playerclass.ModPlayerClass;
 import tk.martijn_heil.kingdomessentials.playerclass.Players;
@@ -22,6 +23,8 @@ public class COfflinePlayer
     private OfflinePlayer offlinePlayer;
 
     private PlayerClass playerClass;
+
+    @Nullable
     private DateTime nextPossibleClassSwitchTime;
 
 
@@ -42,8 +45,12 @@ public class COfflinePlayer
             Players.populateData(this.offlinePlayer);
 
         this.playerClass = new PlayerClass(ModPlayerClass.getInstance().getRawData().getString(offlinePlayer.getUniqueId() + ".class"));
-        this.nextPossibleClassSwitchTime = DateTime.parse(ModPlayerClass.getInstance().getRawData()
-                .getString(offlinePlayer.getUniqueId() + ".nextPossibleClassSwitchTime"));
+
+        String nextPossibleClassSwitchTime = ModPlayerClass.getInstance().getRawData()
+                .getString(offlinePlayer.getUniqueId() + ".nextPossibleClassSwitchTime");
+
+        if (nextPossibleClassSwitchTime != null)
+            this.nextPossibleClassSwitchTime = DateTime.parse(nextPossibleClassSwitchTime);
     }
 
 
@@ -201,7 +208,7 @@ public class COfflinePlayer
      */
     public boolean hasPlayerClassSwitchCoolDownExpired()
     {
-        return this.nextPossibleClassSwitchTime.isBeforeNow();
+        return this.nextPossibleClassSwitchTime == null || this.nextPossibleClassSwitchTime.isBeforeNow();
     }
 
 
@@ -210,6 +217,7 @@ public class COfflinePlayer
      *
      * @return Next possible time to switch player class.
      */
+    @Nullable
     public DateTime getNextPossibleClassSwitchTime()
     {
         return this.nextPossibleClassSwitchTime;
@@ -233,6 +241,8 @@ public class COfflinePlayer
     public void save()
     {
         ModPlayerClass.getInstance().getRawData().set(this.offlinePlayer.getUniqueId() + ".class", this.playerClass.getName());
-        ModPlayerClass.getInstance().getRawData().set(this.offlinePlayer.getUniqueId() + ".nextPossibleClassSwitchTime", this.nextPossibleClassSwitchTime.toString());
+
+        if(this.nextPossibleClassSwitchTime != null)
+            ModPlayerClass.getInstance().getRawData().set(this.offlinePlayer.getUniqueId() + ".nextPossibleClassSwitchTime", this.nextPossibleClassSwitchTime.toString());
     }
 }
