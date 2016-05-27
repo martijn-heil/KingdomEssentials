@@ -175,7 +175,7 @@ public class COfflinePlayer
             {
                 this.toOfflinePlayer().getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&',
                         TranslationUtils.transWithArgs(ModPlayerClass.getMessages(np.getLocale()),
-                                new Object[]{playerClass.getName()}, "switchedPlayerClass")));
+                                new Object[]{playerClass.getName()}, "playerclass.switchedPlayerClass")));
             }
         }
 
