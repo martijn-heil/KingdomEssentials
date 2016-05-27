@@ -127,27 +127,6 @@ public class KingdomKitsSetClassCmd extends NinSubCommandExecutor
 
             // All validation has passed, set player's class..
             ninOfflinePlayer.setPlayerClass(className, true);
-
-
-            if (sender instanceof Player)
-            {
-                sender.sendMessage(ChatColor.DARK_GRAY + targetPlayerName +
-                        "'s" + ChatColor.YELLOW + " class has been set to " + ChatColor.DARK_GRAY + className);
-            }
-            else if (sender instanceof ConsoleCommandSender)
-            {
-                ConsoleCommandSender consoleCommandSender = (ConsoleCommandSender) sender;
-
-                consoleCommandSender.sendMessage(ChatColor.DARK_GRAY + targetPlayerName +
-                        "'s" + ChatColor.YELLOW + " class has been set to " + ChatColor.DARK_GRAY + className);
-            }
-
-            // If the target player is online, give him a little notification.
-            if (ninOfflinePlayer.toOfflinePlayer().isOnline())
-            {
-                ninOfflinePlayer.toOfflinePlayer().getPlayer().sendMessage(ChatColor.DARK_GRAY +
-                        sender.getName() + ChatColor.YELLOW + " has set your class to " + ChatColor.DARK_GRAY + className);
-            }
         }
     }
 }
