@@ -245,4 +245,19 @@ public class COfflinePlayer
         if(this.nextPossibleClassSwitchTime != null)
             ModPlayerClass.getInstance().getRawData().set(this.offlinePlayer.getUniqueId() + ".nextPossibleClassSwitchTime", this.nextPossibleClassSwitchTime.toString());
     }
+
+
+    public void refresh()
+    {
+        if(!ModPlayerClass.getInstance().getRawData().getKeys(false).contains(this.offlinePlayer.getUniqueId().toString()))
+            Players.populateData(this.offlinePlayer);
+
+        this.playerClass = new PlayerClass(ModPlayerClass.getInstance().getRawData().getString(offlinePlayer.getUniqueId() + ".class"));
+
+        String nextPossibleClassSwitchTime = ModPlayerClass.getInstance().getRawData()
+                .getString(offlinePlayer.getUniqueId() + ".nextPossibleClassSwitchTime");
+
+        if (nextPossibleClassSwitchTime != null)
+            this.nextPossibleClassSwitchTime = DateTime.parse(nextPossibleClassSwitchTime);
+    }
 }
