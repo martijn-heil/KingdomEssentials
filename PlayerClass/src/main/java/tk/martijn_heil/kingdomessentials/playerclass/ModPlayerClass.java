@@ -34,10 +34,6 @@ public class ModPlayerClass extends Core
     @Override
     public void onEnableInner()
     {
-        this.placeHolderApiHook = new PlaceHolderApiHook();
-        this.factionsHook = new FactionsHook();
-        this.modSignsHook = new ModSignsHook();
-
         this.saveDefaultConfig();
 
         if (!this.getDataManager().dataFileExists())
@@ -47,6 +43,10 @@ public class ModPlayerClass extends Core
 
         this.getDataManager().loadDataFile();
         this.getDataManager().scheduleAutomaticDataFileSave(6000);
+
+        this.placeHolderApiHook = new PlaceHolderApiHook();
+        this.factionsHook = new FactionsHook();
+        this.modSignsHook = new ModSignsHook();
     }
 
 

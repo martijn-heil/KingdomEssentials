@@ -11,6 +11,8 @@ import tk.martijn_heil.nincore.api.command.builders.SubCommandBuilder;
 import tk.martijn_heil.nincore.api.localization.LocalizedString;
 import tk.martijn_heil.nincore.api.logging.LogColor;
 
+import java.util.ResourceBundle;
+
 public class ModCommand extends Core
 {
 
@@ -26,16 +28,6 @@ public class ModCommand extends Core
         kk.addDefaultHelpSubCmd();
 
         this.getLogger().info("Creating sub commands..");
-
-//        this.getLogger().fine("Creating" + LogColor.HIGHLIGHT + "/kingdomkits bind" + LogColor.RESET + " sub command.");
-//        new SubCommandBuilder()
-//                .setName("bind")
-//                .setRequiredPermission("kingdomkits.bind")
-//                .setUseStaticDescription(false)
-//                .setLocalizedDescription(new LocalizedString(KingdomKits.class.getClassLoader(), "lang.subCmdMessages", "bind.desc"))
-//                .setParentCommand(kk)
-//                .setExecutor(new KingdomKitsBindCmd())
-//                .construct();
 
         this.getLogger().fine("Creating" + LogColor.HIGHLIGHT + "/kingdomessentials getclass" + LogColor.RESET + " sub command.");
         new SubCommandBuilder()
@@ -68,5 +60,11 @@ public class ModCommand extends Core
                 .setParentCommand(kk)
                 .setExecutor(new KingdomKitsSetClassCmd())
                 .construct();
+    }
+
+
+    public static ResourceBundle getMessages()
+    {
+        return ResourceBundle.getBundle("tk.martijn_heil.kingdomessentials.command.res.messages");
     }
 }

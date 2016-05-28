@@ -7,15 +7,18 @@ import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
 import org.bukkit.entity.Player;
+import tk.martijn_heil.kingdomessentials.command.ModCommand;
 import tk.martijn_heil.kingdomessentials.playerclass.model.COfflinePlayer;
 import tk.martijn_heil.kingdomessentials.playerclass.model.COnlinePlayer;
 import tk.martijn_heil.nincore.api.command.executors.NinSubCommandExecutor;
+import tk.martijn_heil.nincore.api.entity.NinOnlinePlayer;
 import tk.martijn_heil.nincore.api.exceptions.TechnicalException;
 import tk.martijn_heil.nincore.api.exceptions.ValidationException;
 import tk.martijn_heil.nincore.api.exceptions.validationexceptions.AccessDeniedException;
 import tk.martijn_heil.nincore.api.exceptions.validationexceptions.NotEnoughArgumentsException;
 import tk.martijn_heil.nincore.api.exceptions.validationexceptions.PlayerNotFoundException;
 import tk.martijn_heil.nincore.api.exceptions.validationexceptions.TooManyArgumentsException;
+import tk.martijn_heil.nincore.api.util.TranslationUtils;
 
 public class KingdomKitsGetClassCmd extends NinSubCommandExecutor
 {
@@ -32,10 +35,12 @@ public class KingdomKitsGetClassCmd extends NinSubCommandExecutor
         {
             if (sender instanceof Player)
             {
-                COnlinePlayer ninOnlinePlayer = new COnlinePlayer(((Player) sender).getUniqueId());
+                COnlinePlayer cp = new COnlinePlayer(((Player) sender).getUniqueId());
+                NinOnlinePlayer np = cp.toNinOnlinePlayer();
 
-                sender.sendMessage(ChatColor.DARK_GRAY + "You " + ChatColor.YELLOW + "have the " + ChatColor.DARK_GRAY +
-                        ninOnlinePlayer.getPlayerClass().getName() + ChatColor.YELLOW + " class");
+                sender.sendMessage(ChatColor.translateAlternateColorCodes('&',
+                        TranslationUtils.transWithArgs(ModCommand.getMessages(), new Object[]{cp.getPlayerClass().getName()},
+                                "command.getclass.youHaveThe.self")));
             }
             else if (sender instanceof ConsoleCommandSender)
             {
@@ -47,9 +52,7 @@ public class KingdomKitsGetClassCmd extends NinSubCommandExecutor
         else if (args.length == 1)
         {
             if (!sender.hasPermission("kingdomess.playerclass.getclass.others"))
-            {
                 throw new AccessDeniedException(sender);
-            }
 
 
             String targetPlayer = args[0];
@@ -58,12 +61,16 @@ public class KingdomKitsGetClassCmd extends NinSubCommandExecutor
 
             if (op == null) throw new PlayerNotFoundException(sender);
 
-            COfflinePlayer cOfflinePlayer = new COfflinePlayer(op);
+            COfflinePlayer target = new COfflinePlayer(op);
 
+
+            sender.sendMessage(ChatColor.translateAlternateColorCodes('&',
+                    TranslationUtils.transWithArgs(ModCommand.getMessages(), new Object[]{target.toOfflinePlayer().getName(), target.getPlayerClass().getName()},
+                            "command.getclass.youHaveThe.other")));
 
             // Send the player the message..
             sender.sendMessage(ChatColor.DARK_GRAY + targetPlayer + ChatColor.YELLOW + " has the " +
-                    ChatColor.DARK_GRAY + cOfflinePlayer.getPlayerClass().getName() + ChatColor.YELLOW + " class");
+                    ChatColor.DARK_GRAY + target.getPlayerClass().getName() + ChatColor.YELLOW + " class");
 
         }
         else

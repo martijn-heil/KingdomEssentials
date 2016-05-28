@@ -43,7 +43,7 @@ public class ItemRequireListener implements Listener
         if (!(e.getDamager() instanceof Player)) return;
         if (!e.getCause().equals(EntityDamageEvent.DamageCause.ENTITY_ATTACK)) return;
 
-        ItemCategory cat = ItemCategories.getCategory(((Player) e.getDamager()).getItemInHand().getType());
+        ItemCategory cat = ItemCategories.getCategory(((Player) e.getDamager()).getInventory().getItemInMainHand().getType());
 
         if (cat != null && cat.isCombatAllowedRequired() &&
                 !ItemStacks.isCombatAllowed(((Player) e.getDamager()).getInventory().getItemInMainHand()))
