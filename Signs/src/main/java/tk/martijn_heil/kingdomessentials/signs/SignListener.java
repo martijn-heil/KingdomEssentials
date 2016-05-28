@@ -20,10 +20,13 @@ public class SignListener implements Listener
 
         if(!Signs.isKingdomEssSign(sign)) return;
 
-        if(ModSigns.getInstance().getRegister().get(sign.getLine(1)) == null) return; // TODO: send error
-
         ExecutableSign exSign = ModSigns.getInstance().getRegister().get(sign.getLine(1));
-        if(exSign == null) return; // TODO: error
+        if(exSign == null)
+        {
+            NinOnlinePlayer np = NinOnlinePlayer.fromPlayer(e.getPlayer());
+            NinOnlinePlayer.fromPlayer(e.getPlayer()).sendError(ModSigns.getMessages(np.getLocale()).getString("error.signs.invalidSignActionType"));
+            return;
+        }
 
         exSign.execute(e.getPlayer(), sign.getLine(2));
     }

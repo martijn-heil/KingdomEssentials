@@ -41,7 +41,6 @@ public class SoulboundItemListener implements Listener
     }
 
 
-    // TODO Test & Fix
     @EventHandler(priority = EventPriority.HIGHEST) // If player tries to drop a soulbound item..
     public void onPlayerDropItem(PlayerDropItemEvent e)
     {

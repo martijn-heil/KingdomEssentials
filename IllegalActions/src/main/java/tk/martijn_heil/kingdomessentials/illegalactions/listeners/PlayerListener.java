@@ -120,7 +120,6 @@ public class PlayerListener implements Listener
     }
 
 
-    // TODO
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onInventoryClick(InventoryClickEvent e)
     {
@@ -172,7 +171,6 @@ public class PlayerListener implements Listener
     }
 
 
-    // TODO
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerUseItem(PlayerInteractEvent e)
     {
