@@ -28,6 +28,7 @@
         <module name="IllegalActions" />
         <module name="Item" />
         <module name="PlayerClass" />
+        <module name="Signs" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -38,6 +39,7 @@
       <module name="Item" target="1.8" />
       <module name="KingdomEssentials" target="1.8" />
       <module name="PlayerClass" target="1.8" />
+      <module name="Signs" target="1.8" />
       <module name="Storage" target="1.8" />
     </bytecodeTargetLevel>
   </component>

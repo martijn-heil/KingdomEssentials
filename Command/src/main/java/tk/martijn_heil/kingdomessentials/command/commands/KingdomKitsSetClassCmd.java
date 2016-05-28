@@ -102,7 +102,7 @@ public class KingdomKitsSetClassCmd extends NinSubCommandExecutor
             // Class validation has passed..
 
             String targetPlayerName = args[1];
-            OfflinePlayer op = Bukkit.getOfflinePlayer(args[1]);
+            OfflinePlayer op = Bukkit.getOfflinePlayer(targetPlayerName);
 
             // Player validation..
             if (op == null) throw new PlayerNotFoundException(sender);

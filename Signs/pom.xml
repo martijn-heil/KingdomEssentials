@@ -4,25 +4,21 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>tk.martijn_heil.kingdomessentials</groupId>
-    <artifactId>KingdomEssentials</artifactId>
+    <groupId>tk.martijn_heil.KindgomEssentials.signs</groupId>
+    <artifactId>ModSigns</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
-    <name>KingdomEssentials</name>
-    <packaging>pom</packaging>
+    <parent>
+        <artifactId>KingdomEssentials</artifactId>
+        <groupId>tk.martijn_heil.kingdomessentials</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
 
-    <modules>
-        <module>Command</module>
-        <module>Core</module>
-        <module>Item</module>
-        <module>PlayerClass</module>
-        <module>IllegalActions</module>
-        <module>Signs</module>
-    </modules>
+    <name>ModSigns</name>
 
     <repositories>
 
@@ -46,50 +42,45 @@
 
     <dependencies>
 
+        <!-- NinCore API -->
+        <dependency>
+            <groupId>tk.martijn-heil</groupId>
+            <artifactId>NinCore-API</artifactId>
+            <version>-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!--Spigot API-->
+        <dependency>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot-api</artifactId>
+            <version>1.9-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!--Bukkit API-->
+        <dependency>
+            <groupId>org.bukkit</groupId>
+            <artifactId>bukkit</artifactId>
+            <version>1.9-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.16.8</version>
+            <scope>provided</scope>
+        </dependency>
 
     </dependencies>
-
-    <dependencyManagement>
-        <dependencies>
-            <!-- NinCore API -->
-            <dependency>
-                <groupId>tk.martijn-heil</groupId>
-                <artifactId>NinCore-API</artifactId>
-                <version>-SNAPSHOT</version>
-                <scope>provided</scope>
-            </dependency>
-
-            <!--Spigot API-->
-            <dependency>
-                <groupId>org.spigotmc</groupId>
-                <artifactId>spigot-api</artifactId>
-                <version>1.9-R0.1-SNAPSHOT</version>
-                <scope>provided</scope>
-            </dependency>
-
-            <!--Bukkit API-->
-            <dependency>
-                <groupId>org.bukkit</groupId>
-                <artifactId>bukkit</artifactId>
-                <version>1.9-R0.1-SNAPSHOT</version>
-                <scope>provided</scope>
-            </dependency>
-
-            <!-- Lombok -->
-            <dependency>
-                <groupId>org.projectlombok</groupId>
-                <artifactId>lombok</artifactId>
-                <version>1.16.8</version>
-                <scope>provided</scope>
-            </dependency>
-
-        </dependencies>
-    </dependencyManagement>
 
     <build>
 
         <sourceDirectory>target/generated-sources/delombok</sourceDirectory>
         <testSourceDirectory>target/generated-test-sources/delombok</testSourceDirectory>
+        <finalName>KE-${project.name}-${env.DRONE_BUILD_NUMBER}</finalName>
 
         <plugins>
 
@@ -102,40 +93,10 @@
                     <target>1.8</target>
 
                     <annotationProcessors>
-                        <annotationProcessor>lombok.launch.AnnotationProcessorHider$AnnotationProcessor
-                        </annotationProcessor>
+                        <annotationProcessor>lombok.launch.AnnotationProcessorHider$AnnotationProcessor</annotationProcessor>
                     </annotationProcessors>
                 </configuration>
             </plugin>
-
-            <!--<plugin>-->
-                <!--<groupId>com.github.goldin</groupId>-->
-                <!--<artifactId>copy-maven-plugin</artifactId>-->
-                <!--<version>0.2.5</version>-->
-                <!--<executions>-->
-                    <!--<execution>-->
-                        <!--<id>deploy-to-local-directory</id>-->
-                        <!--<phase>install</phase>-->
-                        <!--<goals>-->
-                            <!--<goal>copy</goal>-->
-                        <!--</goals>-->
-                        <!--<configuration>-->
-                            <!--<skipIdentical>false</skipIdentical>-->
-                            <!--<failIfNotFound>true</failIfNotFound>-->
-                            <!--<resources>-->
-                                <!--<resource>-->
-                                    <!--<description>Copy artifact to another directory</description>-->
-                                    <!--<targetPath>${bukkit-devserver-home}/plugins</targetPath>-->
-                                    <!--<directory>${project.build.directory}</directory>-->
-                                    <!--<includes>-->
-                                        <!--<include>${project.build.finalName}.jar</include>-->
-                                    <!--</includes>-->
-                                <!--</resource>-->
-                            <!--</resources>-->
-                        <!--</configuration>-->
-                    <!--</execution>-->
-                <!--</executions>-->
-            <!--</plugin>-->
 
             <plugin>
                 <groupId>org.projectlombok</groupId>
