@@ -46,6 +46,13 @@
 
     <dependencies>
 
+        <dependency>
+            <groupId>tk.martijn_heil.kingdomessentials</groupId>
+            <artifactId>ModSigns</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+
         <!--<dependency>-->
             <!--<groupId>com.massivecraft</groupId>-->
             <!--<artifactId>massivecore</artifactId>-->

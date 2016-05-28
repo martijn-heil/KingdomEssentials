@@ -21,13 +21,13 @@ public class Signs
     {
         Preconditions.checkNotNull(firstLine, "firstLine can not be null.");
 
-        return firstLine.equals(ChatColor.YELLOW + "[KingdomKits]");
+        return firstLine.equals(ChatColor.YELLOW + "[KingdomEss]");
     }
 
 
     @Contract(pure = true)
-    public static String getKingdomKitsPrefix()
+    public static String getKingdomEssPrefix()
     {
-        return ChatColor.YELLOW + "[KingdomKits]";
+        return ChatColor.YELLOW + "[KingdomEss]";
     }
 }

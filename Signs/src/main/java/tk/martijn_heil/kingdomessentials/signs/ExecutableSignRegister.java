@@ -1,12 +1,13 @@
 package tk.martijn_heil.kingdomessentials.signs;
 
 
-import com.google.common.base.Preconditions;
 import lombok.Getter;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.google.common.base.Preconditions.checkArgument;
 
 public class ExecutableSignRegister
 {
@@ -15,7 +16,7 @@ public class ExecutableSignRegister
 
     public void addExecutableSign(ExecutableSign sign)
     {
-        Preconditions.checkArgument(!registeredSigns.contains(sign), "this sign is already registered.");
+        checkArgument(!registeredSigns.contains(sign), "this sign is already registered.");
     }
 
 

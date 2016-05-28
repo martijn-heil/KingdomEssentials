@@ -3,7 +3,7 @@ version: ${project.version}
 author: Ninjoh
 
 main: tk.martijn_heil.kingdomessentials.playerclass.ModPlayerClass
-softdepend: [PlaceHolderAPI]
+softdepend: [PlaceHolderAPI,KE-ModSigns]
 depend: [NinCore]
 
 permissions:

@@ -33,17 +33,20 @@ public class SignListener implements Listener
     public void onSignChange(SignChangeEvent e)
     {
         if(e.getPlayer().hasPermission("kingdomkits.signs.create.switchclass") &&
-                e.getLine(0).equalsIgnoreCase("[KingdomKits]"))
+                e.getLine(0).equalsIgnoreCase("[KingdomEss]"))
         {
-            if(!SignActionType.isValidSignActionType(e.getLine(1)))
+            ExecutableSign sign = ModSigns.getInstance().getRegister().get(e.getLine(1));
+
+            if(sign == null)
             {
-                NinOnlinePlayer.fromPlayer(e.getPlayer()).sendError("Invalid sign action type.");
+                NinOnlinePlayer np = NinOnlinePlayer.fromPlayer(e.getPlayer());
+                NinOnlinePlayer.fromPlayer(e.getPlayer()).sendError(ModSigns.getMessages(np.getLocale()).getString("error.signs.invalidSignActionType"));
                 return;
             }
 
 
             // Validation passed, make it a kingdomkits sign.
-            e.setLine(0, Signs.getKingdomKitsPrefix());
+            e.setLine(0, Signs.getKingdomEssPrefix());
         }
     }
 }

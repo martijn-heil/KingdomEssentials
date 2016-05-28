@@ -4,9 +4,11 @@ package tk.martijn_heil.kingdomessentials.playerclass;
 import lombok.Getter;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
+import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import tk.martijn_heil.kingdomessentials.playerclass.hooks.FactionsHook;
+import tk.martijn_heil.kingdomessentials.playerclass.hooks.ModSignsHook;
 import tk.martijn_heil.kingdomessentials.playerclass.hooks.PlaceHolderApiHook;
 import tk.martijn_heil.nincore.api.Core;
 
@@ -20,6 +22,7 @@ public class ModPlayerClass extends Core
     @Getter private static ModPlayerClass instance;
     @Getter private PlaceHolderApiHook placeHolderApiHook;
     @Getter private FactionsHook factionsHook;
+    @Getter private ModSignsHook modSignsHook;
 
 
     public ModPlayerClass()
@@ -33,6 +36,7 @@ public class ModPlayerClass extends Core
     {
         this.placeHolderApiHook = new PlaceHolderApiHook();
         this.factionsHook = new FactionsHook();
+        this.modSignsHook = new ModSignsHook();
 
         this.saveDefaultConfig();
 
@@ -60,6 +64,7 @@ public class ModPlayerClass extends Core
      * @param kitName The name of the kit to check if this item is part of it.
      * @return true if the item is part of this kit.
      */
+    @Contract("null, _ -> false")
     public static boolean isPartOfKit(@Nullable ItemStack item, @Nullable String kitName)
     {
         return (item != null) && (item.getItemMeta().getLore() != null) && (item.getItemMeta().getLore() != null) &&

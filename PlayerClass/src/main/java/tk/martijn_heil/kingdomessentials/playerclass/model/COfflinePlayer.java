@@ -22,11 +22,6 @@ public class COfflinePlayer
 {
     private OfflinePlayer offlinePlayer;
 
-    private PlayerClass playerClass;
-
-    @Nullable
-    private DateTime nextPossibleClassSwitchTime;
-
 
     /**
      * @param uuid The UUID for the related {@link OfflinePlayer}
@@ -40,17 +35,8 @@ public class COfflinePlayer
         this.offlinePlayer = Bukkit.getOfflinePlayer(uuid);
         if(offlinePlayer == null) throw new IllegalArgumentException(String.format("No OfflinePlayer found with UUID %s", uuid));
 
-
         if(!ModPlayerClass.getInstance().getRawData().getKeys(false).contains(uuid.toString()))
             Players.populateData(this.offlinePlayer);
-
-        this.playerClass = new PlayerClass(ModPlayerClass.getInstance().getRawData().getString(offlinePlayer.getUniqueId() + ".class"));
-
-        String nextPossibleClassSwitchTime = ModPlayerClass.getInstance().getRawData()
-                .getString(offlinePlayer.getUniqueId() + ".nextPossibleClassSwitchTime");
-
-        if (nextPossibleClassSwitchTime != null)
-            this.nextPossibleClassSwitchTime = DateTime.parse(nextPossibleClassSwitchTime);
     }
 
 
@@ -66,11 +52,6 @@ public class COfflinePlayer
 
         if(!ModPlayerClass.getInstance().getRawData().getKeys(false).contains(offlinePlayer.getUniqueId().toString()))
             Players.populateData(this.offlinePlayer);
-
-
-        this.playerClass = new PlayerClass(ModPlayerClass.getInstance().getRawData().getString(offlinePlayer.getUniqueId() + ".class"));
-        this.nextPossibleClassSwitchTime = new DateTime(ModPlayerClass.getInstance().getRawData()
-                .getString(offlinePlayer.getUniqueId() + ".nextPossibleClassSwitchTime"));
     }
 
 
@@ -93,7 +74,7 @@ public class COfflinePlayer
      */
     public PlayerClass getPlayerClass()
     {
-        return this.playerClass;
+        return new PlayerClass(ModPlayerClass.getInstance().getRawData().getString(offlinePlayer.getUniqueId() + ".class"));
     }
 
 
@@ -115,55 +96,42 @@ public class COfflinePlayer
      *
      * @param className    The class name.
      * @param withCoolDown Add cooldown value to player section in data file?
-     * @throws NullPointerException if className is null.
      */
-    public void setPlayerClass(@NotNull String className, boolean withCoolDown)
+    public void setPlayerClass(String className, boolean withCoolDown)
     {
-        checkNotNull(className, "className can not be null.");
         this.setPlayerClass(new PlayerClass(className), withCoolDown);
     }
 
 
-    /**
-     * @throws NullPointerException if playerClass is null.
-     */
+    @Deprecated
     public void setPlayerClass(PlayerClass playerClass)
     {
-        checkNotNull(playerClass, "playerClass can not be null.");
-        this.setPlayerClass(playerClass, true, false, true);
+        this.setPlayerClass(playerClass, true);
     }
 
 
-    public void setPlayerClass(@NotNull PlayerClass playerClass, boolean withCoolDown)
+    public void setPlayerClass(PlayerClass playerClass, boolean withCoolDown)
     {
-        checkNotNull(playerClass, "playerClass can not be null.");
-        this.setPlayerClass(playerClass, withCoolDown, false, true);
+        this.setPlayerClass(playerClass, withCoolDown, false);
     }
 
 
-    public void setPlayerClass(@NotNull PlayerClass playerClass, boolean withCoolDown, boolean silent)
+    public void setPlayerClass(PlayerClass playerClass, boolean withCoolDown, boolean silent)
     {
-        this.setPlayerClass(playerClass, withCoolDown, silent, true);
-    }
-
-
-    public void setPlayerClass(@NotNull PlayerClass playerClass, boolean withCoolDown, boolean silent, boolean removeOldKit)
-    {
-        checkNotNull(playerClass, "playerClass can not be null.");
-
-        if (this.toOfflinePlayer().isOnline() && removeOldKit)
+        if (this.toOfflinePlayer().isOnline())
         {
             new COnlinePlayer(this.toOfflinePlayer().getPlayer()).removePlayerClassKit();
         }
 
-        this.playerClass = playerClass;
-
+        ModPlayerClass.getInstance().getRawData().set(offlinePlayer.getUniqueId() + ".class", playerClass.getName());
 
         if (withCoolDown)
         {
             DateTime currentDateTime = new DateTime();
-            this.nextPossibleClassSwitchTime = currentDateTime.plusMinutes(
+            DateTime nextPossibleClassSwitchTime = currentDateTime.plusMinutes(
                     ModPlayerClass.getInstance().getConfig().getInt("classes.coolDownInMinutes"));
+            ModPlayerClass.getInstance().getRawData().set(offlinePlayer.getUniqueId() + ".nextPossibleClassSwitchTime",
+                    nextPossibleClassSwitchTime.toString());
         }
 
         if (this.toOfflinePlayer().isOnline())
@@ -178,8 +146,6 @@ public class COfflinePlayer
                                 new Object[]{playerClass.getName()}, "playerclass.switchedPlayerClass")));
             }
         }
-
-        this.save();
     }
 
 
@@ -188,16 +154,16 @@ public class COfflinePlayer
      */
     public void moveToDefaultPlayerClass()
     {
-        this.setPlayerClass(PlayerClass.getDefault(), false, false);
+        this.setPlayerClass(PlayerClass.getDefault(), false);
     }
 
 
     /**
      * Move the player to the default player class.
      */
-    public void moveToDefaultPlayerClass(boolean withCoolDown, boolean silent)
+    public void moveToDefaultPlayerClass(boolean withCoolDown)
     {
-        this.setPlayerClass(PlayerClass.getDefault(), withCoolDown, silent);
+        this.setPlayerClass(PlayerClass.getDefault(), withCoolDown);
     }
 
 
@@ -208,7 +174,10 @@ public class COfflinePlayer
      */
     public boolean hasPlayerClassSwitchCoolDownExpired()
     {
-        return this.nextPossibleClassSwitchTime == null || this.nextPossibleClassSwitchTime.isBeforeNow();
+        String nextPossibleClassSwitchTime = ModPlayerClass.getInstance().getRawData()
+                .getString(offlinePlayer.getUniqueId() + ".nextPossibleClassSwitchTime");
+
+        return nextPossibleClassSwitchTime != null && new DateTime(nextPossibleClassSwitchTime).isBeforeNow();
     }
 
 
@@ -220,13 +189,12 @@ public class COfflinePlayer
     @Nullable
     public DateTime getNextPossibleClassSwitchTime()
     {
-        return this.nextPossibleClassSwitchTime;
+        return DateTime.parse(ModPlayerClass.getInstance().getRawData().getString(offlinePlayer.getUniqueId() + ".nextPossibleClassSwitchTime"));
     }
 
 
-    public boolean canBecomeClass(@NotNull String className)
+    public boolean canBecomeClass(String className)
     {
-        checkNotNull(className, "className can not be null.");
         checkArgument(PlayerClass.PlayerClassExists(className), String.format("Player class with name '%s' does not exist.", className));
         return this.canBecomeClass(new PlayerClass(className));
     }
@@ -235,29 +203,5 @@ public class COfflinePlayer
     public boolean canBecomeClass(PlayerClass playerClass)
     {
         return ModPlayerClass.getInstance().getFactionsHook().canBecomeClass(this.toOfflinePlayer(), playerClass);
-    }
-
-
-    public void save()
-    {
-        ModPlayerClass.getInstance().getRawData().set(this.offlinePlayer.getUniqueId() + ".class", this.playerClass.getName());
-
-        if(this.nextPossibleClassSwitchTime != null)
-            ModPlayerClass.getInstance().getRawData().set(this.offlinePlayer.getUniqueId() + ".nextPossibleClassSwitchTime", this.nextPossibleClassSwitchTime.toString());
-    }
-
-
-    public void refresh()
-    {
-        if(!ModPlayerClass.getInstance().getRawData().getKeys(false).contains(this.offlinePlayer.getUniqueId().toString()))
-            Players.populateData(this.offlinePlayer);
-
-        this.playerClass = new PlayerClass(ModPlayerClass.getInstance().getRawData().getString(offlinePlayer.getUniqueId() + ".class"));
-
-        String nextPossibleClassSwitchTime = ModPlayerClass.getInstance().getRawData()
-                .getString(offlinePlayer.getUniqueId() + ".nextPossibleClassSwitchTime");
-
-        if (nextPossibleClassSwitchTime != null)
-            this.nextPossibleClassSwitchTime = DateTime.parse(nextPossibleClassSwitchTime);
     }
 }
