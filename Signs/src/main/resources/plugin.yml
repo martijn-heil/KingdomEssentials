@@ -1,4 +1,4 @@
-name: ${project.name}
+name: KE-${project.name}
 version: ${project.version}
 author: Ninjoh
 

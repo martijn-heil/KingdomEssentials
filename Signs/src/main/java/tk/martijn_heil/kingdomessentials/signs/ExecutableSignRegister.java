@@ -27,7 +27,7 @@ public class ExecutableSignRegister
     {
         for (ExecutableSign sign : registeredSigns)
         {
-            if(sign.getAction().equals(action)) return sign;
+            if(sign.getAction().equalsIgnoreCase(action)) return sign;
         }
 
         return null;
