@@ -17,6 +17,8 @@ public class ExecutableSignRegister
     public void addExecutableSign(ExecutableSign sign)
     {
         checkArgument(!registeredSigns.contains(sign), "this sign is already registered.");
+
+        this.registeredSigns.add(sign);
     }
 
 
