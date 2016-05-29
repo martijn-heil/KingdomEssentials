@@ -15,6 +15,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="module" module-name="Signs" scope="PROVIDED" />
     <orderEntry type="library" name="Maven: joda-time:joda-time:2.9.1" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: me.clip:placeholderapi:2.5.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: tk.martijn-heil:NinCore-API:-189d32d322-1" level="project" />

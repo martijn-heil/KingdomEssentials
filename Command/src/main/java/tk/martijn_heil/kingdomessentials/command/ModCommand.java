@@ -11,6 +11,7 @@ import tk.martijn_heil.nincore.api.command.builders.SubCommandBuilder;
 import tk.martijn_heil.nincore.api.localization.LocalizedString;
 import tk.martijn_heil.nincore.api.logging.LogColor;
 
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class ModCommand extends Core
@@ -66,5 +67,11 @@ public class ModCommand extends Core
     public static ResourceBundle getMessages()
     {
         return ResourceBundle.getBundle("tk.martijn_heil.kingdomessentials.command.res.messages");
+    }
+
+
+    public static ResourceBundle getMessages(Locale inLocale)
+    {
+        return ResourceBundle.getBundle("tk.martijn_heil.kingdomessentials.command.res.messages", inLocale);
     }
 }

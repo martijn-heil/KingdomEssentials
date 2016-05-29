@@ -23,5 +23,11 @@ permissions:
     default: op
 
 
+
   kingdomess.playerclass.bypass.changeclasscooldown:
     default: op
+
+
+
+  kingdomess.playerclass.sign.use.setclass:
+    default: true

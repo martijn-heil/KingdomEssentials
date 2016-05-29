@@ -39,7 +39,7 @@ public class KingdomKitsGetClassCmd extends NinSubCommandExecutor
                 NinOnlinePlayer np = cp.toNinOnlinePlayer();
 
                 sender.sendMessage(ChatColor.translateAlternateColorCodes('&',
-                        TranslationUtils.transWithArgs(ModCommand.getMessages(), new Object[]{cp.getPlayerClass().getName()},
+                        TranslationUtils.transWithArgs(ModCommand.getMessages(np.getLocale()), new Object[]{cp.getPlayerClass().getName()},
                                 "command.getclass.youHaveThe.self")));
             }
             else if (sender instanceof ConsoleCommandSender)
