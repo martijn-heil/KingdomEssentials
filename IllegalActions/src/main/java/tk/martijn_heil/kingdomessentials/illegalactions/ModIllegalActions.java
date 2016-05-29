@@ -26,6 +26,8 @@ public class ModIllegalActions extends Core
     @Override
     public void onEnableInner()
     {
+        this.saveDefaultConfig();
+
         this.getNinLogger().info("Registering listeners..");
         Bukkit.getPluginManager().registerEvents(new InventoryListener(), this);
         Bukkit.getPluginManager().registerEvents(new EntityListener(), this);

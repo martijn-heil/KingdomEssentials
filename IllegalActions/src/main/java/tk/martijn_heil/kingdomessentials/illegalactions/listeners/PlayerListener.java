@@ -109,7 +109,7 @@ public class PlayerListener implements Listener
     @EventHandler
     public void onEntityToggleGlide(EntityToggleGlideEvent e)
     {
-        if (e.isGliding() && e.getEntity() instanceof Player && ModIllegalActions.getInstance().getConfig().getBoolean("preventElytra") &&
+        if (e.isGliding() && e.getEntity() instanceof Player && ModIllegalActions.getInstance().getConfig().getBoolean("movement.preventElytra") &&
                 !e.getEntity().hasPermission("kingdomkits.bypass.elytra"))
         {
             e.setCancelled(true);

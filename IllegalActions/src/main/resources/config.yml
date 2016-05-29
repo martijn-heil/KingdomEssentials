@@ -1,0 +1,96 @@
+# Potion section
+potions:
+
+  # Disable potions?
+  #
+  # Disables drinking/consuming of potions
+  # as well as throwing potions
+  disablePotions: true
+
+
+# Use the potions section above to disable
+# consuming of potions as well as
+# throwing potions & dispensers/droppers shooting potions
+# So, don't add POTION to this list (unless you want to stop people from drinking water bottles, that is).
+consume:
+  blacklistedItems: # Items wich cannot be consumed (eat, drink, etc).
+    - 'GOLDEN_APPLE'
+
+
+# Use the potions section above to disable
+# consuming of potions as well as
+# throwing potions & dispensers/droppers shooting potions
+
+# Section for preventing players using items.
+usage:
+  blacklistedItems: # Items wich cannot be used (right mouse button).
+  - 'BOAT'
+  - 'ENDER_PEARL'
+
+# Enchanting section
+enchanting:
+  blacklistedItems: # All items wich cannot be enchanted.
+  - 'WOODEN_SWORD'
+  - 'STONE_SWORD'
+  - 'GOLD_SWORD'
+  - 'IRON_SWORD'
+  - 'DIAMOND_SWORD'
+  - 'LEATHER_HELMET'
+  - 'LEATHER_CHESTPLATE'
+  - 'LEATHER_LEGGINGS'
+  - 'LEATHER_BOOTS'
+  - 'CHAINMAIL_HELMET'
+  - 'CHAINMAIL_CHESTPLATE'
+  - 'CHAINMAIL_LEGGINGS'
+  - 'CHAINMAIL_BOOTS'
+  - 'GOLD_HELMET'
+  - 'GOLD_CHESTPLATE'
+  - 'GOLD_LEGGINGS'
+  - 'GOLD_BOOTS'
+  - 'IRON_HELMET'
+  - 'IRON_CHESTPLATE'
+  - 'IRON_LEGGINGS'
+  - 'IRON_BOOTS'
+  - 'DIAMOND_HELMET'
+  - 'DIAMOND_CHESTPLATE'
+  - 'DIAMOND_LEGGINGS'
+  - 'DIAMOND_BOOTS'
+  - 'BOW'
+  - 'GOLDEN_APPLE'
+
+
+# Crafting section
+crafting:
+  blacklistedItems: # All items wich cannot be crafted.
+  - 'WOODEN_SWORD'
+  - 'STONE_SWORD'
+  - 'GOLD_SWORD'
+  - 'IRON_SWORD'
+  - 'DIAMOND_SWORD'
+  - 'LEATHER_HELMET'
+  - 'LEATHER_CHESTPLATE'
+  - 'LEATHER_LEGGINGS'
+  - 'LEATHER_BOOTS'
+  - 'CHAINMAIL_HELMET'
+  - 'CHAINMAIL_CHESTPLATE'
+  - 'CHAINMAIL_LEGGINGS'
+  - 'CHAINMAIL_BOOTS'
+  - 'GOLD_HELMET'
+  - 'GOLD_CHESTPLATE'
+  - 'GOLD_LEGGINGS'
+  - 'GOLD_BOOTS'
+  - 'IRON_HELMET'
+  - 'IRON_CHESTPLATE'
+  - 'IRON_LEGGINGS'
+  - 'IRON_BOOTS'
+  - 'DIAMOND_HELMET'
+  - 'DIAMOND_CHESTPLATE'
+  - 'DIAMOND_LEGGINGS'
+  - 'DIAMOND_BOOTS'
+  - 'BOW'
+  - 'GOLDEN_APPLE'
+  - 'BOAT'
+
+# Prevent players from flying with the elytra?
+movement:
+ preventElytra: false
