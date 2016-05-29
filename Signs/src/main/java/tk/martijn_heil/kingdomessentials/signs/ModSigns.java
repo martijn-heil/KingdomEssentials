@@ -30,6 +30,6 @@ public class ModSigns extends Core
 
     public static ResourceBundle getMessages(Locale inLocale)
     {
-        return ResourceBundle.getBundle("tk.martijn_heil.kingdomessentials.signs", inLocale);
+        return ResourceBundle.getBundle("tk.martijn_heil.kingdomessentials.signs.messages", inLocale);
     }
 }
