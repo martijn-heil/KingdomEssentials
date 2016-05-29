@@ -67,11 +67,6 @@ public class KingdomKitsGetClassCmd extends NinSubCommandExecutor
             sender.sendMessage(ChatColor.translateAlternateColorCodes('&',
                     TranslationUtils.transWithArgs(ModCommand.getMessages(), new Object[]{target.toOfflinePlayer().getName(), target.getPlayerClass().getName()},
                             "command.getclass.youHaveThe.other")));
-
-            // Send the player the message..
-            sender.sendMessage(ChatColor.DARK_GRAY + targetPlayer + ChatColor.YELLOW + " has the " +
-                    ChatColor.DARK_GRAY + target.getPlayerClass().getName() + ChatColor.YELLOW + " class");
-
         }
         else
         {
