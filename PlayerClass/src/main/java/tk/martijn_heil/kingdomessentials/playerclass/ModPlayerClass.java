@@ -2,6 +2,7 @@ package tk.martijn_heil.kingdomessentials.playerclass;
 
 
 import lombok.Getter;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.Contract;
@@ -10,6 +11,7 @@ import org.jetbrains.annotations.Nullable;
 import tk.martijn_heil.kingdomessentials.playerclass.hooks.FactionsHook;
 import tk.martijn_heil.kingdomessentials.playerclass.hooks.ModSignsHook;
 import tk.martijn_heil.kingdomessentials.playerclass.hooks.PlaceHolderApiHook;
+import tk.martijn_heil.kingdomessentials.playerclass.listeners.PlayerListener;
 import tk.martijn_heil.nincore.api.Core;
 
 import java.util.Locale;
@@ -47,6 +49,9 @@ public class ModPlayerClass extends Core
         this.placeHolderApiHook = new PlaceHolderApiHook();
         this.factionsHook = new FactionsHook();
         this.modSignsHook = new ModSignsHook();
+
+        this.getNinLogger().info("Registering event listeners..");
+        Bukkit.getPluginManager().registerEvents(new PlayerListener(), this);
     }
 
 
