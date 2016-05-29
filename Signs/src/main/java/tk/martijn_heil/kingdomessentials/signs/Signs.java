@@ -12,7 +12,7 @@ public class Signs
     public static boolean isKingdomEssSign(@NotNull Sign s)
     {
         Preconditions.checkNotNull(s, "s can not be null.");
-        return s.getLine(0).equals(ChatColor.YELLOW + "[KingdomKits]");
+        return s.getLine(0).equals(ChatColor.YELLOW + "[KingdomEss]");
     }
 
 
