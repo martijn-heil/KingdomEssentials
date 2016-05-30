@@ -300,6 +300,7 @@ public class SoulboundItemListener implements Listener
 
             NinOnlinePlayer np = NinOnlinePlayer.fromPlayer(e.getPlayer());
             np.sendError(ModItem.getMessages(np.getLocale()).getString("error.event.cancelled.entity.armorStand.putItemOn"));
+
         }
     }
 }

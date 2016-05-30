@@ -3,6 +3,7 @@ package tk.martijn_heil.kingdomessentials.signs;
 
 import org.bukkit.block.Sign;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
@@ -10,7 +11,7 @@ import tk.martijn_heil.nincore.api.entity.NinOnlinePlayer;
 
 public class SignListener implements Listener
 {
-    @EventHandler
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onPlayerInteract(PlayerInteractEvent e)
     {
         if(e.getClickedBlock() == null) return;
@@ -32,7 +33,7 @@ public class SignListener implements Listener
     }
 
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
     public void onSignChange(SignChangeEvent e)
     {
         if(e.getPlayer().hasPermission("kingdomkits.signs.create.switchclass") &&
