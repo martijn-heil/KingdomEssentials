@@ -7,6 +7,7 @@ import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import tk.martijn_heil.kingdomessentials.item.listeners.ItemRequireListener;
 import tk.martijn_heil.kingdomessentials.item.listeners.SoulboundItemListener;
+import tk.martijn_heil.kingdomessentials.item.listeners.UnbreakableItemListener;
 import tk.martijn_heil.nincore.api.Core;
 
 import java.util.ArrayList;
@@ -35,6 +36,7 @@ public class ModItem extends Core
         this.getNinLogger().info("Registering event listeners..");
         Bukkit.getPluginManager().registerEvents(new SoulboundItemListener(), this);
         Bukkit.getPluginManager().registerEvents(new ItemRequireListener(), this);
+        Bukkit.getPluginManager().registerEvents(new UnbreakableItemListener(), this);
     }
 
 
