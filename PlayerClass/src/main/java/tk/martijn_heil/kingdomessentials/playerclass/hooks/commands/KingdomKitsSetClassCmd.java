@@ -1,4 +1,4 @@
-package tk.martijn_heil.kingdomessentials.command.commands;
+package tk.martijn_heil.kingdomessentials.playerclass.hooks.commands;
 
 
 import org.bukkit.Bukkit;

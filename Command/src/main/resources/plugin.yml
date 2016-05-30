@@ -2,7 +2,7 @@ name: KE-${project.name}
 version: ${project.version}
 author: Ninjoh
 
-depend: [KE-ModItem,KE-ModCore,KE-ModPlayerClass,NinCore]
+depend: [NinCore]
 main: tk.martijn_heil.kingdomessentials.command.ModCommand
 commands:
    kingdomessentials:

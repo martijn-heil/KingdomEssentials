@@ -53,6 +53,13 @@
             <scope>provided</scope>
         </dependency>
 
+        <dependency>
+            <groupId>tk.martijn_heil.kingdomessentials</groupId>
+            <artifactId>ModCommand</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+
         <!--<dependency>-->
             <!--<groupId>com.massivecraft</groupId>-->
             <!--<artifactId>massivecore</artifactId>-->
