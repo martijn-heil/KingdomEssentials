@@ -7,7 +7,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import tk.martijn_heil.kingdomessentials.playerclass.ModPlayerClass;
-import tk.martijn_heil.kingdomessentials.playerclass.Players;
 import tk.martijn_heil.kingdomessentials.playerclass.model.COnlinePlayer;
 import tk.martijn_heil.nincore.api.util.ServerUtils;
 
@@ -16,13 +15,11 @@ public class PlayerListener implements Listener
     @EventHandler // Give the player his class kit if the joins for the first time.
     public void onPlayerJoin(PlayerJoinEvent e)
     {
-        COnlinePlayer cp = new COnlinePlayer(e.getPlayer().getUniqueId());
-
-        Players.populateData(e.getPlayer());
-
         // Player is new.
-        if (ModPlayerClass.getInstance().getRawData().isSet(e.getPlayer().getUniqueId().toString()))
+        if (!ModPlayerClass.getInstance().getRawData().isSet(e.getPlayer().getUniqueId().toString()))
         {
+            COnlinePlayer cp = new COnlinePlayer(e.getPlayer().getUniqueId());
+
             for (String cmd : cp.getPlayerClass().getCmdsExecutedOnPlayerRespawn())
             {
                 cmd = ModPlayerClass.getInstance().getPlaceHolderApiHook().parse(e.getPlayer(), cmd);
