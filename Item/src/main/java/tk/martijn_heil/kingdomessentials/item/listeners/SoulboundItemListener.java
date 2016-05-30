@@ -14,14 +14,12 @@ import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
+import tk.martijn_heil.kingdomessentials.item.ModItem;
 import tk.martijn_heil.kingdomessentials.item.util.ItemStacks;
 import tk.martijn_heil.nincore.api.entity.NinOnlinePlayer;
-import tk.martijn_heil.nincore.api.util.TranslationUtils;
 
 import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
-import java.util.ResourceBundle;
 
 public class SoulboundItemListener implements Listener
 {
@@ -34,9 +32,7 @@ public class SoulboundItemListener implements Listener
             e.setCancelled(true);
 
             NinOnlinePlayer np = NinOnlinePlayer.fromPlayer(e.getPlayer());
-
-            np.sendError(TranslationUtils.getStaticMsg(ResourceBundle.getBundle("lang.errorMsgs",
-                    np.getMinecraftLocale().toLocale()), "error.event.cancelled.entity.itemFrame.putItemIn"));
+            np.sendError(ModItem.getMessages(np.getLocale()).getString("error.event.cancelled.entity.itemFrame.putItemIn"));
         }
     }
 
@@ -51,10 +47,7 @@ public class SoulboundItemListener implements Listener
             e.getPlayer().updateInventory();
 
             NinOnlinePlayer np = NinOnlinePlayer.fromPlayer(e.getPlayer());
-
-
-            np.sendError(TranslationUtils.getStaticMsg(ResourceBundle.getBundle("lang.errorMsgs",
-                    np.getMinecraftLocale().toLocale()), "error.event.cancelled.item.drop"));
+            np.sendError(ModItem.getMessages(np.getLocale()).getString("error.event.cancelled.item.drop"));
         }
     }
 
@@ -91,8 +84,7 @@ public class SoulboundItemListener implements Listener
         {
             e.setCancelled(true);
 
-            np.sendError(TranslationUtils.getStaticMsg(ResourceBundle.getBundle("lang.errorMsgs",
-                    np.getMinecraftLocale().toLocale()), "error.event.cancelled.inventory.putItemIn"));
+            np.sendError(ModItem.getMessages(np.getLocale()).getString("error.event.cancelled.inventory.putItemIn"));
         }
 
 
@@ -110,19 +102,16 @@ public class SoulboundItemListener implements Listener
             {
                 e.setCancelled(true);
 
-                final Locale locale = np.getMinecraftLocale().toLocale();
-                final ResourceBundle errorMsgs = ResourceBundle.getBundle("lang.errorMsgs", locale);
-
                 // If player tries to drop item by clicking outside of his inventory while dragging the item..
                 // the PlayerDropItemEvent would cancel this aswell, but this keeps the item being dragged,
                 // The PlayerDropItemEvent just puts the item back into the inventory, so this is a bit nicer..
                 if (clicked == null)
                 {
-                    np.sendError(errorMsgs.getString("error.event.cancelled.item.drop"));
+                    np.sendError(ModItem.getMessages(np.getLocale()).getString("error.event.cancelled.item.drop"));
                 }
                 else
                 {
-                    np.sendError(errorMsgs.getString("error.event.cancelled.inventory.putItemIn"));
+                    np.sendError(ModItem.getMessages(np.getLocale()).getString("error.event.cancelled.inventory.putItemIn"));
                 }
 
             }
@@ -150,9 +139,7 @@ public class SoulboundItemListener implements Listener
                 {
                     e.setCancelled(true);
                     NinOnlinePlayer np2 = NinOnlinePlayer.fromPlayer((Player) e.getWhoClicked());
-
-                    np2.sendError(TranslationUtils.getStaticMsg(ResourceBundle.getBundle("lang.errorMsgs",
-                            np2.getMinecraftLocale().toLocale()), "event.error.cancelled.item.craft.soulbound"));
+                    np2.sendError(ModItem.getMessages(np2.getLocale()).getString("event.error.cancelled.item.craft.soulbound"));
                 }
             }
         }
@@ -163,9 +150,7 @@ public class SoulboundItemListener implements Listener
         {
             e.setCancelled(true);
             np.toPlayer().updateInventory();
-
-            np.sendError(TranslationUtils.getStaticMsg(ResourceBundle.getBundle("lang.errorMsgs",
-                    np.getMinecraftLocale().toLocale()), "error.event.cancelled.item.drop"));
+            np.sendError(ModItem.getMessages(np.getLocale()).getString("error.event.cancelled.item.drop"));
         }
 //        else if(ItemStacks.isSoulBound(e.getCursor()) && e.getSlotType() == InventoryType.SlotType.OUTSIDE &&
 //                e.getClickedInventory() == null)
@@ -232,9 +217,7 @@ public class SoulboundItemListener implements Listener
                 type != InventoryType.CRAFTING)
         {
             e.setCancelled(true);
-
-            np.sendError(TranslationUtils.getStaticMsg(ResourceBundle.getBundle("lang.errorMsgs"
-                    , np.getMinecraftLocale().toLocale()), "error.event.cancelled.inventory.putItemIn"));
+            np.sendError(ModItem.getMessages(np.getLocale()).getString("error.event.cancelled.inventory.putItemIn"));
         }
     }
 
@@ -260,9 +243,7 @@ public class SoulboundItemListener implements Listener
             {
                 e.setCancelled(true);
                 npHolder.toPlayer().updateInventory();
-
-                npHolder.sendError(TranslationUtils.getStaticMsg(ResourceBundle.getBundle("lang.errorMsgs"
-                        , npHolder.getMinecraftLocale().toLocale()), "error.event.cancelled.inventory.putItemIn"));
+                npHolder.sendError(ModItem.getMessages(npHolder.getLocale()).getString("error.event.cancelled.inventory.putItemIn"));
             }
         }
     }
@@ -287,9 +268,7 @@ public class SoulboundItemListener implements Listener
 
             NinOnlinePlayer np = NinOnlinePlayer.fromPlayer((Player) e.getWhoClicked());
             np.toPlayer().updateInventory();
-
-            np.sendError(TranslationUtils.getStaticMsg(ResourceBundle.getBundle("lang.errorMsgs",
-                    np.getMinecraftLocale().toLocale()), "event.error.cancelled.item.craft.soulbound"));
+            np.sendError(ModItem.getMessages(np.getLocale()).getString("event.error.cancelled.item.craft.soulbound"));
         }
     }
 
@@ -320,9 +299,7 @@ public class SoulboundItemListener implements Listener
             e.setCancelled(true);
 
             NinOnlinePlayer np = NinOnlinePlayer.fromPlayer(e.getPlayer());
-
-            np.sendError(TranslationUtils.getStaticMsg(ResourceBundle.getBundle("lang.errorMsgs",
-                    np.getMinecraftLocale().toLocale()), "error.event.cancelled.entity.armorStand.putItemOn"));
+            np.sendError(ModItem.getMessages(np.getLocale()).getString("error.event.cancelled.entity.armorStand.putItemOn"));
         }
     }
 }
