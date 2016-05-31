@@ -2,7 +2,6 @@ package tk.martijn_heil.kingdomessentials.playerclass.hooks.commands;
 
 
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
@@ -35,7 +34,7 @@ public class KingdomKitsSetClassCmd extends NinSubCommandExecutor
             String className = args[0];
 
             // If sender doesn't have the kingdomkits.setclass.[class] permission
-            if (!sender.hasPermission("kingdomkits.setclass." + className)) throw new AccessDeniedException(sender);
+            if (!sender.hasPermission("kingdomess.setclass." + className)) throw new AccessDeniedException(sender);
 
 
             // Class validation
@@ -49,7 +48,7 @@ public class KingdomKitsSetClassCmd extends NinSubCommandExecutor
 
                 if (!ninOnlinePlayer.canBecomeClass(className))
                 {
-                    throw new PlayerCannotBecomeClassException((CommandSender) ninOnlinePlayer.toPlayer());
+                    throw new PlayerCannotBecomeClassException(ninOnlinePlayer.toPlayer());
                 }
             }
 
@@ -73,10 +72,7 @@ public class KingdomKitsSetClassCmd extends NinSubCommandExecutor
             {
                 COnlinePlayer ninOnlinePlayer = new COnlinePlayer(((Player) sender).getUniqueId());
 
-                ninOnlinePlayer.setPlayerClass(className, true);
-
-                sender.sendMessage(ChatColor.DARK_GRAY + "Your" + ChatColor.YELLOW +
-                        " class has been set to " + ChatColor.DARK_GRAY + className);
+                ninOnlinePlayer.setPlayerClass(new PlayerClass(className), true, false);
 
             } // Target player has to be specified when this command is executed from console.
             else if (sender instanceof ConsoleCommandSender)
@@ -126,7 +122,7 @@ public class KingdomKitsSetClassCmd extends NinSubCommandExecutor
 
 
             // All validation has passed, set player's class..
-            ninOfflinePlayer.setPlayerClass(className, true);
+            ninOfflinePlayer.setPlayerClass(new PlayerClass(className), true, false);
         }
     }
 }

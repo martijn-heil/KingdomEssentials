@@ -6,12 +6,12 @@ import org.joda.time.DateTime;
 import org.joda.time.Period;
 import org.joda.time.PeriodType;
 import org.joda.time.format.PeriodFormat;
+import tk.martijn_heil.kingdomessentials.playerclass.ModPlayerClass;
 import tk.martijn_heil.nincore.api.entity.NinCommandSender;
 import tk.martijn_heil.nincore.api.exceptions.ValidationException;
 import tk.martijn_heil.nincore.api.util.TranslationUtils;
 
 import java.util.Locale;
-import java.util.ResourceBundle;
 
 
 public class CoolDownHasNotExpiredException extends ValidationException
@@ -39,8 +39,8 @@ public class CoolDownHasNotExpiredException extends ValidationException
 
         Locale locale = NinCommandSender.fromCommandSender(commandSender).getLocale();
 
-        return TranslationUtils.transWithArgs(ResourceBundle.getBundle("lang.errorMsgs", locale),
-                new Object[]{PeriodFormat.wordBased(locale).print(period)}, "commandError.coolDownHasNotExpired");
+        return TranslationUtils.transWithArgs(ModPlayerClass.getMessages(locale),
+                new Object[]{PeriodFormat.wordBased(locale).print(period)}, "error.playerclass.coolDownHasNotExpired.self");
     }
 
 
@@ -52,7 +52,7 @@ public class CoolDownHasNotExpiredException extends ValidationException
 
         Locale locale = NinCommandSender.fromCommandSender(commandSender).getLocale();
 
-        return TranslationUtils.transWithArgs(ResourceBundle.getBundle("lang.errorMsgs", locale),
-                new Object[]{notSelfName, PeriodFormat.getDefault().print(period)}, "commandError.coolDownHasNotExpired.notSelf");
+        return TranslationUtils.transWithArgs(ModPlayerClass.getMessages(locale),
+                new Object[]{notSelfName, PeriodFormat.getDefault().print(period)}, "error.playerclass.coolDownHasNotExpired.notSelf");
     }
 }
