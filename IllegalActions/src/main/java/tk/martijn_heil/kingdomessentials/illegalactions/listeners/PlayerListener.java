@@ -257,14 +257,14 @@ public class PlayerListener implements Listener
     {
         if (ModIllegalActions.getInstance().getConfig().getBoolean("potions.disablePotions"))
         {
-            if (e.getItem() != null && e.getItem().getType().equals(Material.POTION) &&
-                    (e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)))
+            if (e.getItem() != null && e.getItem().getType().equals(Material.POTION))
             {
                 Potion potion = Potion.fromItemStack(e.getItem());
 
                 if (potion.getLevel() != 0 && potion.isSplash())
                 {
                     e.setCancelled(true);
+                    e.getPlayer().updateInventory();
 
                     NinOnlinePlayer np = NinOnlinePlayer.fromPlayer(e.getPlayer());
                     np.sendError(ModIllegalActions.getMessages(np.getLocale()).getString("error.event.cancelled.potion.throw"));
