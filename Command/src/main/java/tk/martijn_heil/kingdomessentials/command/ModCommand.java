@@ -22,7 +22,6 @@ public class ModCommand extends Core
         kkBuider.setName("kingdomessentials");
         kkBuider.setUseStaticDescription(true);
         NinCommand kk = kkBuider.construct();
-        kk.addDefaultInfoSubCmd();
         kk.addDefaultHelpSubCmd();
         mainCommand = kk;
     }
