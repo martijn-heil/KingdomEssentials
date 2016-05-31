@@ -14,6 +14,7 @@ public class UnbreakableItemListener implements Listener
         if(ItemStacks.isUnbreakable(e.getItem()))
         {
             e.setCancelled(true);
+            e.getPlayer().updateInventory();
         }
     }
 }

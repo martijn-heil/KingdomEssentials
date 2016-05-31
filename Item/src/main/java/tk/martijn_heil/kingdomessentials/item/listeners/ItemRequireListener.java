@@ -29,6 +29,7 @@ public class ItemRequireListener implements Listener
         if (cat != null && cat.isUseAllowedRequired() && !ItemStacks.isUseAllowed(e.getItem()))
         {
             e.setCancelled(true);
+            e.getPlayer().updateInventory();
 
             // send the error.
             NinOnlinePlayer np = NinOnlinePlayer.fromPlayer(e.getPlayer());
