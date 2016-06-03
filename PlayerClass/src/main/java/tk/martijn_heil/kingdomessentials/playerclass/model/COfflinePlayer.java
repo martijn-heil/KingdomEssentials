@@ -8,8 +8,10 @@ import org.jetbrains.annotations.Nullable;
 import org.joda.time.DateTime;
 import tk.martijn_heil.kingdomessentials.playerclass.ModPlayerClass;
 import tk.martijn_heil.kingdomessentials.playerclass.Players;
+import tk.martijn_heil.kingdomessentials.playerclass.event.player.PlayerClassSwitchEvent;
 import tk.martijn_heil.nincore.api.entity.NinOfflinePlayer;
 import tk.martijn_heil.nincore.api.entity.NinOnlinePlayer;
+import tk.martijn_heil.nincore.api.util.Events;
 import tk.martijn_heil.nincore.api.util.TranslationUtils;
 
 import java.util.UUID;
@@ -118,6 +120,9 @@ public class COfflinePlayer
 
     public void setPlayerClass(PlayerClass playerClass, boolean withCoolDown, boolean silent)
     {
+        if(Events.attempt(new PlayerClassSwitchEvent(this, playerClass))) return;
+
+
         if (this.toOfflinePlayer().isOnline())
         {
             new COnlinePlayer(this.toOfflinePlayer().getPlayer()).removePlayerClassKit();
