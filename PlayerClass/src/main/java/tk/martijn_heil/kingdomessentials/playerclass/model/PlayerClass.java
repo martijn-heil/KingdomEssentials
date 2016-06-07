@@ -33,7 +33,7 @@ public class PlayerClass
         if(classSection == null) throw new IllegalArgumentException("No class could be found for ID: " + id);
     }
 
-
+    
     @Override
     public String toString()
     {

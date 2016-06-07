@@ -27,8 +27,7 @@ public class PlayerListener implements Listener
             }
 
             // Give player default class kit
-            if (ModPlayerClass.getInstance().getConfig().getBoolean("classes.enabled") &&
-                    ModPlayerClass.getInstance().getConfig().getBoolean("classes.giveKitOnRespawn"))
+            if (ModPlayerClass.getInstance().getConfig().getBoolean("classes.giveKitOnRespawn"))
             {
                 cp.givePlayerClassKit();
             }
@@ -42,8 +41,7 @@ public class PlayerListener implements Listener
         COnlinePlayer cOnlinePlayer = new COnlinePlayer(e.getPlayer().getUniqueId());
 
 
-        if (ModPlayerClass.getInstance().getConfig().getBoolean("classes.enabled") &&
-                ModPlayerClass.getInstance().getConfig().getBoolean("classes.giveKitOnRespawn"))
+        if (ModPlayerClass.getInstance().getConfig().getBoolean("classes.giveKitOnRespawn"))
         {
             cOnlinePlayer.givePlayerClassKit();
         }

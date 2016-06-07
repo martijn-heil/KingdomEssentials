@@ -1,9 +1,6 @@
 # Classes section
 classes:
 
-  # Enable classes?
-  enabled: true
-
   # Should the player's class kit be given upon respawn?
   # This also gives a freshly joined player his kit.
   giveKitOnRespawn: true
