@@ -41,9 +41,8 @@ public class ModPlayerClass extends Core
         this.saveDefaultConfig();
 
         if (!this.getDataManager().dataFileExists())
-        {
             this.getDataManager().createDataFile();
-        }
+
 
         this.getDataManager().loadDataFile();
         this.getDataManager().scheduleAutomaticDataFileSave(6000);
@@ -85,11 +84,5 @@ public class ModPlayerClass extends Core
     {
         checkNotNull(inLocale, "inLocale can not be null.");
         return ResourceBundle.getBundle("tk.martijn_heil.kingdomessentials.playerclass.res.messages", inLocale);
-    }
-
-
-    public static ResourceBundle getMessages()
-    {
-        return ResourceBundle.getBundle("tk.martijn_heil.kingdomessentials.playerclass.res.messages");
     }
 }
