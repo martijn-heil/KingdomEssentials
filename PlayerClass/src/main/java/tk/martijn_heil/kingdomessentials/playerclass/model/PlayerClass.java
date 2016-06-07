@@ -13,42 +13,43 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 public class PlayerClass
 {
-    private String name;
+    private String id;
     private ConfigurationSection classSection;
 
 
     /**
      * Constructor
      *
-     * @param className The player class name.
-     * @throws NullPointerException if className is null.
+     * @param id The player class name.
+     * @throws NullPointerException if id is null.
      */
-    public PlayerClass(@NotNull String className)
+    public PlayerClass(@NotNull String id)
     {
-        checkNotNull(className, "className can not be null.");
+        checkNotNull(id, "id can not be null.");
 
-        name = className;
-        this.classSection = ModPlayerClass.getInstance().getConfig().getConfigurationSection("classes.classes." + name);
+        this.id = id;
+        this.classSection = ModPlayerClass.getInstance().getConfig().getConfigurationSection("classes.classes." + id);
 
-        if(classSection == null) throw new IllegalArgumentException("No class could be found for name: " + className);
+        if(classSection == null) throw new IllegalArgumentException("No class could be found for ID: " + id);
     }
 
 
     @Override
     public String toString()
     {
-        return this.getName();
+        return this.getDisplayName();
     }
 
 
-    /**
-     * Get the player class' name.
-     *
-     * @return the player class' name.
-     */
-    public String getName()
+    public String getDisplayName()
     {
-        return name;
+        return classSection.getString("displayName");
+    }
+
+
+    public String getId()
+    {
+        return id;
     }
 
 
@@ -81,7 +82,7 @@ public class PlayerClass
      */
     public boolean isDefaultPlayerClass()
     {
-        return name.equals(ModPlayerClass.getInstance().getConfig().getString("classes.defaultClass"));
+        return id.equals(ModPlayerClass.getInstance().getConfig().getString("classes.defaultClass"));
     }
 
 
@@ -94,13 +95,13 @@ public class PlayerClass
     /**
      * Check if a player class exists.
      *
-     * @param className The player class name to check for.
+     * @param id The player class id to check for.
      * @return true if this player class exists.
      */
     @Contract("null -> false")
-    public static boolean PlayerClassExists(@Nullable String className)
+    public static boolean PlayerClassExists(@Nullable String id)
     {
-        return (className != null) && ModPlayerClass.getInstance().getConfig().getConfigurationSection("classes.classes").getKeys(false).contains(className);
+        return (id != null) && ModPlayerClass.getInstance().getConfig().getConfigurationSection("classes.classes").getKeys(false).contains(id);
     }
 
 

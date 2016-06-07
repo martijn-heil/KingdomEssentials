@@ -128,7 +128,7 @@ public class COfflinePlayer
             new COnlinePlayer(this.toOfflinePlayer().getPlayer()).removePlayerClassKit();
         }
 
-        ModPlayerClass.getInstance().getRawData().set(offlinePlayer.getUniqueId() + ".class", playerClass.getName());
+        ModPlayerClass.getInstance().getRawData().set(offlinePlayer.getUniqueId() + ".class", playerClass.getId());
 
         if (withCoolDown)
         {
@@ -148,7 +148,7 @@ public class COfflinePlayer
             {
                 this.toOfflinePlayer().getPlayer().sendMessage(ChatColor.translateAlternateColorCodes('&',
                         TranslationUtils.transWithArgs(ModPlayerClass.getMessages(np.getLocale()),
-                                new Object[]{playerClass.getName()}, "playerclass.switchedPlayerClass")));
+                                new Object[]{playerClass.getDisplayName()}, "playerclass.switchedPlayerClass")));
             }
         }
     }

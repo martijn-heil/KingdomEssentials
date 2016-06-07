@@ -28,7 +28,7 @@ public class KingdomKitsListCmd extends NinSubCommandExecutor
         // List all player classes
         for (PlayerClass playerClass : PlayerClass.getAll())
         {
-            sender.sendMessage(ChatColor.GRAY + "" + count + ". " + ChatColor.YELLOW + playerClass.getName());
+            sender.sendMessage(ChatColor.GRAY + "" + count + ". " + ChatColor.YELLOW + playerClass.getDisplayName());
             count++;
         }
     }

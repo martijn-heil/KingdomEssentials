@@ -44,8 +44,11 @@ public class PlaceHolderApiHook
         {
             switch (s)
             {
-                case ("class"):
-                    return new COnlinePlayer(player).getPlayerClass().getName();
+                case ("class_display_name"):
+                    return new COnlinePlayer(player).getPlayerClass().getDisplayName();
+
+                case("class_id"):
+                    return new COnlinePlayer(player).getPlayerClass().getId();
             }
 
             return null;

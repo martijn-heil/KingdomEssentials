@@ -58,7 +58,7 @@ public class COnlinePlayer extends COfflinePlayer
     {
         for (ItemStack i : this.player.getInventory().getContents())
         {
-            if (ModPlayerClass.isPartOfKit(i, this.getPlayerClass().getName()))
+            if (ModPlayerClass.isPartOfKit(i, this.getPlayerClass().getId()))
             {
                 this.player.getInventory().remove(i);
             }

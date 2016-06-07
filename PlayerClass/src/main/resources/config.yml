@@ -18,36 +18,37 @@ classes:
   # If a player changes faction; should his
   # player class be reset to the default player class?
   # Note: Only works if factions integration is enabled.
-  setPlayerClassToDefaultOnFactionChange: true
+  #
+  # -- WARNING -- Does not currently work. WIP
+  # setPlayerClassToDefaultOnFactionChange: true
 
 
   # Classes are defined below
   # Essentials kits are used for the kits.
-  # WARNING: Do not name a class "default"
   #
   # You should not include a leading slash in any commands executed on respawn.
-  # You may use variables in commandsExeCutedOnPlayerRespawn. You may use the following variables;
-  #
-  # {player_name}         | The player's Minecraft username.
-  # {player_uuid}         | The player's uuid.
-  # {player_displayname}  | The player's displayname.
+  # You may use PlaceHolderAPI variables in the commands.
   classes:
     footsoldier:
+      displayName: 'foot soldier'
       kitName: 'footsoldier'
       useMaxPercentagePerFaction: true
       maxPercentagePerFaction: 100
       commandsExecutedOnPlayerRespawn: []
     archer:
+      displayName: 'archer'
       kitName: 'archer'
       useMaxPercentagePerFaction: true
       maxPercentagePerFaction: 50
       commandsExecutedOnPlayerRespawn: []
     knight:
+      displayName: 'knight'
       kitName: 'knight'
       useMaxPercentagePerFaction: false
       maxPercentagePerFaction: 100
       commandsExecutedOnPlayerRespawn: []
     lord:
+      displayName: 'lord'
       kitName: 'lord'
       useMaxPercentagePerFaction: false
       maxPercentagePerFaction: 100
