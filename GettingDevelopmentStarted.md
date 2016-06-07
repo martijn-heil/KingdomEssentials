@@ -6,7 +6,7 @@ developing on a different OS
 
 #### Setting up your environment
 1. You should define a Intellij path variable called `SPIGOT_DEVSERVER` and set it's value to the server root of your
-Spigot development server. Note that this path should *exclude* a ending slash/backslash
+Spigot development server. Note that this path should *exclude* a ending slash/backslash.
 You can configure Intellij IDEA path variables at
 `File > Settings > Appearance & Behaviour > Path Variables`
 
