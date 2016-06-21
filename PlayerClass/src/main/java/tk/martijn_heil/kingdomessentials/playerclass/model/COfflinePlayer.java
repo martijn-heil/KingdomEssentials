@@ -37,8 +37,7 @@ public class COfflinePlayer
         this.offlinePlayer = Bukkit.getOfflinePlayer(uuid);
         if(offlinePlayer == null) throw new IllegalArgumentException(String.format("No OfflinePlayer found with UUID %s", uuid));
 
-        if(!ModPlayerClass.getInstance().getRawData().getKeys(false).contains(uuid.toString()))
-            Players.populateData(this.offlinePlayer);
+        Players.updatePlayerData(this.offlinePlayer);
     }
 
 
@@ -52,8 +51,7 @@ public class COfflinePlayer
 
         this.offlinePlayer = p;
 
-        if(!ModPlayerClass.getInstance().getRawData().getKeys(false).contains(offlinePlayer.getUniqueId().toString()))
-            Players.populateData(this.offlinePlayer);
+        Players.updatePlayerData(this.offlinePlayer);
     }
 
 

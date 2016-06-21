@@ -7,6 +7,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import tk.martijn_heil.kingdomessentials.playerclass.ModPlayerClass;
+import tk.martijn_heil.kingdomessentials.playerclass.event.player.PlayerClassSwitchEvent;
 import tk.martijn_heil.kingdomessentials.playerclass.model.COnlinePlayer;
 import tk.martijn_heil.nincore.api.util.ServerUtils;
 
@@ -53,5 +54,13 @@ public class PlayerListener implements Listener
 
             ServerUtils.dispatchCommand(cmd);
         }
+    }
+
+
+    @EventHandler
+    public void onPlayerClassSwitch(PlayerClassSwitchEvent e)
+    {
+        ModPlayerClass.getInstance().getNinLogger().info(String.format("%s's player class has been set to '%s'",
+                e.getCOfflinePlayer().toOfflinePlayer().getName(), e.getPlayerClass().getId()));
     }
 }
