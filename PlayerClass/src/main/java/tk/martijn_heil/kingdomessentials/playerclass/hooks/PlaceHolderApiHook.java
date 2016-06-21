@@ -27,19 +27,7 @@ public class PlaceHolderApiHook
 
     public String parse(Player p, String s)
     {
-        //return (this.usePlaceHolderApi) ? PlaceholderAPI.setPlaceholders(p, s) : s;
-        if(usePlaceHolderApi)
-        {
-            ModPlayerClass.getInstance().getNinLogger().info("Should use placeholderapi");
-            String newString = PlaceholderAPI.setPlaceholders(p, s);
-            ModPlayerClass.getInstance().getNinLogger().info("New string: " + newString);
-            return newString;
-        }
-        else
-        {
-            ModPlayerClass.getInstance().getNinLogger().info("SHould not use placeholderapi");
-            return s;
-        }
+        return (this.usePlaceHolderApi) ? PlaceholderAPI.setPlaceholders(p, s) : s;
     }
 
 
