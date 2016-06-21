@@ -11,7 +11,7 @@ import tk.martijn_heil.kingdomessentials.playerclass.model.COnlinePlayer;
 
 public class PlaceHolderApiHook
 {
-    private boolean usePlaceHolderApi;
+    private boolean usePlaceHolderApi = false;
 
 
     public PlaceHolderApiHook()
@@ -27,7 +27,19 @@ public class PlaceHolderApiHook
 
     public String parse(Player p, String s)
     {
-        return (this.usePlaceHolderApi) ? PlaceholderAPI.setPlaceholders(p, s) : s;
+        //return (this.usePlaceHolderApi) ? PlaceholderAPI.setPlaceholders(p, s) : s;
+        if(usePlaceHolderApi)
+        {
+            ModPlayerClass.getInstance().getNinLogger().info("Should use placeholderapi");
+            String newString = PlaceholderAPI.setPlaceholders(p, s);
+            ModPlayerClass.getInstance().getNinLogger().info("New string: " + newString);
+            return newString;
+        }
+        else
+        {
+            ModPlayerClass.getInstance().getNinLogger().info("SHould not use placeholderapi");
+            return s;
+        }
     }
 
 

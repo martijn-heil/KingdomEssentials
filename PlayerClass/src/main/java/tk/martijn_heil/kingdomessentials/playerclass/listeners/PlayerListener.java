@@ -50,8 +50,6 @@ public class PlayerListener implements Listener
         for (String cmd : cOnlinePlayer.getPlayerClass().getCmdsExecutedOnPlayerRespawn())
         {
             cmd = ModPlayerClass.getInstance().getPlaceHolderApiHook().parse(e.getPlayer(), cmd);
-
-
             ServerUtils.dispatchCommand(cmd);
         }
     }
