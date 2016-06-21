@@ -16,9 +16,9 @@ public class PlaceHolderApiHook
 
     public PlaceHolderApiHook()
     {
-        if (Bukkit.getPluginManager().isPluginEnabled("PlaceHolderAPI"))
+        if (Bukkit.getPluginManager().isPluginEnabled("PlaceholderAPI"))
         {
-            ModPlayerClass.getInstance().getNinLogger().info("PlaceHolderAPI detected! Hooking in.");
+            ModPlayerClass.getInstance().getNinLogger().info("PlaceholderAPI detected! Hooking in.");
             this.usePlaceHolderApi = true;
             new Hook(ModPlayerClass.getInstance());
         }
