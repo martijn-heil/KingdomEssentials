@@ -55,3 +55,12 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 
+
+## Gradle:
+
+.gradle
+build/
+gradle-app.setting
+!gradle-wrapper.jar
+.gradletasknamecache
+

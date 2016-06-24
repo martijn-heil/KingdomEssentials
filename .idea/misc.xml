@@ -15,7 +15,14 @@
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/Boot/pom.xml" />
+        <option value="$PROJECT_DIR$/Command/pom.xml" />
+        <option value="$PROJECT_DIR$/Core/pom.xml" />
+        <option value="$PROJECT_DIR$/IllegalActions/pom.xml" />
+        <option value="$PROJECT_DIR$/Item/pom.xml" />
+        <option value="$PROJECT_DIR$/PlayerClass/pom.xml" />
+        <option value="$PROJECT_DIR$/Signs/pom.xml" />
         <option value="$PROJECT_DIR$/Storage/pom.xml" />
+        <option value="$PROJECT_DIR$/pom.xml" />
       </set>
     </option>
   </component>

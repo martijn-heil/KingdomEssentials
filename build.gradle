@@ -1,8 +1,15 @@
 allprojects  {
   apply plugin: 'maven'
+  apply plugin: 'war'
 
   group = 'tk.martijn_heil.kingdomessentials'
-version = '1.0-SNAPSHOT'
+  version = 'SNAPSHOT'
+
+  //noinspection GroovyAssignabilityCheck
+  configurations.all {
+    // Check for updates every build
+    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+  }
 }
 
 subprojects {
@@ -19,8 +26,4 @@ subprojects {
     maven { url "http://repo.maven.apache.org/maven2" }
     maven { url "http://repo.extendedclip.com/content/repositories/placeholderapi/" }
   }
-
-  
-  
-  
 }

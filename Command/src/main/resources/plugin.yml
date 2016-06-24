@@ -1,5 +1,5 @@
-name: KE-${project.name}
-version: ${project.version}
+name: KE-ModCommand
+version: SNAPSHOT
 author: Ninjoh
 
 depend: [NinCore]
