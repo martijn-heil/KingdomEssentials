@@ -1,5 +1,5 @@
-name: KE-${project.name}
-version: ${project.version}
+name: KE-ModPlayerClass
+version: SNAPSHOT
 author: Ninjoh
 
 main: tk.martijn_heil.kingdomessentials.playerclass.ModPlayerClass

@@ -1,0 +1,14 @@
+rootProject.name = 'KingdomEssentials'
+include ':ModCommand'
+include ':ModCore'
+include ':ModItem'
+include ':ModPlayerClass'
+include ':ModIllegalActions'
+include ':ModSigns'
+
+project(':ModCommand').projectDir = "$rootDir/Command" as File
+project(':ModCore').projectDir = "$rootDir/Core" as File
+project(':ModItem').projectDir = "$rootDir/Item" as File
+project(':ModPlayerClass').projectDir = "$rootDir/PlayerClass" as File
+project(':ModIllegalActions').projectDir = "$rootDir/IllegalActions" as File
+project(':ModSigns').projectDir = "$rootDir/Signs" as File

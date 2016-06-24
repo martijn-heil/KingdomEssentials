@@ -1,0 +1,29 @@
+allprojects  {
+  apply plugin: 'maven'
+  apply plugin: 'war'
+
+  group = 'tk.martijn_heil.kingdomessentials'
+  version = 'SNAPSHOT'
+
+  //noinspection GroovyAssignabilityCheck
+  configurations.all {
+    // Check for updates every build
+    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+  }
+}
+
+subprojects {
+  apply plugin: 'java'
+  sourceCompatibility = 1.8
+  targetCompatibility = 1.8
+
+  
+  repositories {
+    mavenLocal()
+    
+    maven { url "https://jitpack.io" }
+    maven { url "https://hub.spigotmc.org/nexus/content/repositories/snapshots/" }
+    maven { url "http://repo.maven.apache.org/maven2" }
+    maven { url "http://repo.extendedclip.com/content/repositories/placeholderapi/" }
+  }
+}

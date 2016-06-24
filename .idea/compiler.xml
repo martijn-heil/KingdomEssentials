@@ -23,12 +23,6 @@
         <outputRelativeToContentRoot value="true" />
         <processor name="lombok.launch.AnnotationProcessorHider$AnnotationProcessor" />
         <processorPath useClasspath="true" />
-        <module name="Command" />
-        <module name="Core" />
-        <module name="IllegalActions" />
-        <module name="Item" />
-        <module name="PlayerClass" />
-        <module name="Signs" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
@@ -38,6 +32,20 @@
       <module name="IllegalActions" target="1.8" />
       <module name="Item" target="1.8" />
       <module name="KingdomEssentials" target="1.8" />
+      <module name="KingdomEssentials_main" target="1.8" />
+      <module name="KingdomEssentials_test" target="1.8" />
+      <module name="ModCommand_main" target="1.8" />
+      <module name="ModCommand_test" target="1.8" />
+      <module name="ModCore_main" target="1.8" />
+      <module name="ModCore_test" target="1.8" />
+      <module name="ModIllegalActions_main" target="1.8" />
+      <module name="ModIllegalActions_test" target="1.8" />
+      <module name="ModItem_main" target="1.8" />
+      <module name="ModItem_test" target="1.8" />
+      <module name="ModPlayerClass_main" target="1.8" />
+      <module name="ModPlayerClass_test" target="1.8" />
+      <module name="ModSigns_main" target="1.8" />
+      <module name="ModSigns_test" target="1.8" />
       <module name="PlayerClass" target="1.8" />
       <module name="Signs" target="1.8" />
       <module name="Storage" target="1.8" />
