@@ -1,14 +1,14 @@
 rootProject.name = 'KingdomEssentials'
-include ':ModCommand'
-include ':ModCore'
-include ':ModItem'
-include ':ModPlayerClass'
-include ':ModIllegalActions'
-include ':ModSigns'
+include ':KE-ModCommand'
+include ':KE-ModCore'
+include ':KE-ModItem'
+include ':KE-ModPlayerClass'
+include ':KE-ModIllegalActions'
+include ':KE-ModSigns'
 
-project(':ModCommand').projectDir = "$rootDir/Command" as File
-project(':ModCore').projectDir = "$rootDir/Core" as File
-project(':ModItem').projectDir = "$rootDir/Item" as File
-project(':ModPlayerClass').projectDir = "$rootDir/PlayerClass" as File
-project(':ModIllegalActions').projectDir = "$rootDir/IllegalActions" as File
-project(':ModSigns').projectDir = "$rootDir/Signs" as File
+project(':KE-ModCommand').projectDir = "$rootDir/Command" as File
+project(':KE-ModCore').projectDir = "$rootDir/Core" as File
+project(':KE-ModItem').projectDir = "$rootDir/Item" as File
+project(':KE-ModPlayerClass').projectDir = "$rootDir/PlayerClass" as File
+project(':KE-ModIllegalActions').projectDir = "$rootDir/IllegalActions" as File
+project(':KE-ModSigns').projectDir = "$rootDir/Signs" as File

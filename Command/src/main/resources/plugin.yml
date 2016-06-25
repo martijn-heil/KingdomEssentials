@@ -1,5 +1,5 @@
 name: KE-ModCommand
-version: SNAPSHOT
+version: @version@
 author: Ninjoh
 
 depend: [NinCore]

@@ -1,3 +1,6 @@
+import org.apache.tools.ant.filters.*
+
+
 allprojects  {
   apply plugin: 'maven'
 
@@ -9,20 +12,36 @@ allprojects  {
     // Check for updates every build
     resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
   }
+
+
 }
 
 subprojects {
-  apply plugin: 'java'
-  sourceCompatibility = 1.8
-  targetCompatibility = 1.8
+    apply plugin: 'java'
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
 
-  
-  repositories {
-    maven { url "https://hub.spigotmc.org/nexus/content/repositories/snapshots/" }
-    maven { url "http://repo.maven.apache.org/maven2" }
-    maven { url "http://repo.extendedclip.com/content/repositories/placeholderapi/" }
 
-    maven { url "https://jitpack.io" }
-    mavenLocal()
-  }
+    repositories {
+        maven { url "https://hub.spigotmc.org/nexus/content/repositories/snapshots/" }
+        maven { url "http://repo.maven.apache.org/maven2" }
+        maven { url "http://repo.extendedclip.com/content/repositories/placeholderapi/" }
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+
+        mavenCentral()
+        maven { url "https://jitpack.io" }
+        mavenLocal()
+    }
+
+    dependencies {
+        compileOnly(group: 'org.spigotmc', name: 'spigot-api', version: '1.9-R0.1-SNAPSHOT') { changing = true }
+        compileOnly(group: 'org.bukkit', name: 'bukkit', version: '1.9-R0.1-SNAPSHOT') { changing = true }
+    }
+
+    //noinspection GroovyAssignabilityCheck
+    processResources {
+        filter ReplaceTokens, tokens: [
+                "@version@": project.version
+        ]
+    }
 }

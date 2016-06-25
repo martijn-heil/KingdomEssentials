@@ -1,9 +1,9 @@
 
-description = 'ModPlayerClass'
+description = 'KE-ModPlayerClass'
 dependencies {
     compile group: 'joda-time', name: 'joda-time', version:'2.9.1'
-    compileOnly project(':ModSigns')
-    compileOnly project(':ModCommand')
+    compileOnly project(':KE-ModSigns')
+    compileOnly project(':KE-ModCommand')
     compileOnly(group: 'me.clip', name: 'placeholderapi', version:'2.5.1')
     compileOnly(group: 'tk.martijn-heil', name: 'NinCore-API', version:'-SNAPSHOT') {changing = true}
     compileOnly(group: 'org.spigotmc', name: 'spigot-api', version:'1.9-R0.1-SNAPSHOT') {changing = true}

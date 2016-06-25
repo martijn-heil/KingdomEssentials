@@ -1,5 +1,5 @@
 name: KE-ModIllegalActions
-version: SNAPSHOT
+version: @version@
 author: Ninjoh
 
 main: tk.martijn_heil.kingdomessentials.illegalactions.ModIllegalActions

@@ -1,5 +1,5 @@
 name: KE-ModSigns
-version: SNAPSHOT
+version: @version@
 author: Ninjoh
 
 main: tk.martijn_heil.kingdomessentials.signs.ModSigns
