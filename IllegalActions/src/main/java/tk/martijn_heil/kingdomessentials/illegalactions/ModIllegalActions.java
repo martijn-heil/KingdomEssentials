@@ -37,6 +37,6 @@ public class ModIllegalActions extends Core
 
     public static ResourceBundle getMessages(Locale inLocale)
     {
-        return ResourceBundle.getBundle("tk.martijn_heil.kingdomessentials.illegalactions.res", inLocale);
+        return ResourceBundle.getBundle("tk.martijn_heil.kingdomessentials.illegalactions.res.messages", inLocale);
     }
 }
