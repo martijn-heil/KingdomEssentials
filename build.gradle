@@ -1,9 +1,8 @@
 allprojects  {
   apply plugin: 'maven'
-  apply plugin: 'war'
 
   group = 'tk.martijn_heil.kingdomessentials'
-  version = 'SNAPSHOT'
+  version = "$System.env.GIT_BRANCH-$System.env.GIT_COMMIT"
 
   //noinspection GroovyAssignabilityCheck
   configurations.all {
