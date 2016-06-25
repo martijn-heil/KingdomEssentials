@@ -5,7 +5,7 @@ allprojects  {
   apply plugin: 'maven'
 
   group = 'tk.martijn_heil.kingdomessentials'
-  version = "$System.env.GIT_BRANCH-$System.env.GIT_COMMIT"
+  version = "$System.env.GIT_BRANCH-$System.env.GIT_COMMIT-DRONE_BUILD_NUMBER"
 
   //noinspection GroovyAssignabilityCheck
   configurations.all {
