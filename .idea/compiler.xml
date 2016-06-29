@@ -31,6 +31,18 @@
       <module name="Core" target="1.8" />
       <module name="IllegalActions" target="1.8" />
       <module name="Item" target="1.8" />
+      <module name="KE-ModCommand_main" target="1.7" />
+      <module name="KE-ModCommand_test" target="1.7" />
+      <module name="KE-ModCore_main" target="1.7" />
+      <module name="KE-ModCore_test" target="1.7" />
+      <module name="KE-ModIllegalActions_main" target="1.7" />
+      <module name="KE-ModIllegalActions_test" target="1.7" />
+      <module name="KE-ModItem_main" target="1.7" />
+      <module name="KE-ModItem_test" target="1.7" />
+      <module name="KE-ModPlayerClass_main" target="1.7" />
+      <module name="KE-ModPlayerClass_test" target="1.7" />
+      <module name="KE-ModSigns_main" target="1.7" />
+      <module name="KE-ModSigns_test" target="1.7" />
       <module name="KingdomEssentials" target="1.8" />
       <module name="KingdomEssentials_main" target="1.8" />
       <module name="KingdomEssentials_test" target="1.8" />

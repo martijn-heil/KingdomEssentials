@@ -5,6 +5,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import tk.martijn_heil.kingdomessentials.playerclass.ModPlayerClass;
+import tk.martijn_heil.nincore.api.NinCore;
 import tk.martijn_heil.nincore.api.entity.NinOnlinePlayer;
 import tk.martijn_heil.nincore.api.util.ServerUtils;
 
@@ -38,7 +39,7 @@ public class COnlinePlayer extends COfflinePlayer
 
     public NinOnlinePlayer toNinOnlinePlayer()
     {
-        return NinOnlinePlayer.fromPlayer(this.toPlayer());
+        return NinCore.get().getEntityManager().getNinOnlinePlayer(this.toPlayer());
     }
 
 

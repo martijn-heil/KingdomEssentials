@@ -6,8 +6,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import tk.martijn_heil.kingdomessentials.playerclass.ModPlayerClass;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -119,7 +119,13 @@ public class PlayerClass
 
     public static List<PlayerClass> getAll()
     {
-        return ModPlayerClass.getInstance().getConfig().getConfigurationSection("classes.classes").getKeys(false)
-                .stream().map(PlayerClass::new).collect(Collectors.toList());
+        List<PlayerClass> list = new ArrayList<>();
+
+        for (String classId : ModPlayerClass.getInstance().getConfig().getConfigurationSection("classes.classes").getKeys(false))
+        {
+            list.add(new PlayerClass(classId));
+        }
+
+        return list;
     }
 }

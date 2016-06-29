@@ -13,6 +13,7 @@ import tk.martijn_heil.kingdomessentials.item.ItemCategory;
 import tk.martijn_heil.kingdomessentials.item.ModItem;
 import tk.martijn_heil.kingdomessentials.item.util.ItemCategories;
 import tk.martijn_heil.kingdomessentials.item.util.ItemStacks;
+import tk.martijn_heil.nincore.api.NinCore;
 import tk.martijn_heil.nincore.api.entity.NinOnlinePlayer;
 import tk.martijn_heil.nincore.api.events.ArmorEquipEvent;
 
@@ -32,7 +33,7 @@ public class ItemRequireListener implements Listener
             e.getPlayer().updateInventory();
 
             // send the error.
-            NinOnlinePlayer np = NinOnlinePlayer.fromPlayer(e.getPlayer());
+            NinOnlinePlayer np = NinCore.get().getEntityManager().getNinOnlinePlayer(e.getPlayer());
             np.sendError(ModItem.getMessages(np.getLocale()).getString("error.event.cancelled.item.use"));
         }
     }
@@ -52,7 +53,7 @@ public class ItemRequireListener implements Listener
             e.setCancelled(true);
 
             // send the error.
-            NinOnlinePlayer np = NinOnlinePlayer.fromPlayer((Player) e.getDamager());
+            NinOnlinePlayer np = NinCore.get().getEntityManager().getNinOnlinePlayer((Player) e.getDamager());
             np.sendError(ModItem.getMessages(np.getLocale()).getString("error.event.cancelled.item.combat"));
         }
     }
@@ -72,7 +73,7 @@ public class ItemRequireListener implements Listener
             e.setCancelled(true);
 
             // send the error.
-            NinOnlinePlayer np = NinOnlinePlayer.fromPlayer(e.getPlayer());
+            NinOnlinePlayer np = NinCore.get().getEntityManager().getNinOnlinePlayer(e.getPlayer());
             np.sendError(ModItem.getMessages(np.getLocale()).getString("error.event.cancelled.item.equip"));
         }
     }
@@ -88,7 +89,7 @@ public class ItemRequireListener implements Listener
             e.setCancelled(true);
 
             // send the error.
-            NinOnlinePlayer np = NinOnlinePlayer.fromPlayer(e.getPlayer());
+            NinOnlinePlayer np = NinCore.get().getEntityManager().getNinOnlinePlayer(e.getPlayer());
             np.sendError(ModItem.getMessages(np.getLocale()).getString("error.event.cancelled.block.mine"));
         }
     }
@@ -104,7 +105,7 @@ public class ItemRequireListener implements Listener
             e.setCancelled(true);
 
             // send the error.
-            NinOnlinePlayer np = NinOnlinePlayer.fromPlayer(e.getPlayer());
+            NinOnlinePlayer np = NinCore.get().getEntityManager().getNinOnlinePlayer(e.getPlayer());
             np.sendError(ModItem.getMessages(np.getLocale()).getString("error.event.cancelled.item.consume"));
         }
     }

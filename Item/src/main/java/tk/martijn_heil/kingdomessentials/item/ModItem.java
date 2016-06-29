@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
 
 public class ModItem extends Core
 {
@@ -50,7 +49,10 @@ public class ModItem extends Core
             List<Material> items = new ArrayList<>();
 
             // Add all items belonging to this category to the staging list.
-            items.addAll(section.getStringList(key + ".items").stream().map(Material::valueOf).collect(Collectors.toList()));
+            for (String s : section.getStringList(key + ".items"))
+            {
+                items.add(Material.valueOf(s));
+            }
 
             // Add this category to the staging list of categories.
             categories.add(

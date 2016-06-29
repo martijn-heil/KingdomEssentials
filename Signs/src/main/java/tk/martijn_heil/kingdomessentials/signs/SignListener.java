@@ -7,6 +7,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.SignChangeEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import tk.martijn_heil.nincore.api.NinCore;
 import tk.martijn_heil.nincore.api.entity.NinOnlinePlayer;
 
 public class SignListener implements Listener
@@ -24,8 +25,8 @@ public class SignListener implements Listener
         ExecutableSign exSign = ModSigns.getInstance().getRegister().get(sign.getLine(1));
         if(exSign == null)
         {
-            NinOnlinePlayer np = NinOnlinePlayer.fromPlayer(e.getPlayer());
-            NinOnlinePlayer.fromPlayer(e.getPlayer()).sendError(ModSigns.getMessages(np.getLocale()).getString("error.signs.invalidSignActionType"));
+            NinOnlinePlayer np = NinCore.get().getEntityManager().getNinOnlinePlayer(e.getPlayer());
+            NinCore.get().getEntityManager().getNinOnlinePlayer(e.getPlayer()).sendError(ModSigns.getMessages(np.getLocale()).getString("error.signs.invalidSignActionType"));
             return;
         }
 
@@ -43,8 +44,8 @@ public class SignListener implements Listener
 
             if(sign == null)
             {
-                NinOnlinePlayer np = NinOnlinePlayer.fromPlayer(e.getPlayer());
-                NinOnlinePlayer.fromPlayer(e.getPlayer()).sendError(ModSigns.getMessages(np.getLocale()).getString("error.signs.invalidSignActionType"));
+                NinOnlinePlayer np = NinCore.get().getEntityManager().getNinOnlinePlayer(e.getPlayer());
+                np.sendError(ModSigns.getMessages(np.getLocale()).getString("error.signs.invalidSignActionType"));
                 return;
             }
 

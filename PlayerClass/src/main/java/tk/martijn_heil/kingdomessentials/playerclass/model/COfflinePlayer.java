@@ -9,6 +9,7 @@ import org.joda.time.DateTime;
 import tk.martijn_heil.kingdomessentials.playerclass.ModPlayerClass;
 import tk.martijn_heil.kingdomessentials.playerclass.Players;
 import tk.martijn_heil.kingdomessentials.playerclass.event.player.PlayerClassSwitchEvent;
+import tk.martijn_heil.nincore.api.NinCore;
 import tk.martijn_heil.nincore.api.entity.NinOfflinePlayer;
 import tk.martijn_heil.nincore.api.entity.NinOnlinePlayer;
 import tk.martijn_heil.nincore.api.util.Events;
@@ -57,7 +58,7 @@ public class COfflinePlayer
 
     public NinOfflinePlayer toNinOfflinePlayer()
     {
-        return NinOfflinePlayer.fromOfflinePlayer(this.offlinePlayer);
+        return NinCore.get().getEntityManager().getNinOfflinePlayer(this.offlinePlayer);
     }
 
 
@@ -140,7 +141,7 @@ public class COfflinePlayer
         if (this.toOfflinePlayer().isOnline())
         {
             new COnlinePlayer(this.offlinePlayer.getUniqueId()).givePlayerClassKit();
-            NinOnlinePlayer np = NinOnlinePlayer.fromPlayer(this.toOfflinePlayer().getPlayer());
+            NinOnlinePlayer np = NinCore.get().getEntityManager().getNinOnlinePlayer(this.toOfflinePlayer().getPlayer());
 
             if (!silent)
             {

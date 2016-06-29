@@ -7,7 +7,7 @@ import org.joda.time.Period;
 import org.joda.time.PeriodType;
 import org.joda.time.format.PeriodFormat;
 import tk.martijn_heil.kingdomessentials.playerclass.ModPlayerClass;
-import tk.martijn_heil.nincore.api.entity.NinCommandSender;
+import tk.martijn_heil.nincore.api.NinCore;
 import tk.martijn_heil.nincore.api.exceptions.ValidationException;
 import tk.martijn_heil.nincore.api.util.TranslationUtils;
 
@@ -37,7 +37,7 @@ public class CoolDownHasNotExpiredException extends ValidationException
         DateTime start = new DateTime();
         Period period = new Period(start, nextPossibleClassSwitchTime, PERIOD_TO_MINUTES);
 
-        Locale locale = NinCommandSender.fromCommandSender(commandSender).getLocale();
+        Locale locale = NinCore.get().getEntityManager().getNinCommandSender(commandSender).getLocale();
 
         return TranslationUtils.transWithArgs(ModPlayerClass.getMessages(locale),
                 new Object[]{PeriodFormat.wordBased(locale).print(period)}, "error.playerclass.coolDownHasNotExpired.self");
@@ -50,7 +50,7 @@ public class CoolDownHasNotExpiredException extends ValidationException
         DateTime start = new DateTime();
         Period period = new Period(start, nextPossibleClassSwitchTime, PERIOD_TO_MINUTES);
 
-        Locale locale = NinCommandSender.fromCommandSender(commandSender).getLocale();
+        Locale locale = NinCore.get().getEntityManager().getNinCommandSender(commandSender).getLocale();
 
         return TranslationUtils.transWithArgs(ModPlayerClass.getMessages(locale),
                 new Object[]{notSelfName, PeriodFormat.getDefault().print(period)}, "error.playerclass.coolDownHasNotExpired.notSelf");

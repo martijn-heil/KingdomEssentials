@@ -2,27 +2,25 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Command/KE-ModCommand.iml" filepath="$PROJECT_DIR$/.idea/modules/Command/KE-ModCommand.iml" group="KE-ModCommand" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Command/KE-ModCommand_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Command/KE-ModCommand_main.iml" group="KE-ModCommand" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Command/KE-ModCommand_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Command/KE-ModCommand_test.iml" group="KE-ModCommand" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Core/KE-ModCore.iml" filepath="$PROJECT_DIR$/.idea/modules/Core/KE-ModCore.iml" group="KE-ModCore" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Core/KE-ModCore_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Core/KE-ModCore_main.iml" group="KE-ModCore" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Core/KE-ModCore_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Core/KE-ModCore_test.iml" group="KE-ModCore" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/IllegalActions/KE-ModIllegalActions.iml" filepath="$PROJECT_DIR$/.idea/modules/IllegalActions/KE-ModIllegalActions.iml" group="KE-ModIllegalActions" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/IllegalActions/KE-ModIllegalActions_main.iml" filepath="$PROJECT_DIR$/.idea/modules/IllegalActions/KE-ModIllegalActions_main.iml" group="KE-ModIllegalActions" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/IllegalActions/KE-ModIllegalActions_test.iml" filepath="$PROJECT_DIR$/.idea/modules/IllegalActions/KE-ModIllegalActions_test.iml" group="KE-ModIllegalActions" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Item/KE-ModItem.iml" filepath="$PROJECT_DIR$/.idea/modules/Item/KE-ModItem.iml" group="KE-ModItem" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Item/KE-ModItem_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Item/KE-ModItem_main.iml" group="KE-ModItem" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Item/KE-ModItem_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Item/KE-ModItem_test.iml" group="KE-ModItem" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/PlayerClass/KE-ModPlayerClass.iml" filepath="$PROJECT_DIR$/.idea/modules/PlayerClass/KE-ModPlayerClass.iml" group="KE-ModPlayerClass" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/PlayerClass/KE-ModPlayerClass_main.iml" filepath="$PROJECT_DIR$/.idea/modules/PlayerClass/KE-ModPlayerClass_main.iml" group="KE-ModPlayerClass" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/PlayerClass/KE-ModPlayerClass_test.iml" filepath="$PROJECT_DIR$/.idea/modules/PlayerClass/KE-ModPlayerClass_test.iml" group="KE-ModPlayerClass" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Signs/KE-ModSigns.iml" filepath="$PROJECT_DIR$/.idea/modules/Signs/KE-ModSigns.iml" group="KE-ModSigns" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Signs/KE-ModSigns_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Signs/KE-ModSigns_main.iml" group="KE-ModSigns" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Signs/KE-ModSigns_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Signs/KE-ModSigns_test.iml" group="KE-ModSigns" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/KingdomEssentials.iml" filepath="$PROJECT_DIR$/.idea/modules/KingdomEssentials.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/KingdomEssentials_main.iml" filepath="$PROJECT_DIR$/.idea/modules/KingdomEssentials_main.iml" group="KingdomEssentials" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/KingdomEssentials_test.iml" filepath="$PROJECT_DIR$/.idea/modules/KingdomEssentials_test.iml" group="KingdomEssentials" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Command/ModCommand.iml" filepath="$PROJECT_DIR$/.idea/modules/Command/ModCommand.iml" group="ModCommand" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Command/ModCommand_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Command/ModCommand_main.iml" group="ModCommand" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Command/ModCommand_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Command/ModCommand_test.iml" group="ModCommand" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Core/ModCore.iml" filepath="$PROJECT_DIR$/.idea/modules/Core/ModCore.iml" group="ModCore" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Core/ModCore_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Core/ModCore_main.iml" group="ModCore" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Core/ModCore_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Core/ModCore_test.iml" group="ModCore" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/IllegalActions/ModIllegalActions.iml" filepath="$PROJECT_DIR$/.idea/modules/IllegalActions/ModIllegalActions.iml" group="ModIllegalActions" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/IllegalActions/ModIllegalActions_main.iml" filepath="$PROJECT_DIR$/.idea/modules/IllegalActions/ModIllegalActions_main.iml" group="ModIllegalActions" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/IllegalActions/ModIllegalActions_test.iml" filepath="$PROJECT_DIR$/.idea/modules/IllegalActions/ModIllegalActions_test.iml" group="ModIllegalActions" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Item/ModItem.iml" filepath="$PROJECT_DIR$/.idea/modules/Item/ModItem.iml" group="ModItem" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Item/ModItem_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Item/ModItem_main.iml" group="ModItem" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Item/ModItem_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Item/ModItem_test.iml" group="ModItem" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/PlayerClass/ModPlayerClass.iml" filepath="$PROJECT_DIR$/.idea/modules/PlayerClass/ModPlayerClass.iml" group="ModPlayerClass" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/PlayerClass/ModPlayerClass_main.iml" filepath="$PROJECT_DIR$/.idea/modules/PlayerClass/ModPlayerClass_main.iml" group="ModPlayerClass" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/PlayerClass/ModPlayerClass_test.iml" filepath="$PROJECT_DIR$/.idea/modules/PlayerClass/ModPlayerClass_test.iml" group="ModPlayerClass" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Signs/ModSigns.iml" filepath="$PROJECT_DIR$/.idea/modules/Signs/ModSigns.iml" group="ModSigns" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Signs/ModSigns_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Signs/ModSigns_main.iml" group="ModSigns" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Signs/ModSigns_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Signs/ModSigns_test.iml" group="ModSigns" />
     </modules>
   </component>
 </project>

@@ -22,6 +22,7 @@ import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionType;
 import tk.martijn_heil.kingdomessentials.illegalactions.ModIllegalActions;
 import tk.martijn_heil.kingdomessentials.item.util.ItemStacks;
+import tk.martijn_heil.nincore.api.NinCore;
 import tk.martijn_heil.nincore.api.entity.NinOnlinePlayer;
 
 import java.util.ArrayList;
@@ -43,7 +44,7 @@ public class PlayerListener implements Listener
             // Update player inventory so that the client doesn't think the arrow was used.
             player.updateInventory();
 
-            NinOnlinePlayer np = NinOnlinePlayer.fromPlayer(player);
+            NinOnlinePlayer np = NinCore.get().getEntityManager().getNinOnlinePlayer(player);
             np.sendError(ModIllegalActions.getMessages(np.getLocale()).getString("error.event.cancelled.generic.shootBow"));
         }
     }
@@ -71,7 +72,7 @@ public class PlayerListener implements Listener
             {
                 e.setCancelled(true);
 
-                NinOnlinePlayer np = NinOnlinePlayer.fromPlayer(player);
+                NinOnlinePlayer np = NinCore.get().getEntityManager().getNinOnlinePlayer(player);
                 np.sendError(ModIllegalActions.getMessages(np.getLocale()).getString("error.event.cancelled.item.combat"));
             }
         }
@@ -98,7 +99,7 @@ public class PlayerListener implements Listener
             {
                 e.setCancelled(true);
 
-                NinOnlinePlayer np = NinOnlinePlayer.fromPlayer(player);
+                NinOnlinePlayer np = NinCore.get().getEntityManager().getNinOnlinePlayer(player);
                 np.sendError(ModIllegalActions.getMessages(np.getLocale()).getString("error.event.cancelled.item.combat"));
             }
         }
@@ -114,7 +115,7 @@ public class PlayerListener implements Listener
         {
             e.setCancelled(true);
 
-            NinOnlinePlayer np = NinOnlinePlayer.fromPlayer((Player) e.getEntity());
+            NinOnlinePlayer np = NinCore.get().getEntityManager().getNinOnlinePlayer((Player) e.getEntity());
             np.sendError(ModIllegalActions.getMessages(np.getLocale()).getString("error.event.cancelled.movement.glide"));
         }
     }
@@ -136,7 +137,7 @@ public class PlayerListener implements Listener
                         items.contains(e.getCurrentItem().getType().toString()))
                 {
                     e.setCancelled(true);
-                    NinOnlinePlayer np = NinOnlinePlayer.fromPlayer((Player) e.getWhoClicked());
+                    NinOnlinePlayer np = NinCore.get().getEntityManager().getNinOnlinePlayer((Player) e.getWhoClicked());
                     np.sendError(ModIllegalActions.getMessages(np.getLocale()).getString("error.event.cancelled.item.craft"));
                 }
             }
@@ -162,7 +163,7 @@ public class PlayerListener implements Listener
                         // If clicked inventory is an anvil && anvil contains enchanted book + a blacklisted item, cancel the event..
                         e.setCancelled(true);
 
-                        NinOnlinePlayer np = NinOnlinePlayer.fromPlayer((Player) e.getWhoClicked());
+                        NinOnlinePlayer np = NinCore.get().getEntityManager().getNinOnlinePlayer((Player) e.getWhoClicked());
                         np.sendError(ModIllegalActions.getMessages(np.getLocale()).getString("error.event.cancelled.block.use.anvil"));
                     }
                 }
@@ -182,7 +183,7 @@ public class PlayerListener implements Listener
                 e.setCancelled(true);
                 e.getPlayer().updateInventory();
 
-                NinOnlinePlayer np = NinOnlinePlayer.fromPlayer(e.getPlayer());
+                NinOnlinePlayer np = NinCore.get().getEntityManager().getNinOnlinePlayer(e.getPlayer());
                 np.sendError(ModIllegalActions.getMessages(np.getLocale()).getString("error.event.cancelled.item.use"));
             }
         }
@@ -197,7 +198,7 @@ public class PlayerListener implements Listener
         {
             e.setCancelled(true);
 
-            NinOnlinePlayer np = NinOnlinePlayer.fromPlayer(e.getPlayer());
+            NinOnlinePlayer np = NinCore.get().getEntityManager().getNinOnlinePlayer(e.getPlayer());
             np.sendError(ModIllegalActions.getMessages(np.getLocale()).getString("error.event.cancelled.item.consume"));
         }
 
@@ -211,7 +212,7 @@ public class PlayerListener implements Listener
                 {
                     e.setCancelled(true);
 
-                    NinOnlinePlayer np = NinOnlinePlayer.fromPlayer(e.getPlayer());
+                    NinOnlinePlayer np = NinCore.get().getEntityManager().getNinOnlinePlayer(e.getPlayer());
                     np.sendError(ModIllegalActions.getMessages(np.getLocale()).getString("error.event.cancelled.potion.drink"));
                 }
             }
@@ -233,7 +234,7 @@ public class PlayerListener implements Listener
             // Cancel enchant event if the item is blacklisted
             e.setCancelled(true);
 
-            NinOnlinePlayer np = NinOnlinePlayer.fromPlayer(e.getEnchanter());
+            NinOnlinePlayer np = NinCore.get().getEntityManager().getNinOnlinePlayer(e.getEnchanter());
             np.sendError(ModIllegalActions.getMessages(np.getLocale()).getString("error.event.cancelled.item.enchant"));
         }
     }
@@ -266,7 +267,7 @@ public class PlayerListener implements Listener
                     e.setCancelled(true);
                     e.getPlayer().updateInventory();
 
-                    NinOnlinePlayer np = NinOnlinePlayer.fromPlayer(e.getPlayer());
+                    NinOnlinePlayer np = NinCore.get().getEntityManager().getNinOnlinePlayer(e.getPlayer());
                     np.sendError(ModIllegalActions.getMessages(np.getLocale()).getString("error.event.cancelled.potion.throw"));
                 }
             }

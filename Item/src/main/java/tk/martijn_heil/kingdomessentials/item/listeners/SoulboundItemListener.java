@@ -16,6 +16,7 @@ import org.bukkit.inventory.InventoryHolder;
 import org.bukkit.inventory.ItemStack;
 import tk.martijn_heil.kingdomessentials.item.ModItem;
 import tk.martijn_heil.kingdomessentials.item.util.ItemStacks;
+import tk.martijn_heil.nincore.api.NinCore;
 import tk.martijn_heil.nincore.api.entity.NinOnlinePlayer;
 
 import java.util.Iterator;
@@ -31,7 +32,7 @@ public class SoulboundItemListener implements Listener
         {
             e.setCancelled(true);
 
-            NinOnlinePlayer np = NinOnlinePlayer.fromPlayer(e.getPlayer());
+            NinOnlinePlayer np = NinCore.get().getEntityManager().getNinOnlinePlayer(e.getPlayer());
             np.sendError(ModItem.getMessages(np.getLocale()).getString("error.event.cancelled.entity.itemFrame.putItemIn"));
         }
     }
@@ -46,7 +47,7 @@ public class SoulboundItemListener implements Listener
             e.setCancelled(true);
             e.getPlayer().updateInventory();
 
-            NinOnlinePlayer np = NinOnlinePlayer.fromPlayer(e.getPlayer());
+            NinOnlinePlayer np = NinCore.get().getEntityManager().getNinOnlinePlayer(e.getPlayer());
             np.sendError(ModItem.getMessages(np.getLocale()).getString("error.event.cancelled.item.drop"));
         }
     }
@@ -55,7 +56,7 @@ public class SoulboundItemListener implements Listener
     @EventHandler(priority = EventPriority.HIGHEST) // If player tries to put a soulbound item in another inventory..
     public void onInventoryClick(InventoryClickEvent e)
     {
-        NinOnlinePlayer np = NinOnlinePlayer.fromPlayer((Player) e.getWhoClicked());
+        NinOnlinePlayer np = NinCore.get().getEntityManager().getNinOnlinePlayer((Player) e.getWhoClicked());
 
 //        // Shift click an item from your inventory into the chest
 //        if (e.getClick().isShiftClick() && e.getView().getTopInventory() != null)
@@ -138,7 +139,7 @@ public class SoulboundItemListener implements Listener
                 if (e.getSlotType().equals(InventoryType.SlotType.RESULT) && cancel)
                 {
                     e.setCancelled(true);
-                    NinOnlinePlayer np2 = NinOnlinePlayer.fromPlayer((Player) e.getWhoClicked());
+                    NinOnlinePlayer np2 = NinCore.get().getEntityManager().getNinOnlinePlayer((Player) e.getWhoClicked());
                     np2.sendError(ModItem.getMessages(np2.getLocale()).getString("event.error.cancelled.item.craft.soulbound"));
                 }
             }
@@ -188,7 +189,7 @@ public class SoulboundItemListener implements Listener
     @EventHandler(priority = EventPriority.HIGHEST) // Click the item, and drag it inside the chest
     public void onInventoryDrag(InventoryDragEvent e)
     {
-        NinOnlinePlayer np = NinOnlinePlayer.fromPlayer((Player) e.getWhoClicked());
+        NinOnlinePlayer np = NinCore.get().getEntityManager().getNinOnlinePlayer((Player) e.getWhoClicked());
 
         ItemStack dragged = e.getOldCursor(); // This is the item that is being dragged
 
@@ -237,7 +238,7 @@ public class SoulboundItemListener implements Listener
         if (holder instanceof Player)
         {
             Player pHolder = (Player) holder;
-            NinOnlinePlayer npHolder = NinOnlinePlayer.fromPlayer(pHolder);
+            NinOnlinePlayer npHolder = NinCore.get().getEntityManager().getNinOnlinePlayer(pHolder);
 
             if (e.getDestination() != pHolder.getInventory())
             {
@@ -266,7 +267,7 @@ public class SoulboundItemListener implements Listener
         {
             e.setCancelled(true);
 
-            NinOnlinePlayer np = NinOnlinePlayer.fromPlayer((Player) e.getWhoClicked());
+            NinOnlinePlayer np = NinCore.get().getEntityManager().getNinOnlinePlayer((Player) e.getWhoClicked());
             np.toPlayer().updateInventory();
             np.sendError(ModItem.getMessages(np.getLocale()).getString("event.error.cancelled.item.craft.soulbound"));
         }
@@ -298,7 +299,7 @@ public class SoulboundItemListener implements Listener
         {
             e.setCancelled(true);
 
-            NinOnlinePlayer np = NinOnlinePlayer.fromPlayer(e.getPlayer());
+            NinOnlinePlayer np = NinCore.get().getEntityManager().getNinOnlinePlayer(e.getPlayer());
             np.sendError(ModItem.getMessages(np.getLocale()).getString("error.event.cancelled.entity.armorStand.putItemOn"));
 
         }
