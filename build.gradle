@@ -41,7 +41,7 @@ subprojects {
     //noinspection GroovyAssignabilityCheck
     processResources {
         filter ReplaceTokens, tokens: [
-                "@version@": project.version
+                "version": project.version
         ]
     }
 }
