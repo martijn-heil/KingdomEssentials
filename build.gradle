@@ -6,10 +6,10 @@ allprojects {
 
     group = 'tk.martijn_heil.kingdomessentials'
 
-    def gitHash = System.env.DRONE_BUILD_NUMBER
+    def gitHash = System.env.GIT_COMMIT
 
     // Only use the first 7 characters.
-    if (gitHash != null) {
+    if (gitHash != null && gitHash.size() >= 7) {
         gitHash = gitHash.substring(0, 6)
     }
     else {
