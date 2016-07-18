@@ -23,6 +23,7 @@ public class ModCommandHook
         if(Bukkit.getPluginManager().isPluginEnabled("KE-ModCommand"))
         {
             logger.info("ModCommand detected, hooking in..");
+            new Hook(logger);
         }
     }
 
