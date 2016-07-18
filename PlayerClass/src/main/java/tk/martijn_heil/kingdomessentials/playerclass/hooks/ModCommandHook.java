@@ -7,6 +7,8 @@ import tk.martijn_heil.kingdomessentials.playerclass.ModPlayerClass;
 import tk.martijn_heil.kingdomessentials.playerclass.hooks.commands.KingdomKitsGetClassCmd;
 import tk.martijn_heil.kingdomessentials.playerclass.hooks.commands.KingdomKitsListCmd;
 import tk.martijn_heil.kingdomessentials.playerclass.hooks.commands.KingdomKitsSetClassCmd;
+import tk.martijn_heil.kingdomessentials.signs.ExecutableSign;
+import tk.martijn_heil.kingdomessentials.signs.ModSigns;
 import tk.martijn_heil.nincore.api.command.NinCommand;
 import tk.martijn_heil.nincore.api.command.builders.SubCommandBuilder;
 import tk.martijn_heil.nincore.api.localization.LocalizedString;
@@ -16,13 +18,20 @@ import java.util.logging.Logger;
 
 public class ModCommandHook
 {
-    public ModCommandHook()
+    public ModCommandHook(Logger logger)
     {
         if(Bukkit.getPluginManager().isPluginEnabled("KE-ModCommand"))
         {
-            Logger logger = ModPlayerClass.getInstance().getNinLogger();
             logger.info("ModCommand detected, hooking in..");
+        }
+    }
 
+    private class Hook
+    {
+        public Hook(Logger logger)
+        {
+            ModPlayerClass.getInstance().getNinLogger().info("Registering executable signs..");
+            ModSigns.getInstance().getRegister().addExecutableSign(new ExecutableSign("SetClass", new SetClassSignExecutor()));
 
             NinCommand kk = ModCommand.getMainCommand();
 

@@ -47,10 +47,10 @@ public class ModPlayerClass extends Core
         this.getDataManager().loadDataFile();
         this.getDataManager().scheduleAutomaticDataFileSave(6000);
 
-        this.placeHolderApiHook = new PlaceHolderApiHook();
+        this.placeHolderApiHook = new PlaceHolderApiHook(this.getNinLogger(), this);
         this.factionsHook = new FactionsHook();
-        this.modSignsHook = new ModSignsHook();
-        this.modCommandHook = new ModCommandHook();
+        this.modSignsHook = new ModSignsHook(this.getNinLogger());
+        this.modCommandHook = new ModCommandHook(this.getNinLogger());
 
         this.getNinLogger().info("Registering event listeners..");
         Bukkit.getPluginManager().registerEvents(new PlayerListener(), this);
