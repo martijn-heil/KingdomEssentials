@@ -30,14 +30,20 @@ allprojects {
         // Check for updates every build
         resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
     }
-
-
 }
 
+defaultTasks 'clean', 'shadow'
+
+
+
+
 subprojects {
+
     apply plugin: 'java'
     sourceCompatibility = 1.7
     targetCompatibility = 1.7
+
+
 
 
     repositories {
