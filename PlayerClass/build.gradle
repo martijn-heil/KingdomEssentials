@@ -1,7 +1,7 @@
-plugins {
-    id 'com.github.johnrengelman.shadow' version '1.2.3'
-}
-
+//plugins {
+//    id 'com.github.johnrengelman.shadow' version '1.2.3'
+//}
+//
 
 description = 'KE-ModPlayerClass'
 dependencies {
@@ -15,7 +15,7 @@ dependencies {
     compile(group: 'org.projectlombok', name: 'lombok', version:'1.16.8')
 }
 
-shadowJar {
-    [project.configurations.compile]
-    classifier = null
-}
+//shadowJar {
+//    [project.configurations.compile]
+//    classifier = null
+//}
