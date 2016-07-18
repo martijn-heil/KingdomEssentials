@@ -1,3 +1,3 @@
-:: Requires MinGW or Cygwin (not really sure if it works under pure MinGW)
+:: Requires Cygwin
 @echo off
-cp */target/KE-*.jar '%SPIGOT_DEVSERVER%/plugins/'
+cp */build/libs/*.jar '%SPIGOT_DEVSERVER%/plugins/'

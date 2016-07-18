@@ -57,6 +57,13 @@ public class ModPlayerClass extends Core
     }
 
 
+    @Override
+    public void onDisableInner()
+    {
+        this.getDataManager().saveDataFile();
+    }
+
+
     public FileConfiguration getRawData()
     {
         return this.getDataManager().getData();
