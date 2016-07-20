@@ -34,7 +34,7 @@ public class KingdomKitsSetClassCmd extends NinSubCommandExecutor
             String className = args[0];
 
             // If sender doesn't have the kingdomkits.setclass.[class] permission
-            if (!sender.hasPermission("kingdomess.setclass." + className)) throw new AccessDeniedException(sender);
+            if (!sender.hasPermission("kingdomess.command.setclass." + className)) throw new AccessDeniedException(sender);
 
 
             // Class validation
@@ -85,11 +85,11 @@ public class KingdomKitsSetClassCmd extends NinSubCommandExecutor
             String className = args[0];
 
             // If sender doesn't have the kingdomkits.setclass.[class] permission
-            if (!sender.hasPermission("kingdomess.playerclass.setclass." + className))
+            if (!sender.hasPermission("kingdomess.playerclass.command.setclass." + className))
                 throw new AccessDeniedException(sender);
 
 
-            if (!sender.hasPermission("kingdomess.playerclass.setclass.others." + className)) throw new AccessDeniedException(sender);
+            if (!sender.hasPermission("kingdomess.playerclass.command.setclass.others." + className)) throw new AccessDeniedException(sender);
 
             // Class validation
             if (!PlayerClass.PlayerClassExists(className)) throw new PlayerClassNotFoundException(sender);

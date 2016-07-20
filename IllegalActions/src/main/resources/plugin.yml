@@ -4,3 +4,7 @@ author: Ninjoh
 
 main: tk.martijn_heil.kingdomessentials.illegalactions.ModIllegalActions
 depend: [KE-ModItem,NinCore]
+
+permissions:
+  kingdomess.illegalactions.bypass.potion.disable:
+    default: false

@@ -10,24 +10,22 @@ permissions:
   kingdomess.playerclass.list:
     default: true
 
-  kingdomess.playerclass.getclass:
+  kingdomess.playerclass.command.getclass:
     default: true
 
-  kingdomess.playerclass.getclass.other:
+  kingdomess.playerclass.command.getclass.other:
     default: true
 
-  kingdomess.playerclass.setclass:
+  kingdomess.playerclass.command.setclass:
     default: op
 
-  kingdomess.playerclass.setclass.other:
+  kingdomess.playerclass.command.setclass.other:
     default: op
 
 
 
   kingdomess.playerclass.bypass.changeclasscooldown:
     default: op
-
-
 
   kingdomess.playerclass.sign.use.setclass:
     default: true

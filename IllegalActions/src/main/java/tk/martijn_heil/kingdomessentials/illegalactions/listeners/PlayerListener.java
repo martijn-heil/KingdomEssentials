@@ -21,6 +21,7 @@ import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.Potion;
 import org.bukkit.potion.PotionType;
 import tk.martijn_heil.kingdomessentials.illegalactions.ModIllegalActions;
+import tk.martijn_heil.kingdomessentials.illegalactions.ModIllegalActions.Permission;
 import tk.martijn_heil.kingdomessentials.item.util.ItemStacks;
 import tk.martijn_heil.nincore.api.NinCore;
 import tk.martijn_heil.nincore.api.entity.NinOnlinePlayer;
@@ -111,7 +112,7 @@ public class PlayerListener implements Listener
     public void onEntityToggleGlide(EntityToggleGlideEvent e)
     {
         if (e.isGliding() && e.getEntity() instanceof Player && ModIllegalActions.getInstance().getConfig().getBoolean("movement.preventElytra") &&
-                !e.getEntity().hasPermission("kingdomkits.bypass.elytra"))
+                !e.getEntity().hasPermission("kingdomkits.bypass.elytra")) // TODO: Permissions
         {
             e.setCancelled(true);
 
@@ -124,15 +125,18 @@ public class PlayerListener implements Listener
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onInventoryClick(InventoryClickEvent e)
     {
-        List<String> items = ModIllegalActions.getInstance().getConfig().getStringList("crafting.blacklistedItems");
+
 
         if (e.getCurrentItem() != null && e.getInventory() != null)
         {
+            InventoryType invType = e.getInventory().getType();
 
             // If clicked inventory is a WORKBENCH or CRAFTING inventory
-            if (e.getInventory().getType().equals(InventoryType.WORKBENCH) ||
-                    e.getInventory().getType().equals(InventoryType.CRAFTING))
+            if (invType == InventoryType.WORKBENCH || invType == InventoryType.CRAFTING &&
+                    !Permission.hasPermission(e.getWhoClicked(), Permission.BYPASS_CRAFT_BLACKLIST))
             {
+                List<String> items = ModIllegalActions.getInstance().getConfig().getStringList("crafting.blacklistedItems");
+
                 if (e.getSlotType().equals(InventoryType.SlotType.RESULT) &&
                         items.contains(e.getCurrentItem().getType().toString()))
                 {
@@ -141,16 +145,10 @@ public class PlayerListener implements Listener
                     np.sendError(ModIllegalActions.getMessages(np.getLocale()).getString("error.event.cancelled.item.craft"));
                 }
             }
-        }
-
-        List<String> items2 = ModIllegalActions.getInstance().getConfig().getStringList("enchanting.blacklistedItems");
-
-        if (e.getCurrentItem() != null && e.getInventory() != null)
-        {
-
-            // If clicked inventory is an anvil
-            if (e.getInventory().getType().equals(InventoryType.ANVIL))
+            else if (invType == InventoryType.ANVIL && !Permission.hasPermission(e.getWhoClicked(), Permission.BYPASS_ENCHANT_BLACKLIST))
             {
+                List<String> items2 = ModIllegalActions.getInstance().getConfig().getStringList("enchanting.blacklistedItems");
+
                 // Foreach blacklisted item list
                 for (String item : items2)
                 {
@@ -175,16 +173,19 @@ public class PlayerListener implements Listener
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerUseItem(PlayerInteractEvent e)
     {
-        if (e.getItem() != null)
+        if(!Permission.hasPermission(e.getPlayer(), Permission.BYPASS_USE_BLACKLIST))
         {
-            if (ModIllegalActions.getInstance().getConfig().getList("usage.blacklistedItems").contains(e.getItem().getType().toString()) &&
-                    (e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)))
+            if (e.getItem() != null)
             {
-                e.setCancelled(true);
-                e.getPlayer().updateInventory();
+                if (ModIllegalActions.getInstance().getConfig().getList("usage.blacklistedItems").contains(e.getItem().getType().toString()) &&
+                        (e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)))
+                {
+                    e.setCancelled(true);
+                    e.getPlayer().updateInventory();
 
-                NinOnlinePlayer np = NinCore.get().getEntityManager().getNinOnlinePlayer(e.getPlayer());
-                np.sendError(ModIllegalActions.getMessages(np.getLocale()).getString("error.event.cancelled.item.use"));
+                    NinOnlinePlayer np = NinCore.get().getEntityManager().getNinOnlinePlayer(e.getPlayer());
+                    np.sendError(ModIllegalActions.getMessages(np.getLocale()).getString("error.event.cancelled.item.use"));
+                }
             }
         }
     }
@@ -193,27 +194,30 @@ public class PlayerListener implements Listener
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerItemConsume(PlayerItemConsumeEvent e)
     {
-        if (ModIllegalActions.getInstance().getConfig().getList("consume.blacklistedItems").contains(e.getItem().getType().toString())
-                && !ItemStacks.isConsumeAllowed(e.getItem()))
+        if(!Permission.hasPermission(e.getPlayer(), Permission.BYPASS_CONSUME_BLACKLIST))
         {
-            e.setCancelled(true);
-
-            NinOnlinePlayer np = NinCore.get().getEntityManager().getNinOnlinePlayer(e.getPlayer());
-            np.sendError(ModIllegalActions.getMessages(np.getLocale()).getString("error.event.cancelled.item.consume"));
-        }
-
-        if (ModIllegalActions.getInstance().getConfig().getBoolean("potions.disablePotions"))
-        {
-            if (e.getItem().getType().equals(Material.POTION))
+            if (ModIllegalActions.getInstance().getConfig().getList("consume.blacklistedItems").contains(e.getItem().getType().toString())
+                    && !ItemStacks.isConsumeAllowed(e.getItem()))
             {
-                PotionMeta potion = (PotionMeta) e.getItem().getItemMeta();
+                e.setCancelled(true);
 
-                if (potion.getBasePotionData().getType() != PotionType.WATER)
+                NinOnlinePlayer np = NinCore.get().getEntityManager().getNinOnlinePlayer(e.getPlayer());
+                np.sendError(ModIllegalActions.getMessages(np.getLocale()).getString("error.event.cancelled.item.consume"));
+            }
+
+            if (ModIllegalActions.getInstance().getConfig().getBoolean("potions.disablePotions"))
+            {
+                if (e.getItem().getType().equals(Material.POTION))
                 {
-                    e.setCancelled(true);
+                    PotionMeta potion = (PotionMeta) e.getItem().getItemMeta();
 
-                    NinOnlinePlayer np = NinCore.get().getEntityManager().getNinOnlinePlayer(e.getPlayer());
-                    np.sendError(ModIllegalActions.getMessages(np.getLocale()).getString("error.event.cancelled.potion.drink"));
+                    if (potion.getBasePotionData().getType() != PotionType.WATER)
+                    {
+                        e.setCancelled(true);
+
+                        NinOnlinePlayer np = NinCore.get().getEntityManager().getNinOnlinePlayer(e.getPlayer());
+                        np.sendError(ModIllegalActions.getMessages(np.getLocale()).getString("error.event.cancelled.potion.drink"));
+                    }
                 }
             }
         }
@@ -223,19 +227,20 @@ public class PlayerListener implements Listener
     @EventHandler(priority = EventPriority.HIGHEST) // Prevent player enchanting soulbound items.
     public void onEnchantItem(EnchantItemEvent e)
     {
-        List<String> items = ModIllegalActions.getInstance().getConfig().getStringList("enchanting.blacklistedItems");
-
-        ItemStack enchantedItem = e.getItem();
-
-        Material enchantedItemMaterial = enchantedItem.getType();
-
-        if (items.contains(enchantedItemMaterial.toString()))
+        if(!Permission.hasPermission(e.getEnchanter(), Permission.BYPASS_ENCHANT_BLACKLIST))
         {
-            // Cancel enchant event if the item is blacklisted
-            e.setCancelled(true);
+            List<String> items = ModIllegalActions.getInstance().getConfig().getStringList("enchanting.blacklistedItems");
+            ItemStack enchantedItem = e.getItem();
+            Material enchantedItemMaterial = enchantedItem.getType();
 
-            NinOnlinePlayer np = NinCore.get().getEntityManager().getNinOnlinePlayer(e.getEnchanter());
-            np.sendError(ModIllegalActions.getMessages(np.getLocale()).getString("error.event.cancelled.item.enchant"));
+            if (items.contains(enchantedItemMaterial.name()))
+            {
+                // Cancel enchant event if the item is blacklisted
+                e.setCancelled(true);
+
+                NinOnlinePlayer np = NinCore.get().getEntityManager().getNinOnlinePlayer(e.getEnchanter());
+                np.sendError(ModIllegalActions.getMessages(np.getLocale()).getString("error.event.cancelled.item.enchant"));
+            }
         }
     }
 
@@ -245,7 +250,9 @@ public class PlayerListener implements Listener
     {
         if (ModIllegalActions.getInstance().getConfig().getBoolean("potions.disablePotions"))
         {
-            if (e.getItem().getType().equals(Material.POTION))
+            Material type = e.getItem().getType();
+
+            if (type == Material.POTION || type == Material.SPLASH_POTION)
             {
                 e.setCancelled(true);
             }
@@ -256,11 +263,14 @@ public class PlayerListener implements Listener
     @EventHandler(priority = EventPriority.HIGHEST)
     public void onPlayerInteract(PlayerInteractEvent e)
     {
+        ItemStack item = e.getItem();
+
         if (ModIllegalActions.getInstance().getConfig().getBoolean("potions.disablePotions"))
         {
-            if (e.getItem() != null && e.getItem().getType().equals(Material.POTION))
+            if (!Permission.hasPermission(e.getPlayer(), Permission.BYPASS_POTION_DISABLE) &&
+                    item != null && (item.getType().equals(Material.POTION) || item.getType() == Material.SPLASH_POTION))
             {
-                Potion potion = Potion.fromItemStack(e.getItem());
+                Potion potion = Potion.fromItemStack(item);
 
                 if (potion.getLevel() != 0 && potion.isSplash())
                 {
