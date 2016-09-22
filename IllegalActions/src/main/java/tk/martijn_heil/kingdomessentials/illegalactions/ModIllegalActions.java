@@ -4,9 +4,7 @@ package tk.martijn_heil.kingdomessentials.illegalactions;
 import lombok.Getter;
 import org.bukkit.Bukkit;
 import org.bukkit.permissions.Permissible;
-import tk.martijn_heil.kingdomessentials.illegalactions.listeners.EntityListener;
-import tk.martijn_heil.kingdomessentials.illegalactions.listeners.InventoryListener;
-import tk.martijn_heil.kingdomessentials.illegalactions.listeners.PlayerListener;
+import tk.martijn_heil.kingdomessentials.illegalactions.listeners.MainListener;
 import tk.martijn_heil.nincore.api.Core;
 
 import java.util.Locale;
@@ -16,6 +14,7 @@ public class ModIllegalActions extends Core
 {
     @Getter
     private static ModIllegalActions instance;
+    private MainListener listener;
 
 
     public ModIllegalActions()
@@ -29,10 +28,10 @@ public class ModIllegalActions extends Core
     {
         this.saveDefaultConfig();
 
+        this.listener = new MainListener(this.getConfig());
+
         this.getNinLogger().info("Registering listeners..");
-        Bukkit.getPluginManager().registerEvents(new InventoryListener(), this);
-        Bukkit.getPluginManager().registerEvents(new EntityListener(), this);
-        Bukkit.getPluginManager().registerEvents(new PlayerListener(), this);
+        Bukkit.getPluginManager().registerEvents(listener, this);
     }
 
 
@@ -41,13 +40,23 @@ public class ModIllegalActions extends Core
         return ResourceBundle.getBundle("tk.martijn_heil.kingdomessentials.illegalactions.res.messages", inLocale);
     }
 
+
+    @Override
+    public void reloadConfig()
+    {
+        super.reloadConfig();
+        listener.setConfig(this.getConfig());
+    }
+
+
     public enum Permission
     {
         BYPASS_POTION_DISABLE("kingdomess.illegalactions.bypass.potion.disable"),
         BYPASS_ENCHANT_BLACKLIST("kingdomess.illegalactions.bypass.enchant.blacklist"),
         BYPASS_CONSUME_BLACKLIST("kingdomess.illegalactions.bypass.consume.blacklist"),
         BYPASS_USE_BLACKLIST("kingdomess.illegalactions.bypass.use.blacklist"),
-        BYPASS_CRAFT_BLACKLIST("kingdomess.illegalactions.bypass.craft.blacklist");
+        BYPASS_CRAFT_BLACKLIST("kingdomess.illegalactions.bypass.craft.blacklist"),
+        BYPASS_ELYTRA_DISABLE("kingdomess.illegalactions.bypass.elytra.disable");
 
 
         private String permission;

@@ -9,9 +9,9 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="KE-ModSigns_main" />
-    <orderEntry type="module" module-name="KE-ModCommand_main" />
     <orderEntry type="library" name="Gradle: joda-time:joda-time:2.9.1" level="project" />
+    <orderEntry type="module" module-name="KE-ModCommand_main" />
+    <orderEntry type="module" module-name="KE-ModSigns_main" />
     <orderEntry type="library" name="Gradle: org.projectlombok:lombok:1.16.8" level="project" />
     <orderEntry type="library" name="Gradle: org.spigotmc:spigot-api:1.9-R0.1-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Gradle: org.bukkit:bukkit:1.9-R0.1-SNAPSHOT" level="project" />

@@ -2,9 +2,10 @@ package tk.martijn_heil.kingdomessentials.illegalactions.listeners;
 
 
 import org.bukkit.Material;
+import org.bukkit.configuration.Configuration;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockDispenseEvent;
@@ -26,12 +27,20 @@ import tk.martijn_heil.kingdomessentials.item.util.ItemStacks;
 import tk.martijn_heil.nincore.api.NinCore;
 import tk.martijn_heil.nincore.api.entity.NinOnlinePlayer;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-public class PlayerListener implements Listener
+public class MainListener implements Listener
 {
-    @EventHandler(priority = EventPriority.HIGHEST) // If player tries to shoot with a non-soulbound bow.
+    private Configuration config;
+
+    public MainListener(Configuration config)
+    {
+        this.config = config;
+    }
+
+
+    @EventHandler // If player tries to shoot with a non-soulbound bow.
     public void onEntityShootBow(EntityShootBowEvent e)
     {
         if (ModIllegalActions.getInstance().getConfig().getBoolean("soulbound.preventNonSoulboundWeaponUsage") &&
@@ -51,68 +60,69 @@ public class PlayerListener implements Listener
     }
 
 
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler
     public void onEntityDamageByEntity(EntityDamageByEntityEvent e)
     {
-        if (ModIllegalActions.getInstance().getConfig().getBoolean("soulbound.preventNonSoulboundWeaponUsage") && e.getDamager() instanceof Player)
+        if (e.getDamager() instanceof Player)
         {
             Player player = (Player) e.getDamager();
-
-            // List of weapons
-            List<Material> weapons = new ArrayList<>();
-
-            weapons.add(Material.WOOD_SWORD);
-            weapons.add(Material.STONE_SWORD);
-            weapons.add(Material.GOLD_SWORD);
-            weapons.add(Material.IRON_SWORD);
-            weapons.add(Material.DIAMOND_SWORD);
-
-
-            if (player.getInventory().getItemInMainHand() != null && weapons.contains(player.getInventory().getItemInMainHand().getType()) &&
-                    !ItemStacks.isSoulBound(player.getInventory().getItemInMainHand()))
-            {
-                e.setCancelled(true);
-
-                NinOnlinePlayer np = NinCore.get().getEntityManager().getNinOnlinePlayer(player);
-                np.sendError(ModIllegalActions.getMessages(np.getLocale()).getString("error.event.cancelled.item.combat"));
-            }
-        }
-
-
-        if (ModIllegalActions.getInstance().getConfig().getBoolean("soulbound.preventNonSoulboundAxeUsage") && e.getDamager() instanceof Player)
-        {
-            Player player = (Player) e.getDamager();
-
-            // List of weapons
-            List<Material> weapons = new ArrayList<>();
-
-            weapons.add(Material.WOOD_AXE);
-            weapons.add(Material.STONE_AXE);
-            weapons.add(Material.GOLD_AXE);
-            weapons.add(Material.IRON_AXE);
-            weapons.add(Material.DIAMOND_AXE);
-
-
             ItemStack itemInMainHand = player.getInventory().getItemInMainHand();
 
-            if (itemInMainHand != null && weapons.contains(itemInMainHand.getType()) &&
-                    !ItemStacks.isSoulBound(itemInMainHand))
+            if(itemInMainHand != null)
             {
-                e.setCancelled(true);
+                Material itemInMainHandType = itemInMainHand.getType();
 
-                NinOnlinePlayer np = NinCore.get().getEntityManager().getNinOnlinePlayer(player);
-                np.sendError(ModIllegalActions.getMessages(np.getLocale()).getString("error.event.cancelled.item.combat"));
+                if(ModIllegalActions.getInstance().getConfig().getBoolean("soulbound.preventNonSoulboundWeaponUsage") ||
+                        ModIllegalActions.getInstance().getConfig().getBoolean("soulbound.preventNonSoulboundAxeUsage"))
+                {
+                    // List of weapons
+                    Material[] weapons = {
+                            Material.WOOD_SWORD,
+                            Material.STONE_SWORD,
+                            Material.GOLD_SWORD,
+                            Material.IRON_SWORD,
+                            Material.DIAMOND_SWORD
+                    };
+
+                    // List of axes
+                    Material[] axes = {
+                            Material.WOOD_AXE,
+                            Material.STONE_AXE,
+                            Material.GOLD_AXE,
+                            Material.IRON_AXE,
+                            Material.DIAMOND_AXE
+                    };
+
+
+
+                    if (Arrays.asList(weapons).contains(itemInMainHandType) &&
+                            !ItemStacks.isSoulBound(itemInMainHand))
+                    {
+                        e.setCancelled(true);
+
+                        NinOnlinePlayer np = NinCore.get().getEntityManager().getNinOnlinePlayer(player);
+                        np.sendError(ModIllegalActions.getMessages(np.getLocale()).getString("error.event.cancelled.item.combat"));
+                    }
+                    else if (Arrays.asList(axes).contains(itemInMainHandType) && !ItemStacks.isSoulBound(itemInMainHand))
+                    {
+                        e.setCancelled(true);
+
+                        NinOnlinePlayer np = NinCore.get().getEntityManager().getNinOnlinePlayer(player);
+                        np.sendError(ModIllegalActions.getMessages(np.getLocale()).getString("error.event.cancelled.item.combat"));
+                    }
+                }
             }
         }
-
     }
 
 
     @EventHandler
     public void onEntityToggleGlide(EntityToggleGlideEvent e)
     {
-        if (e.isGliding() && e.getEntity() instanceof Player && ModIllegalActions.getInstance().getConfig().getBoolean("movement.preventElytra") &&
-                !e.getEntity().hasPermission("kingdomkits.bypass.elytra")) // TODO: Permissions
+        Entity entity = e.getEntity();
+
+        if (e.isGliding() && entity instanceof Player && ModIllegalActions.getInstance().getConfig().getBoolean("movement.preventElytra") &&
+                !Permission.hasPermission(entity, Permission.BYPASS_ELYTRA_DISABLE))
         {
             e.setCancelled(true);
 
@@ -122,11 +132,9 @@ public class PlayerListener implements Listener
     }
 
 
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler
     public void onInventoryClick(InventoryClickEvent e)
     {
-
-
         if (e.getCurrentItem() != null && e.getInventory() != null)
         {
             InventoryType invType = e.getInventory().getType();
@@ -135,7 +143,7 @@ public class PlayerListener implements Listener
             if (invType == InventoryType.WORKBENCH || invType == InventoryType.CRAFTING &&
                     !Permission.hasPermission(e.getWhoClicked(), Permission.BYPASS_CRAFT_BLACKLIST))
             {
-                List<String> items = ModIllegalActions.getInstance().getConfig().getStringList("crafting.blacklistedItems");
+                List<String> items = config.getStringList("crafting.blacklistedItems");
 
                 if (e.getSlotType().equals(InventoryType.SlotType.RESULT) &&
                         items.contains(e.getCurrentItem().getType().toString()))
@@ -170,14 +178,14 @@ public class PlayerListener implements Listener
     }
 
 
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler
     public void onPlayerUseItem(PlayerInteractEvent e)
     {
         if(!Permission.hasPermission(e.getPlayer(), Permission.BYPASS_USE_BLACKLIST))
         {
             if (e.getItem() != null)
             {
-                if (ModIllegalActions.getInstance().getConfig().getList("usage.blacklistedItems").contains(e.getItem().getType().toString()) &&
+                if (config.getList("usage.blacklistedItems").contains(e.getItem().getType().toString()) &&
                         (e.getAction().equals(Action.RIGHT_CLICK_AIR) || e.getAction().equals(Action.RIGHT_CLICK_BLOCK)))
                 {
                     e.setCancelled(true);
@@ -191,12 +199,12 @@ public class PlayerListener implements Listener
     }
 
 
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler
     public void onPlayerItemConsume(PlayerItemConsumeEvent e)
     {
         if(!Permission.hasPermission(e.getPlayer(), Permission.BYPASS_CONSUME_BLACKLIST))
         {
-            if (ModIllegalActions.getInstance().getConfig().getList("consume.blacklistedItems").contains(e.getItem().getType().toString())
+            if (config.getList("consume.blacklistedItems").contains(e.getItem().getType().toString())
                     && !ItemStacks.isConsumeAllowed(e.getItem()))
             {
                 e.setCancelled(true);
@@ -205,7 +213,7 @@ public class PlayerListener implements Listener
                 np.sendError(ModIllegalActions.getMessages(np.getLocale()).getString("error.event.cancelled.item.consume"));
             }
 
-            if (ModIllegalActions.getInstance().getConfig().getBoolean("potions.disablePotions"))
+            if (config.getBoolean("potions.disablePotions"))
             {
                 if (e.getItem().getType().equals(Material.POTION))
                 {
@@ -224,12 +232,12 @@ public class PlayerListener implements Listener
     }
 
 
-    @EventHandler(priority = EventPriority.HIGHEST) // Prevent player enchanting soulbound items.
+    @EventHandler // Prevent player enchanting soulbound items.
     public void onEnchantItem(EnchantItemEvent e)
     {
         if(!Permission.hasPermission(e.getEnchanter(), Permission.BYPASS_ENCHANT_BLACKLIST))
         {
-            List<String> items = ModIllegalActions.getInstance().getConfig().getStringList("enchanting.blacklistedItems");
+            List<String> items = config.getStringList("enchanting.blacklistedItems");
             ItemStack enchantedItem = e.getItem();
             Material enchantedItemMaterial = enchantedItem.getType();
 
@@ -245,10 +253,10 @@ public class PlayerListener implements Listener
     }
 
 
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler
     public void onBlockDispenseEvent(BlockDispenseEvent e)
     {
-        if (ModIllegalActions.getInstance().getConfig().getBoolean("potions.disablePotions"))
+        if (config.getBoolean("potions.disablePotions"))
         {
             Material type = e.getItem().getType();
 
@@ -260,12 +268,12 @@ public class PlayerListener implements Listener
     }
 
 
-    @EventHandler(priority = EventPriority.HIGHEST)
+    @EventHandler
     public void onPlayerInteract(PlayerInteractEvent e)
     {
         ItemStack item = e.getItem();
 
-        if (ModIllegalActions.getInstance().getConfig().getBoolean("potions.disablePotions"))
+        if (config.getBoolean("potions.disablePotions"))
         {
             if (!Permission.hasPermission(e.getPlayer(), Permission.BYPASS_POTION_DISABLE) &&
                     item != null && (item.getType().equals(Material.POTION) || item.getType() == Material.SPLASH_POTION))
@@ -282,5 +290,11 @@ public class PlayerListener implements Listener
                 }
             }
         }
+    }
+
+
+    public void setConfig(Configuration config)
+    {
+        this.config = config;
     }
 }

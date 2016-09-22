@@ -9,8 +9,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="KE-ModItem_main" />
     <orderEntry type="library" name="Gradle: org.projectlombok:lombok:1.16.8" level="project" />
+    <orderEntry type="module" module-name="KE-ModItem_main" />
     <orderEntry type="library" name="Gradle: org.spigotmc:spigot-api:1.9-R0.1-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Gradle: org.bukkit:bukkit:1.9-R0.1-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Gradle: tk.martijn-heil:NinCore-API:-SNAPSHOT" level="project" />
